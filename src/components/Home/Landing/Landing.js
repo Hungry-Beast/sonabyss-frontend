@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import Topbar from '../../Navs/Topbar';
+import Body from './Body';
 
 const Component=styled.div`
     height: 100%;
@@ -8,7 +8,7 @@ const Component=styled.div`
 const Landing = () => {
   return (
     <Component>
-        <Topbar/>
+      <Body/>
     </Component>
   )
 }

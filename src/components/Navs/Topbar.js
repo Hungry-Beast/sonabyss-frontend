@@ -7,21 +7,25 @@ const Component = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem 2rem;
     padding-bottom: 0.2rem;
+    z-index: 2;
 `;
-const LeftPart = styled.div``;
+const LeftPart = styled.div`
+    z-index: 2;
+`;
 const Logo = styled.img`
-    height: 5rem;
+    height: 7rem;
     width: auto;
-
+    z-index: 2;
 `;
 const RightPart = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     width: 40%;
+    margin-top: 1rem;
 
 `;
 const Button = styled.button`
@@ -30,9 +34,11 @@ const Button = styled.button`
     outline: none;
     border: none;
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     transition: 200ms ease-in-out;
     font-family: 'nightOfTerror';
+    font-style: normal;
+    font-weight: 400;
     &:hover{
         transform: translateY(-10%);
     }

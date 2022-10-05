@@ -8,8 +8,9 @@
 }
 @font-face {
   font-family: 'nightOfTerror';
-  src: url(./fonts/cf_night_of_terror/CFNightofTerror.ttf),
-  url(./fonts/cf_night_of_terror/CFNightofTerrorFont.rtf)
+  src: 
+  url(./fonts/cf_night_of_terror/CFNightofTerrorFont.rtf),
+  url(./fonts/cf_night_of_terror/CFNightofTerror.ttf) 
   ;
 }
 body {
