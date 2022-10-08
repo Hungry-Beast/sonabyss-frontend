@@ -1,0 +1,9 @@
+.signnup-container label {
+  font-size: 12px !important;
+  margin-left: 15px;
+  /* color: red !important; */
+}
+
+.signnup-container .MuiFormLabel-root label :hover {
+    color: red;
+}
