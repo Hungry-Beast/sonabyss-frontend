@@ -19,6 +19,7 @@ const Container = styled.div`
   background-color: #1e1e1e;
   width: 100%;
   display: flex;
+  height: 100vh;
 `;
 
 const SignUpForm = styled.form`
@@ -180,7 +181,6 @@ const RightContainer = styled.div`
 const LogInPage = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
-  const [confpswdError, setConfPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
 
   const handleRegChange = (e) => {
@@ -211,16 +211,6 @@ const LogInPage = () => {
     }
   };
 
-  const handleConfPasswordError = (e) => {
-    var password =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (e.target.value.match(password)) {
-      setConfPswdError(false);
-    } else {
-      setConfPswdError(true);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
@@ -229,13 +219,6 @@ const LogInPage = () => {
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(password)) {
       setPswdError(true);
-      return;
-    }
-
-    var password =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (!e.target.confPassword.value.match(password)) {
-      setConfPswdError(true);
       return;
     }
 
@@ -274,8 +257,6 @@ const LogInPage = () => {
   /// Handling Password
   const [values, setValues] = useState({
     password: "",
-    confPassword: "",
-    showConfPassword: false,
     showPassword: false,
   });
 
@@ -283,13 +264,6 @@ const LogInPage = () => {
     setValues({
       ...values,
       showPassword: !values.showPassword,
-    });
-  };
-
-  const handleClickShowConfPassword = () => {
-    setValues({
-      ...values,
-      showConfPassword: !values.showConfPassword,
     });
   };
 
@@ -302,10 +276,12 @@ const LogInPage = () => {
     pswdError && handlePasswordChange(e);
   };
 
-  const handleConfEventChange = (e) => {
-    setValues({ ...values, ["confPassword"]: e.target.value });
-    confpswdError && handleConfPasswordError(e);
+  const [checked, setChecked] = useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
+
   return (
     <Container>
       <SignUpWrapper>
@@ -313,21 +289,15 @@ const LogInPage = () => {
           <SignUpForm className="login-container" onSubmit={handleSubmit}>
             <LogoTitle>
               <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
-              <Heading>Sign Up</Heading>
+              <Heading>Log In</Heading>
             </LogoTitle>
-
-            <InputTag
-              name="username"
-              type={"text"}
-              label="User name"
-              variant="standard"
-              sx={SxStyles}
-              // required
-            />
-
             <Wrapper>
               <QueryText>Are you a Neristien?</QueryText>
-              <CustomizedSwitches />
+              <CustomizedSwitches
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+              />
             </Wrapper>
 
             <InputTag
@@ -344,19 +314,20 @@ const LogInPage = () => {
               }}
             />
 
-            <InputTag
-              name="phoneno"
-              label="Phone No"
-              variant="standard"
-              sx={SxStyles}
-              error={phoneError}
-              helperText={
-                phoneError ? "Please enter a valid 10 digit number" : ""
-              }
-              onChange={(e) => {
-                phoneError && handlePhoneChange(e);
-              }}
-            />
+              {/* <InputTag
+                // sx={{display: checked ? 'block' : 'none'}}
+                name="phoneno"
+                label="Phone No"
+                variant="standard"
+                sx={SxStyles}
+                error={phoneError}
+                helperText={
+                  phoneError ? "Please enter a valid 10 digit number" : ""
+                }
+                onChange={(e) => {
+                  phoneError && handlePhoneChange(e);
+                }}
+              /> */}
 
             <FormControl
               variant="standard"
@@ -397,48 +368,7 @@ const LogInPage = () => {
                 ""
               )}
             </FormControl>
-
-            <FormControl
-              variant="standard"
-              error={confpswdError}
-              className="password-container"
-            >
-              <InputLabel>Confirm Password</InputLabel>
-              <SignUpPassword
-                name="confPassword"
-                label="Password"
-                variant="standard"
-                sx={SxStyles}
-                type={values.showConfPassword ? "text" : "password"}
-                value={values.confPassword}
-                onChange={handleConfEventChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowConfPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showConfPassword ? (
-                        <VisibilityOff sx={{ color: "white" }} />
-                      ) : (
-                        <Visibility sx={{ color: "white" }} />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              {confpswdError ? (
-                <FormHelperText>
-                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
-                </FormHelperText>
-              ) : (
-                ""
-              )}
-            </FormControl>
-
-            <SignUpButton>SIGN UP</SignUpButton>
+            <SignUpButton>LOG IN</SignUpButton>
           </SignUpForm>
         </FormContainer>
 
