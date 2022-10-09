@@ -1,16 +1,25 @@
-import { Switch, TextField } from "@mui/material";
+import { useState } from "react";
+import {
+  Switch,
+  TextField,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  Input,
+  InputLabel
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { imgUrl, prodURL } from "../../config";
 import styled from "styled-components";
 import "./SignUpCustomization.css";
 
 const Container = styled.div`
-  background-color: beige;
   /* background-color: #130912; */
-  background-color: #1e1e1e;
+  // background-color: #1e1e1e;
   width: 100%;
   display: flex;
   /* border: 2px solid black; */
-  
 `;
 
 const SignUpForm = styled.form`
@@ -50,7 +59,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 10px 0 20px 0;
+  /* margin: 10px 0 20px 0; */
 `;
 const QueryText = styled.p`
   color: #d5c6dc;
@@ -66,11 +75,12 @@ const InputTag = styled(TextField)`
   background-color: rgba(22, 10, 19, 0.7) !important;
 `;
 
-const SignUpPassword = styled(TextField)`
+const SignUpPassword = styled(Input)`
   margin-bottom: 10px !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
+  /* background-color: white !important; */
 `;
 
 const SignUpButton = styled.button`
@@ -89,10 +99,10 @@ const SignUpButton = styled.button`
   transition: 300ms ease-in-out;
   &:hover {
     /* transform: translate(8px, 8px); */
-/* 
+    /* 
     padding-right: 3.5rem;
     padding-bottom: 1rem; */
-    transform: scale(1,1.2);
+    transform: scale(1, 1.2);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
@@ -156,11 +166,11 @@ const FormContainer = styled.div`
 
 const SignUpWrapper = styled.div`
   flex: 1;
-  background-color: #130912;
+  /* background-color: #130912; */
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;  
+  padding: 1rem;
 `;
 
 const RightContainer = styled.div`
@@ -196,31 +206,45 @@ const RegisterPage = () => {
       redirect: "follow",
     };
 
-    fetch("https://sonabyss.herokuapp.com/api/auth/createUser", requestOptions)
+    fetch("https://sonabyss.herokuapp.com/auth/createUser", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
+
+  /// Handling Password
+  const [values, setValues] = useState({
+    password: "",
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <Container>
       <SignUpWrapper>
-        <LogoTitle>
-          <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
-          <Heading>Sign Up</Heading>
-        </LogoTitle>
-
         <FormContainer>
           <SignUpForm className="signnup-container" onSubmit={handleSubmit}>
+            <LogoTitle>
+              <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
+              <Heading>Sign Up</Heading>
+            </LogoTitle>
+
             <InputTag
               name="username"
               label="User name"
-              variant="standard"
-              sx={SxStyles}
-            />
-
-            <InputTag
-              name="regno"
-              label="Registration No"
               variant="standard"
               sx={SxStyles}
             />
@@ -231,18 +255,47 @@ const RegisterPage = () => {
             </Wrapper>
 
             <InputTag
+              name="regno"
+              label="Registration No"
+              variant="standard"
+              sx={SxStyles}
+            />
+
+            <InputTag
               name="phoneno"
               label="Phone No"
               variant="standard"
               sx={SxStyles}
             />
 
-            <SignUpPassword
-              name="password"
-              label="Password"
-              variant="standard"
-              sx={SxStyles}
-            />
+            <FormControl variant="standard" className="password-container">
+            <InputLabel>Password</InputLabel>
+              <SignUpPassword
+                name="password"
+                label="Password"
+                variant="standard"
+                sx={SxStyles}
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? (
+                        <VisibilityOff sx={{ color: "white" }} />
+                      ) : (
+                        <Visibility sx={{ color: "white" }} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
             <SignUpPassword
               name="confpassword"

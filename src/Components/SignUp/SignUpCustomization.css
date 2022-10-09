@@ -1,9 +1,32 @@
 .signnup-container label {
   font-size: 12px !important;
   margin-left: 15px;
+  /* margin-top: 0px; */
   /* color: red !important; */
 }
 
 .signnup-container .MuiFormLabel-root label :hover {
     color: red;
+}
+
+.signnup-container input {
+    font-size: 12px;
+    margin-left: 15px;
+    /* margin-top: 0px; */
+}
+
+.MuiInputLabel-formControl {
+  color: aliceblue;
+}
+
+.MuiFormControl-root .MuiInputBase-adornedEnd {
+  margin-top: 0px;
+}
+
+.MuiInputAdornment-positionEnd {
+  margin-right: 10px;
+}
+
+.password-container label :focus{
+  color: #d5c6dc;
 }
