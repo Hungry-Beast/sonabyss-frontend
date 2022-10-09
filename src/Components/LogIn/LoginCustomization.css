@@ -1,5 +1,57 @@
-.login-container label{
-    font-size: 12px !important;
+.login-container label {
+    font-size: 15px !important;
     margin-left: 15px;
-    /* color: red !important; */
-}
+    margin-top: 0px;
+    color: #D5C6DC !important;
+  }
+  
+  .login-container input {
+    font-size: 15px;
+    margin-left: 15px;
+  }
+  
+  /*password Input field style starts here ...*/
+  
+  /* style for password underline */
+  .login-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root:after {
+    border-bottom: 2px solid #d5c6dc;
+  }
+  
+  .login-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid #d5c6dc;
+  }
+  
+  .login-container .MuiInput-underline:before {
+    border-bottom: 2px solid #D5C6DC;
+  }
+  /*password Input field style ends here ...*/
+  
+  
+  /* ################################### */
+  
+  /*password Input field style starts here ...*/
+  
+  /* style for pasword label */
+  .login-container .css-ujwy10-MuiInputBase-root-MuiInput-root {
+    margin: 0px;
+  }
+  
+  /* style for password underline */
+  .login-container .css-ujwy10-MuiInputBase-root-MuiInput-root:before {
+    border-bottom: 2px solid #d5c6dc;
+  }
+  
+  .login-container .css-ujwy10-MuiInputBase-root-MuiInput-root:after {
+    border-bottom: 2px solid #d5c6dc;
+  }
+  
+  .login-container
+    .css-ujwy10-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid #d5c6dc;
+  }
+  /*password Input field style ends here ...*/
+  
+  .MuiFormControl-root label {
+    color: #D5C6DC;
+  }
+  

@@ -180,6 +180,7 @@ const RightContainer = styled.div`
 const RegisterPage = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
+  const [confpswdError, setConfPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
 
   const handleRegChange = (e) => {
@@ -210,6 +211,16 @@ const RegisterPage = () => {
     }
   };
 
+  const handleConfPasswordError = (e) => {
+    var password =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (e.target.value.match(password)) {
+      setConfPswdError(false);
+    } else {
+      setConfPswdError(true);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
@@ -218,6 +229,13 @@ const RegisterPage = () => {
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(password)) {
       setPswdError(true);
+      return;
+    }
+
+    var password =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (!e.target.confPassword.value.match(password)) {
+      setConfPswdError(true);
       return;
     }
 
@@ -261,10 +279,6 @@ const RegisterPage = () => {
     showPassword: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -284,10 +298,13 @@ const RegisterPage = () => {
   };
 
   const handleEventChange = (e) => {
-    console.log(values);
-
     setValues({ ...values, ["password"]: e.target.value });
     pswdError && handlePasswordChange(e);
+  };
+
+  const handleConfEventChange = (e) => {
+    setValues({ ...values, ["confPassword"]: e.target.value });
+    confpswdError && handleConfPasswordError(e);
   };
   return (
     <Container>
@@ -381,7 +398,11 @@ const RegisterPage = () => {
               )}
             </FormControl>
 
-            <FormControl variant="standard" className="password-container">
+            <FormControl
+              variant="standard"
+              error={confpswdError}
+              className="password-container"
+            >
               <InputLabel>Confirm Password</InputLabel>
               <SignUpPassword
                 name="confPassword"
@@ -390,7 +411,7 @@ const RegisterPage = () => {
                 sx={SxStyles}
                 type={values.showConfPassword ? "text" : "password"}
                 value={values.confPassword}
-                onChange={handleChange("confPassword")}
+                onChange={handleConfEventChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -408,14 +429,14 @@ const RegisterPage = () => {
                   </InputAdornment>
                 }
               />
+              {confpswdError ? (
+                <FormHelperText>
+                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                </FormHelperText>
+              ) : (
+                ""
+              )}
             </FormControl>
-
-            {/* <SignUpPassword
-              name="confpassword"
-              label="Confirm Password"
-              variant="standard"
-              sx={SxStyles}
-            /> */}
 
             <SignUpButton>SIGN UP</SignUpButton>
           </SignUpForm>
