@@ -6,6 +6,7 @@ import {
   FormControl,
   Input,
   InputLabel,
+  FormHelperText,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -179,6 +180,16 @@ const RightContainer = styled.div`
 const RegisterPage = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
+  const [regError, setRegError] = useState(false);
+
+  const handleRegChange = (e) => {
+    var regno = /^[0-9]{6,6}$/g;
+    if (e.target.value.match(regno)) {
+      setRegError(false);
+    } else {
+      setRegError(true);
+    }
+  };
 
   const handlePhoneChange = (e) => {
     var phoneno = /^\d{10}$/;
@@ -203,20 +214,23 @@ const RegisterPage = () => {
     e.preventDefault();
     var myHeaders = new Headers();
 
-    if (e.target.name === "password") {
-      var password =
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-      // e.target.name.match(password)....
-      if (!e.target.password.match(password)) {
-        setPswdError(true);
-        return;
-      }
-    } else {
-      var phoneno = /^\d{10}$/;
-      if (!e.target.phoneno.value.match(phoneno)) {
-        setPhoneError(true);
-        return;
-      }
+    var password =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (!e.target.password.value.match(password)) {
+      setPswdError(true);
+      return;
+    }
+
+    var regno = /^[0-9]{6,6}$/g;
+    if (!e.target.regno.value.match(regno)) {
+      setRegError(true);
+      return;
+    }
+
+    var phoneno = /^\d{10}$/;
+    if (!e.target.phoneno.value.match(phoneno)) {
+      setPhoneError(true);
+      return;
     }
     myHeaders.append("Content-Type", "application/json");
     var formdata = new FormData();
@@ -270,12 +284,11 @@ const RegisterPage = () => {
   };
 
   const handleEventChange = (e) => {
-    if(e){
-      pswdError && handlePasswordChange(e);
-    }else{
-    handleChange("password");
-    }
-  }
+    console.log(values);
+
+    setValues({ ...values, ["password"]: e.target.value });
+    pswdError && handlePasswordChange(e);
+  };
   return (
     <Container>
       <SignUpWrapper>
@@ -305,6 +318,13 @@ const RegisterPage = () => {
               label="Registration No"
               variant="standard"
               sx={SxStyles}
+              error={regError}
+              helperText={
+                regError ? "Please enter a valid 6 digit reg no. with no /" : ""
+              }
+              onChange={(e) => {
+                regError && handleRegChange(e);
+              }}
             />
 
             <InputTag
@@ -321,7 +341,11 @@ const RegisterPage = () => {
               }}
             />
 
-            <FormControl variant="standard" className="password-container">
+            <FormControl
+              variant="standard"
+              error={pswdError}
+              className="password-container"
+            >
               <InputLabel>Password</InputLabel>
               <SignUpPassword
                 name="password"
@@ -330,7 +354,6 @@ const RegisterPage = () => {
                 sx={SxStyles}
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
-                // onChange={handleChange("password")}
                 onChange={handleEventChange}
                 endAdornment={
                   <InputAdornment position="end">
@@ -349,6 +372,13 @@ const RegisterPage = () => {
                   </InputAdornment>
                 }
               />
+              {pswdError ? (
+                <FormHelperText>
+                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                </FormHelperText>
+              ) : (
+                ""
+              )}
             </FormControl>
 
             <FormControl variant="standard" className="password-container">
