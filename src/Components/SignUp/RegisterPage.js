@@ -1,25 +1,23 @@
 import { useState } from "react";
 import {
-  Switch,
   TextField,
   InputAdornment,
   IconButton,
   FormControl,
   Input,
-  InputLabel
+  InputLabel,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { imgUrl, prodURL } from "../../config";
 import styled from "styled-components";
 import "./SignUpCustomization.css";
+import CustomizedSwitches from "./CustomSwitch";
 
 const Container = styled.div`
-  /* background-color: #130912; */
-  // background-color: #1e1e1e;
+  background-color: #1e1e1e;
   width: 100%;
   display: flex;
-  /* border: 2px solid black; */
 `;
 
 const SignUpForm = styled.form`
@@ -36,23 +34,22 @@ const LogoTitle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 135px;
+  padding-top: 20%;
   color: white;
 `;
 
 const SignUpLogo = styled.img`
-  width: 72px;
-  height: 72px;
+  width: 90px;
+  height: 90px;
 `;
 
 const Heading = styled.h1`
   font-family: "Midnight";
-  font-size: 27px;
+  font-size: 32px;
   /* color: black; */
   color: #ffffff;
-  line-height: 3px;
   font-weight: 100;
-  margin-bottom: 63px;
+  margin: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -64,12 +61,11 @@ const Wrapper = styled.div`
 const QueryText = styled.p`
   color: #d5c6dc;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 15px;
 `;
 
 const InputTag = styled(TextField)`
-  margin-bottom: 10px !important;
+  margin-bottom: 21px !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
@@ -110,14 +106,12 @@ const SignUpButton = styled.button`
 
 const FooterWrapper = styled.div`
   text-align: center;
-  /* padding-bottom: 54%; */
-  /* margin-top: 20px; */
-  margin: 32px 82px 117px 82px;
+  padding-bottom: 19%;
 `;
 const Footer = styled.span`
   color: #d5c6dc;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 18px;
   &:hover {
     text-decoration: underline;
@@ -126,15 +120,15 @@ const Footer = styled.span`
 const LoginLink = styled.a`
   color: #ff461f;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 15px;
+  /* line-height: 18px; */
   text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
 `;
 
-//sx props using
+//sx props using starts here ...
 
 const SxStyles = {
   input: { color: "#D5C6DC" },
@@ -159,6 +153,8 @@ const SxStyles = {
   },
 };
 
+// sx props ends here ...
+
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -166,7 +162,7 @@ const FormContainer = styled.div`
 
 const SignUpWrapper = styled.div`
   flex: 1;
-  /* background-color: #130912; */
+  background-color: #130912;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -181,18 +177,49 @@ const RightContainer = styled.div`
   }
 `;
 const RegisterPage = () => {
+  const [phoneError, setPhoneError] = useState(false);
+  const [pswdError, setPswdError] = useState(false);
+
+  const handlePhoneChange = (e) => {
+    var phoneno = /^\d{10}$/;
+    if (e.target.value.match(phoneno)) {
+      setPhoneError(false);
+    } else {
+      setPhoneError(true);
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    var password =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (e.target.value.match(password)) {
+      setPswdError(false);
+    } else {
+      setPswdError(true);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
+
+    if (e.target.name === "password") {
+      var password =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+      // e.target.name.match(password)....
+      if (!e.target.password.match(password)) {
+        setPswdError(true);
+        return;
+      }
+    } else {
+      var phoneno = /^\d{10}$/;
+      if (!e.target.phoneno.value.match(phoneno)) {
+        setPhoneError(true);
+        return;
+      }
+    }
     myHeaders.append("Content-Type", "application/json");
     var formdata = new FormData();
-
-    // var raw = JSON.stringify({
-    //   "name": "Vishal",
-    //   "password": "vishal@123",
-    //   "phoneNo": "6909442740",
-    //   "regNo": "220/089"
-    // });
 
     formdata.append("name", e.target.username.value);
     formdata.append("password", e.target.password.value);
@@ -206,8 +233,8 @@ const RegisterPage = () => {
       redirect: "follow",
     };
 
-    fetch("https://sonabyss.herokuapp.com/auth/createUser", requestOptions)
-      .then((response) => response.text())
+    fetch(prodURL + "/auth/createUser", requestOptions)
+      .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
@@ -215,6 +242,8 @@ const RegisterPage = () => {
   /// Handling Password
   const [values, setValues] = useState({
     password: "",
+    confPassword: "",
+    showConfPassword: false,
     showPassword: false,
   });
 
@@ -229,9 +258,24 @@ const RegisterPage = () => {
     });
   };
 
+  const handleClickShowConfPassword = () => {
+    setValues({
+      ...values,
+      showConfPassword: !values.showConfPassword,
+    });
+  };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  const handleEventChange = (e) => {
+    if(e){
+      pswdError && handlePasswordChange(e);
+    }else{
+    handleChange("password");
+    }
+  }
   return (
     <Container>
       <SignUpWrapper>
@@ -244,14 +288,16 @@ const RegisterPage = () => {
 
             <InputTag
               name="username"
+              type={"text"}
               label="User name"
               variant="standard"
               sx={SxStyles}
+              // required
             />
 
             <Wrapper>
               <QueryText>Are you a Neristien?</QueryText>
-              <Switch />
+              <CustomizedSwitches />
             </Wrapper>
 
             <InputTag
@@ -266,10 +312,17 @@ const RegisterPage = () => {
               label="Phone No"
               variant="standard"
               sx={SxStyles}
+              error={phoneError}
+              helperText={
+                phoneError ? "Please enter a valid 10 digit number" : ""
+              }
+              onChange={(e) => {
+                phoneError && handlePhoneChange(e);
+              }}
             />
 
             <FormControl variant="standard" className="password-container">
-            <InputLabel>Password</InputLabel>
+              <InputLabel>Password</InputLabel>
               <SignUpPassword
                 name="password"
                 label="Password"
@@ -277,7 +330,8 @@ const RegisterPage = () => {
                 sx={SxStyles}
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
-                onChange={handleChange("password")}
+                // onChange={handleChange("password")}
+                onChange={handleEventChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -297,12 +351,41 @@ const RegisterPage = () => {
               />
             </FormControl>
 
-            <SignUpPassword
+            <FormControl variant="standard" className="password-container">
+              <InputLabel>Confirm Password</InputLabel>
+              <SignUpPassword
+                name="confPassword"
+                label="Password"
+                variant="standard"
+                sx={SxStyles}
+                type={values.showConfPassword ? "text" : "password"}
+                value={values.confPassword}
+                onChange={handleChange("confPassword")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowConfPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showConfPassword ? (
+                        <VisibilityOff sx={{ color: "white" }} />
+                      ) : (
+                        <Visibility sx={{ color: "white" }} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+
+            {/* <SignUpPassword
               name="confpassword"
               label="Confirm Password"
               variant="standard"
               sx={SxStyles}
-            />
+            /> */}
 
             <SignUpButton>SIGN UP</SignUpButton>
           </SignUpForm>
