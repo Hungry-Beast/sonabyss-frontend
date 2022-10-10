@@ -256,9 +256,9 @@ const RegisterPage = () => {
   };
 
   const handlePasswordChange = (e) => {
-    var password =
+    var passwordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (e.target.value.match(password)) {
+    if (e.target.value.match(passwordCheck)) {
       setPswdError(false);
     } else {
       setPswdError(true);
@@ -266,9 +266,9 @@ const RegisterPage = () => {
   };
 
   const handleConfPasswordError = (e) => {
-    var password =
+    var confPasswordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (e.target.value.match(password)) {
+    if (e.target.value.match(confPasswordCheck)) {
       setConfPswdError(false);
     } else {
       setConfPswdError(true);
@@ -279,17 +279,17 @@ const RegisterPage = () => {
     e.preventDefault();
     var myHeaders = new Headers();
     let isError = false;
-    var password =
+    var passwordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (!e.target.password.value.match(password)) {
+    if (!e.target.password.value.match(passwordCheck)) {
       setPswdError(true);
       // return;
       isError = true;
     }
 
-    var password =
+    var confPasswordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (!e.target.confPassword.value.match(password)) {
+    if (!e.target.confPassword.value.match(confPasswordCheck)) {
       setConfPswdError(true);
       // return;
       isError = true;
