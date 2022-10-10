@@ -2,55 +2,105 @@
   font-size: 15px !important;
   margin-left: 15px;
   margin-top: 0px;
+  /* color: #D5C6DC !important; */
+  z-index: 1;
+}
+
+.signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
   color: #D5C6DC !important;
 }
+
+.Mui-focused {
+  color: #D5C6DC !important;
+}
+
+.signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root:hover:focus {
+  color: #ff461f !important;
+  
+}
+
+MuiInputLabel-root:hover {
+  color: #ff461f !important;
+
+}
+
 
 .signnup-container input {
   font-size: 15px;
   margin-left: 15px;
 }
 
+/* Style to the eye svg in password (signnup) starts here... */
+.css-1d159sf-MuiSvgIcon-root {
+  margin-right: 10px;
+}
+
+.css-1d159sf-MuiSvgIcon-root:hover {
+  color: #ff461f !important;
+}
+/* Style to the eye svg in password (signnup) ends here... */
+
+
+
 /*password Input field style starts here ...*/
 
 /* style for password underline */
-.signnup-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root:after {
+.signnup-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root::after {
+  border-bottom: 2px solid #ff461f;
+}
+/* .css-15o4x5l-MuiFormControl-root-MuiTextField-root .MuiInput-underline::after{
+  border-bottom-color: #ff461f !important;
+} */
+/* .signnup-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
   border-bottom: 2px solid #d5c6dc;
+} */ 
+
+.signnup-container .MuiInput-underline:hover::before {
+  border-bottom: 2px solid #ff461f !important;
 }
 
-.signnup-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
-  border-bottom: 2px solid #d5c6dc;
-}
-
-.signnup-container .MuiInput-underline:before {
+.signnup-container .MuiInput-underline::before {
   border-bottom: 2px solid #D5C6DC;
 }
-/*password Input field style ends here ...*/
 
 
-/* ################################### */
 
-/*password Input field style starts here ...*/
 
 /* style for pasword label */
 .signnup-container .css-ujwy10-MuiInputBase-root-MuiInput-root {
   margin: 0px;
 }
 
+
+/* CHECKED STARTS .... */
 /* style for password underline */
-.signnup-container .css-ujwy10-MuiInputBase-root-MuiInput-root:before {
-  border-bottom: 2px solid #d5c6dc;
+.signnup-container .css-ujwy10-MuiInputBase-root-MuiInput-root:hover::before {
+  border-bottom: 2px solid #ff461f !important;
+}
+/* .css-15o4x5l-MuiFormControl-root-MuiTextField-root .MuiInput-underline:hover::before{
+  border-bottom-color: #ff461f;
+} */
+
+.signnup-container .css-ujwy10-MuiInputBase-root-MuiInput-root::after {
+  border-bottom: 2px solid #ff461f;
 }
 
-.signnup-container .css-ujwy10-MuiInputBase-root-MuiInput-root:after {
-  border-bottom: 2px solid #d5c6dc;
-}
-
-.signnup-container
+/* .signnup-container
   .css-ujwy10-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
   border-bottom: 2px solid #d5c6dc;
-}
+} */
+
 /*password Input field style ends here ...*/
 
+ /* CHECKED ENDS .... */
+
+
+
+/* phone or reg underline css */
+.css-15o4x5l-MuiFormControl-root-MuiTextField-root .MuiInput-underline:hover::after{
+  border-bottom: 2px solid #ff461f;
+  
+}
 /* .MuiFormControl-root label {
   color: #D5C6DC;
 } */
