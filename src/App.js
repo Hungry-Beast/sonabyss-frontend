@@ -6,12 +6,15 @@ import Home from "./components/Home/Home";
 const Component=styled.div`
   width: 100%;
   min-height: 100%;
+  background-color: #130912;
+  display: flex;
+  justify-content: center;
 `
 function App() {
   return (
-    <div className="App">
+    <Component className="App">
         <Home/>
-    </div>
+    </Component>
   );
 }
 
