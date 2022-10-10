@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Topbar from '../Navs/Topbar';
 import Landing from './Landing/Landing';
+import Bottom from './LandingSecond/Bottom';
 
 const Component = styled.div`
    
@@ -14,8 +15,10 @@ const Component = styled.div`
 const Home = () => {
   return (
     <Component>
-        <Topbar/>
-        {/* <Landing/> */}
+
+      <Topbar />
+      <Landing />
+      <Bottom />
     </Component>
   )
 }

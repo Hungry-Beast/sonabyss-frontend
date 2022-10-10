@@ -1,19 +1,30 @@
-import logo from "./logo.svg";
-import styled from 'styled-components';
+// import logo from "./logo.svg";
 import "./App.css";
+import EventPage from "./components/Event/EventPage";
+import styled from "styled-components";
 import Home from "./components/Home/Home";
+import LogInPage from "./components/LogIn/LogInPage";
+import RegisterPage from "./components/SignUp/RegisterPage";
+import { Route, Routes } from "react-router-dom";
 
-const Component=styled.div`
+const Component = styled.div`
   width: 100%;
   min-height: 100%;
+
   background-color: #130912;
   display: flex;
   justify-content: center;
 `
+
 function App() {
   return (
     <Component className="App">
-        <Home/>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/events/:id" element={<EventPage />} />
+        <Route path="/login" element={<LogInPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
     </Component>
   );
 }
