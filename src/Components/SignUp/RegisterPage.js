@@ -444,7 +444,7 @@ const RegisterPage = () => {
 
         <FooterWrapper>
           <Footer>Don't have an accoutnt?</Footer>
-          <LoginLink href="#">Log In</LoginLink>
+          <LoginLink href="/login">Log In</LoginLink>
         </FooterWrapper>
       </SignUpWrapper>
       <RightContainer></RightContainer>

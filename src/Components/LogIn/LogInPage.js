@@ -7,6 +7,7 @@ import {
   Input,
   InputLabel,
   FormHelperText,
+  Alert,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -19,10 +20,10 @@ const Container = styled.div`
   background-color: #1e1e1e;
   width: 100%;
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 
-const SignUpForm = styled.form`
+const LogInForm = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -40,7 +41,7 @@ const LogoTitle = styled.div`
   color: white;
 `;
 
-const SignUpLogo = styled.img`
+const LogInLogo = styled.img`
   width: 90px;
   height: 90px;
 `;
@@ -73,7 +74,7 @@ const InputTag = styled(TextField)`
   background-color: rgba(22, 10, 19, 0.7) !important;
 `;
 
-const SignUpPassword = styled(Input)`
+const LogInPassword = styled(Input)`
   margin-bottom: 10px !important;
   width: 296px !important;
   height: 50px !important;
@@ -81,7 +82,7 @@ const SignUpPassword = styled(Input)`
   /* background-color: white !important; */
 `;
 
-const SignUpButton = styled.button`
+const LogInButton = styled.button`
   font-family: "Midnight";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
@@ -94,13 +95,15 @@ const SignUpButton = styled.button`
   background: #ff461f;
   color: #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
-  transition: 300ms ease-in-out;
+  /* transition: 300ms ease-in-out; */
   &:hover {
     /* transform: translate(8px, 8px); */
     /* 
     padding-right: 3.5rem;
     padding-bottom: 1rem; */
-    transform: scale(1, 1.2);
+    /* transform: scale(1, 1.2); */
+    transition: 80ms ease-in-out;
+    padding: 0.8rem 3.4rem 1rem 3rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
@@ -162,7 +165,7 @@ const FormContainer = styled.div`
   justify-content: center;
 `;
 
-const SignUpWrapper = styled.div`
+const LogInWrapper = styled.div`
   flex: 1;
   background-color: #130912;
   display: flex;
@@ -228,18 +231,18 @@ const LogInPage = () => {
       return;
     }
 
-    var phoneno = /^\d{10}$/;
-    if (!e.target.phoneno.value.match(phoneno)) {
-      setPhoneError(true);
-      return;
-    }
+    // var phoneno = /^\d{10}$/;
+    // if (!e.target.phoneno.value.match(phoneno)) {
+    //   setPhoneError(true);
+    //   return;
+    // }
     myHeaders.append("Content-Type", "application/json");
     var formdata = new FormData();
 
-    formdata.append("name", e.target.username.value);
-    formdata.append("password", e.target.password.value);
-    formdata.append("phoneNo", e.target.phoneno.value);
+    // formdata.append("name", e.target.username.value);
     formdata.append("regNo", e.target.regno.value);
+    formdata.append("password", e.target.password.value);
+    // formdata.append("phoneNo", e.target.phoneno.value);
 
     var requestOptions = {
       method: "POST",
@@ -248,10 +251,13 @@ const LogInPage = () => {
       redirect: "follow",
     };
 
-    fetch(prodURL + "/auth/createUser", requestOptions)
+    fetch(prodURL + "/auth/login", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        // <Alert severity="error">Servier issues</Alert>
+        console.log("error", error);
+      });
   };
 
   /// Handling Password
@@ -276,28 +282,25 @@ const LogInPage = () => {
     pswdError && handlePasswordChange(e);
   };
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
+  console.log(checked);
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    setChecked(!checked);
   };
 
   return (
     <Container>
-      <SignUpWrapper>
+      <LogInWrapper>
         <FormContainer>
-          <SignUpForm className="login-container" onSubmit={handleSubmit}>
+          <LogInForm className="login-container" onSubmit={handleSubmit}>
             <LogoTitle>
-              <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
+              <LogInLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
               <Heading>Log In</Heading>
             </LogoTitle>
             <Wrapper>
               <QueryText>Are you a Neristien?</QueryText>
-              <CustomizedSwitches
-                checked={checked}
-                onChange={handleChange}
-                inputProps={{ "aria-label": "controlled" }}
-              />
+              <CustomizedSwitches checked={checked} onChange={handleChange} />
             </Wrapper>
 
             <InputTag
@@ -312,6 +315,7 @@ const LogInPage = () => {
               onChange={(e) => {
                 regError && handleRegChange(e);
               }}
+              autoComplete="off"
             />
 
             {/* <InputTag
@@ -335,7 +339,7 @@ const LogInPage = () => {
               className="password-container"
             >
               <InputLabel>Password</InputLabel>
-              <SignUpPassword
+              <LogInPassword
                 name="password"
                 label="Password"
                 variant="standard"
@@ -359,6 +363,7 @@ const LogInPage = () => {
                     </IconButton>
                   </InputAdornment>
                 }
+                autoComplete="on"
               />
               {pswdError ? (
                 <FormHelperText>
@@ -368,16 +373,16 @@ const LogInPage = () => {
                 ""
               )}
             </FormControl>
-            <SignUpButton>LOG IN</SignUpButton>
-          </SignUpForm>
+            <LogInButton>LOG IN</LogInButton>
+          </LogInForm>
         </FormContainer>
 
         <FooterWrapper>
           <Footer>Don't have an accoutnt?</Footer>
-          <LoginLink href="#">Log In</LoginLink>
+          <LoginLink href="./register">Sign Up</LoginLink>
         </FooterWrapper>
-      </SignUpWrapper>
-      <RightContainer></RightContainer>
+      </LogInWrapper>
+      // <RightContainer></RightContainer>
     </Container>
   );
 };
