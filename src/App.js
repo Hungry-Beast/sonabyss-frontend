@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
+  max-width: 1600px;
+  
 `;
 function App() {
   return (
