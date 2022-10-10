@@ -224,31 +224,42 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
-
+    let isError=false;
     var password =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(password)) {
       setPswdError(true);
-      return;
+      // return;
+      isError=true;
     }
-
+    
     var password =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.confPassword.value.match(password)) {
       setConfPswdError(true);
-      return;
+      // return;
+      isError=true;
     }
-
+    
     var regno = /^[0-9]{6,6}$/g;
     if (!e.target.regno.value.match(regno)) {
       setRegError(true);
-      return;
+      // return;
+      isError=true;
     }
-
+    
     var phoneno = /^\d{10}$/;
     if (!e.target.phoneno.value.match(phoneno)) {
       setPhoneError(true);
-      return;
+      isError=true;
+      // return;
+    }
+    if(e.target.confPassword.value!==e.target.password.value){
+      alert("Ho")  
+      // return;
+    }
+    if(isError){
+      return
     }
     myHeaders.append("Content-Type", "application/json");
     var formdata = new FormData();
