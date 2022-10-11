@@ -8,24 +8,23 @@ const BackCard = styled.div`
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    /* background-color: pink; */
     border-radius: 16px;
     padding-left: 12px;
     padding-right:12px;
-    /* width: 481px; */
-    height: 100%;
+    /* margin: 12px; */
     max-width: 300px;
     filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
     background: #000000;
     color: #fff;
+    @media(max-width: 992px) {
+    margin: 0;
+  }
     `;
 const EventCard = styled.div`
     align-items:center;
     justify-content: center;
     width: 100%;
-    /* height: 182px; */
     object-fit: contain;
-    /* background-color: white; */
     border-radius: 8px;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -46,6 +45,14 @@ const Details = styled.div`
     margin-bottom: 12px;
 
 `;
+const Stylespan1 = styled.span`
+    font-family: Midnight Minutes;
+    font-size: 2em;
+`;
+const Stylespan2 = styled.span`
+    font-family: Midnight Minutes;
+    font-size: 1.5em;
+`;
 
 const EventBox = ({data}) => {
     console.log(data)
@@ -55,12 +62,12 @@ const EventBox = ({data}) => {
             <Poster src={data.image} />
         </EventCard>
         <Details>
-            <span>
-            {data.name}
-            </span>
-            <span>
+            <Stylespan1>
+             {data.name}
+            </Stylespan1>
+            <Stylespan2>
                {data.date}
-            </span>
+            </Stylespan2>
         </Details>
     </BackCard>
   )

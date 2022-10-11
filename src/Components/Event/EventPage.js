@@ -3,35 +3,51 @@ import { useState, useEffect } from "react";
 import { user } from "../../localStore";
 import { prodURL } from "../../config";
 import { useLocation } from "react-router-dom";
-// import Topbar from "../Navs/Topbar";
+import Topbar from "../Navs/Topbar";
 import FilterSection from "./FilterSection";
 import EventBox from "./EventBox";
 import { CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 
 const Bckground = styled.div`
-  background-color: #130912;
+  /* display: flex;
+  flex-direction:column; */
+  /* justify-content: center; */
+  /* align-items: center; */
   height:100vh;
-  /* color: #fff; */
+`;
+const OuterEventPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  padding: 12px 8px;
+
+  @media(min-width: 992px) {
+    padding: 24px 64px;
+    
+  }
+  
+
 `;
 const EventAndPre = styled.div`
-  padding: 0 24px 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media(min-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 5rem;
+    max-width: 100%;
+  }
 `;
-const PreEvent = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const PreEventBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 120px;
-  height: 25px;
-  border-radius: 3px;
-  background-color: #ffffff;
-`;
+
+
 function EventPage(props) {
   const url = "https://sonabyss.herokuapp.com";
   const location = useLocation();
@@ -174,20 +190,17 @@ function EventPage(props) {
 
   return (
     <Bckground>
-      <FilterSection/>
-      <EventAndPre>
-        <PreEvent>
-          <PreEventBox>PreEvent</PreEventBox>
-        </PreEvent>
-        {/* <EventBox> */}
-          {Events ? (
-            Events.map((data) => <EventBox data={data} />)
-          ) : (
-            <CircularProgress />
-          )}
-        {/* </EventBox> */}
-        <h1>This is the EventPage</h1>
-      </EventAndPre>
+    <Topbar/>
+      <OuterEventPage>
+        <FilterSection/>
+        <EventAndPre>
+            {Events ? (
+              Events.map((data) => <EventBox data={data} />)
+            ) : (
+              <CircularProgress />
+            )}
+        </EventAndPre>
+      </OuterEventPage>
 
     </Bckground>
   );
