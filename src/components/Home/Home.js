@@ -10,6 +10,7 @@ const Component = styled.div`
    width: 100%;
    min-height: 100vh;
    height: 100%;
+   overflow: hidden;
 
 `
 const Home = () => {
@@ -17,8 +18,8 @@ const Home = () => {
     <Component>
 
       <Topbar />
-      <Landing />
-      <Bottom />
+      {/* <Landing />
+      <Bottom /> */}
     </Component>
   )
 }
