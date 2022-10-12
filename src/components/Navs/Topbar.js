@@ -51,7 +51,7 @@ const Topbar = () => {
         <Logo src={imgUrl + "/logo.svg"} />
       </LeftPart>
       <RightPart>
-        {user ? (
+        {false ? (
           <></>
         ) : (
           <>

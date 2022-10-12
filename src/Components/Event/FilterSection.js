@@ -4,88 +4,81 @@ import TextField from "@mui/material/TextField";
 import { Autocomplete } from "@mui/material";
 import styled from "@emotion/styled";
 import { imgUrl } from "../../config";
+import './Style.css'
 
 const StyleFilter = styled.div`
   display: flex;
   flex-direction:row;
-  justify-content: flex-end;
-  /* position: fixed; */
-  /* padding: 1em 0.5em; */
+  align-items: center;
+  /* justify-content: center; */
+  /* padding: 1em 0; */
   margin-bottom: 2em;
   background-color: rgba(19, 9, 18, 0.9); ;
   width: 100%;
+  /* position: fi; */
 `;
 
+const PreEventDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  width: 60%;
+`;
 const PreEvent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  padding: 4px 2.5em;
   background-color: #000000;
   border: solid #FF0000;
   border-radius: 70px;
-  /* border-color: red; */
   color: white;
 `;
 const Pre =styled.span`
-font-size: 1.5em;
+font-size: 2em;
 font-family: Midnight Minutes;
 max-width: 100%;
 `;
+
+const AutoCompleteDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+`;
 const AutoStyle = {
   "& .MuiAutocomplete-inputRoot": {
+    display:"flex",
+    flexdirection:"row",
     alignitem:"center",
-    justifycontent:"center",
-    // backgroundColor: "#000000",
+    justifycontent:"flexend",
+    backgroundColor: "#000000",
     color:"#FFFFFF",
     fontsize: "25px",
     fontfamily: "Midnight Minutes",
-    width: "14rem",
-    height: "46px",
+    width: "17em",
     borderRadius: "70px",
     border:" solid #FF0000",
-    // padding: "0 15px",
+  
+    // padding: "0 0 0 1em",
     // margin: "6px",
     
   },
 
   "& input::placeholder": {
-    fontSize: "25px",
+    fontSize: "1em",
+    opacity:"5",
     color:"#FFFFFF",
-    fontfamily: "Midnight Minutes",
   },
   "& input": {
-    fontSize: "25px",
+    // fontSize: "2em",
+    padding:"0.5em",
     color:"#FFFFFF",
-    fontfamily: "Midnight Minutes",
+    fontfamily: "Midnight",
   },
-
 
 };
 
-// const theme = createTheme({
-//   components: {
-//     MuiAutocomplete: {
-//       styleOverrides: {
-//         root: {
-//           '& label': {
-//             fontSize: 25,
-//             color:"#FFFFFF",
-//             fontfamily: "Midnight Minutes",
-//           },
-//         },
-//         input: {
-//           fontSize: 25,
-//           color:"#FFFFFF",
-//           fontfamily: "Midnight Minutes",
-//         },
-//         listbox: {
-//           fontSize: 22,
-//         },
-//       },
-//     },
-//   },
-// });
 
 const Events = [
   {
@@ -101,7 +94,8 @@ const PopupIcon = (
   <span>
     <svg
       width="22"
-      height="21"
+      // height="21"
+      padding="0.5em"
       viewBox="0 0 24 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -116,26 +110,32 @@ const PopupIcon = (
 
 const FilterSection = () => {
   return (
-    <StyleFilter>
+    <StyleFilter className='event-card'>
+      <PreEventDiv>
       <PreEvent>
         <Pre>PreEvents</Pre>
       </PreEvent>
-      {/* <ThemeProvider theme={theme}> */}
-      <Autocomplete
-        disablePortal
-        options={Events}
-        sx={AutoStyle}
-        popupIcon={PopupIcon}
-        renderInput={(params) => (
-          <TextField
-            placeholder="Events"
-            variant="standard"
-            {...params}
-            InputProps={{ ...params.InputProps, disableUnderline: true }}
-          />
-        )}
-      />
-      {/* </ThemeProvider> */}
+      </PreEventDiv>
+      <AutoCompleteDiv>
+        <Autocomplete
+          className="AutoCom"
+          disablePortal
+          options={Events}
+          sx={AutoStyle}
+          // open={true}
+          popupIcon={PopupIcon}
+          disableClearable
+          renderInput={(params) => (
+            <TextField
+              placeholder="Clubs"
+              variant="standard"
+              {...params}
+              InputProps={{ ...params.InputProps, disableUnderline: true }}
+            />
+          )}
+        />
+      </AutoCompleteDiv>
+
     </StyleFilter>
   );
 };

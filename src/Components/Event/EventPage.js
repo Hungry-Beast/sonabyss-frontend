@@ -10,10 +10,6 @@ import { CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 
 const Bckground = styled.div`
-  /* display: flex;
-  flex-direction:column; */
-  /* justify-content: center; */
-  /* align-items: center; */
   height:100vh;
 `;
 const OuterEventPage = styled.div`
@@ -39,10 +35,16 @@ const EventAndPre = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media(min-width: 992px) {
+  @media(min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 5rem;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  @media(min-width: 1600px) {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 3rem;
     max-width: 100%;
   }
 `;
@@ -73,10 +75,101 @@ function EventPage(props) {
       })
       .catch((error) => console.log("error", error));
   };
+  // getEventsById
 
   useEffect(() => {
     getEvents();
     setEvents([
+      {
+        "name": "Solo Dance",
+        "date": "26-10-2022",
+        "time": "12:00",
+        "club": "63241cd01517958fb627cd3f",
+        "clubName": "Hobby",
+        "image": "https://firebasestorage.googleapis.com/v0/b/sonabyss-48665.appspot.com/o/WhatsApp%20Image%202022-10-09%20at%2011.53.16%20PM.jpeg?alt=media&token=b332a40f-ccfb-415d-bd63-ea6553ce5298",
+        "desc": "rnjrjrjrjrj",
+        "user": [],
+        "isOpen": true,
+        "createdBy": "633fedf0d523113e1ebf2dbc",
+        "isPaid": true,
+        "price": "10",
+        "_id": "6343126e480d5d47e12c4a65",
+        "createdAt": "2022-10-09T18:26:54.849Z",
+        "updatedAt": "2022-10-09T18:26:54.849Z",
+        "__v": 0
+    },
+      {
+        "name": "Solo Dance",
+        "date": "26-10-2022",
+        "time": "12:00",
+        "club": "63241cd01517958fb627cd3f",
+        "clubName": "Hobby",
+        "image": "https://firebasestorage.googleapis.com/v0/b/sonabyss-48665.appspot.com/o/WhatsApp%20Image%202022-10-09%20at%2011.53.16%20PM.jpeg?alt=media&token=b332a40f-ccfb-415d-bd63-ea6553ce5298",
+        "desc": "rnjrjrjrjrj",
+        "user": [],
+        "isOpen": true,
+        "createdBy": "633fedf0d523113e1ebf2dbc",
+        "isPaid": true,
+        "price": "10",
+        "_id": "6343126e480d5d47e12c4a65",
+        "createdAt": "2022-10-09T18:26:54.849Z",
+        "updatedAt": "2022-10-09T18:26:54.849Z",
+        "__v": 0
+    },
+      {
+        "name": "Solo Dance",
+        "date": "26-10-2022",
+        "time": "12:00",
+        "club": "63241cd01517958fb627cd3f",
+        "clubName": "Hobby",
+        "image": "https://firebasestorage.googleapis.com/v0/b/sonabyss-48665.appspot.com/o/WhatsApp%20Image%202022-10-09%20at%2011.53.16%20PM.jpeg?alt=media&token=b332a40f-ccfb-415d-bd63-ea6553ce5298",
+        "desc": "rnjrjrjrjrj",
+        "user": [],
+        "isOpen": true,
+        "createdBy": "633fedf0d523113e1ebf2dbc",
+        "isPaid": true,
+        "price": "10",
+        "_id": "6343126e480d5d47e12c4a65",
+        "createdAt": "2022-10-09T18:26:54.849Z",
+        "updatedAt": "2022-10-09T18:26:54.849Z",
+        "__v": 0
+    },
+      {
+        "name": "Solo Dance",
+        "date": "26-10-2022",
+        "time": "12:00",
+        "club": "63241cd01517958fb627cd3f",
+        "clubName": "Hobby",
+        "image": "https://firebasestorage.googleapis.com/v0/b/sonabyss-48665.appspot.com/o/WhatsApp%20Image%202022-10-09%20at%2011.53.16%20PM.jpeg?alt=media&token=b332a40f-ccfb-415d-bd63-ea6553ce5298",
+        "desc": "rnjrjrjrjrj",
+        "user": [],
+        "isOpen": true,
+        "createdBy": "633fedf0d523113e1ebf2dbc",
+        "isPaid": true,
+        "price": "10",
+        "_id": "6343126e480d5d47e12c4a65",
+        "createdAt": "2022-10-09T18:26:54.849Z",
+        "updatedAt": "2022-10-09T18:26:54.849Z",
+        "__v": 0
+    },
+      {
+        "name": "Solo Dance",
+        "date": "26-10-2022",
+        "time": "12:00",
+        "club": "63241cd01517958fb627cd3f",
+        "clubName": "Hobby",
+        "image": "https://firebasestorage.googleapis.com/v0/b/sonabyss-48665.appspot.com/o/WhatsApp%20Image%202022-10-09%20at%2011.53.16%20PM.jpeg?alt=media&token=b332a40f-ccfb-415d-bd63-ea6553ce5298",
+        "desc": "rnjrjrjrjrj",
+        "user": [],
+        "isOpen": true,
+        "createdBy": "633fedf0d523113e1ebf2dbc",
+        "isPaid": true,
+        "price": "10",
+        "_id": "6343126e480d5d47e12c4a65",
+        "createdAt": "2022-10-09T18:26:54.849Z",
+        "updatedAt": "2022-10-09T18:26:54.849Z",
+        "__v": 0
+    },
       {
         "name": "Solo Dance",
         "date": "26-10-2022",
@@ -190,7 +283,7 @@ function EventPage(props) {
 
   return (
     <Bckground>
-    <Topbar/>
+    {/* <Topbar/> */}
       <OuterEventPage>
         <FilterSection/>
         <EventAndPre>
