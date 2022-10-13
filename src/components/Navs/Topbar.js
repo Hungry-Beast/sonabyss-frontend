@@ -12,6 +12,7 @@ const Component = styled.div`
   padding: 1rem 2rem;
   padding-bottom: 0.2rem;
   z-index: 2;
+  overflow: hidden;
 `;
 const LeftPart = styled.div`
   @media (max-width: ${phoneBreak}) {
@@ -37,6 +38,7 @@ const RightPart = styled.div`
 `;
 const HamburgerMenu = styled.div`
   /* position: relative; */
+  display: none;
 `;
 const HamburgerMenuIcon = styled.img``;
 const PhoneMenuComponent = styled.div`
@@ -112,6 +114,7 @@ const Topbar = () => {
         <Logo src={imgUrl + "/logo.svg"} />
       </LeftPart>
       <RightPart>
+
         <PcMenu>
           {user ? (
             <></>
@@ -139,6 +142,7 @@ const Topbar = () => {
             </MobileMenuContainer>
           </PhoneMenuComponent>
         </HamburgerMenu>
+
       </RightPart>
     </Component>
   );

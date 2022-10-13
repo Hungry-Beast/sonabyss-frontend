@@ -10,12 +10,12 @@ import { Route, Routes } from "react-router-dom";
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
-
   background-color: #130912;
   display: flex;
   justify-content: center;
-`
-
+  max-width: 1600px;
+  margin: 0 auto;
+`;
 function App() {
   return (
     <Component className="App">

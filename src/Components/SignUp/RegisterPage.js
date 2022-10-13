@@ -19,6 +19,7 @@ const Container = styled.div`
   background-color: #1e1e1e;
   width: 100%;
   display: flex;
+  height: 100vh;
 `;
 
 const SignUpForm = styled.form`
@@ -65,19 +66,75 @@ const QueryText = styled.p`
   font-size: 15px;
 `;
 
-const InputTag = styled(TextField)`
+const InputTagUser = styled(TextField)`
   margin-bottom: 21px !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
+  &:hover {
+    label {
+      color: #ff461f !important;
+    }
+  }
+  &:focus {
+    label {
+      color: #ff461f !important;
+    }
+  }
 `;
+
+const InputTagReg = styled(TextField)`
+  margin-bottom: 21px !important;
+  width: 296px !important;
+  height: 50px !important;
+  background-color: rgba(22, 10, 19, 0.7) !important;
+  display: ${(props) => (props.isNerist ? "inline-flex" : "none")} !important;
+  &:hover {
+    label {
+      color: #ff461f !important;
+    }
+  }
+  &:focus {
+    label {
+      color: #ff461f !important;
+    }
+  }
+  /* .css-15o4x5l-MuiFormControl-root-MuiTextField-root
+    .MuiInput-underline::after {
+    border-bottom-color: #ff461f;
+  }
+  .login-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root::after {
+    border-bottom: 2px solid #ff461f;
+  } */
+`;
+
+const InputTagPh = styled(InputTagReg)`
+  display: ${(props) => (!props.isNerist ? "inline-flex" : "none")} !important;
+`;
+
+// const SignUpPassword = styled(Input)`
+//   margin-bottom: 10px !important;
+//   width: 296px !important;
+//   height: 50px !important;
+//   background-color: rgba(22, 10, 19, 0.7) !important;
+//   /* background-color: white !important; */
+// `;
 
 const SignUpPassword = styled(Input)`
   margin-bottom: 10px !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
-  /* background-color: white !important; */
+  /* &:hover {
+    .password-container label {
+      color: #ff461f !important;
+    }
+  }
+  &:focus {
+    .password-container label {
+      color: #ff461f !important;
+    }
+  } */
 `;
 
 const SignUpButton = styled.button`
@@ -93,13 +150,9 @@ const SignUpButton = styled.button`
   background: #ff461f;
   color: #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
-  transition: 300ms ease-in-out;
   &:hover {
-    /* transform: translate(8px, 8px); */
-    /* 
-    padding-right: 3.5rem;
-    padding-bottom: 1rem; */
-    transform: scale(1, 1.2);
+    transition: 80ms ease-in-out;
+    padding: 0.8rem 3.4rem 1rem 3rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
@@ -182,6 +235,7 @@ const RegisterPage = () => {
   const [pswdError, setPswdError] = useState(false);
   const [confpswdError, setConfPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
+  const [confPasswordCheck, setConfPasswordCheck] = useState(false);
 
   const handleRegChange = (e) => {
     var regno = /^[0-9]{6,6}$/g;
@@ -202,9 +256,9 @@ const RegisterPage = () => {
   };
 
   const handlePasswordChange = (e) => {
-    var password =
+    var passwordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (e.target.value.match(password)) {
+    if (e.target.value.match(passwordCheck)) {
       setPswdError(false);
     } else {
       setPswdError(true);
@@ -212,9 +266,9 @@ const RegisterPage = () => {
   };
 
   const handleConfPasswordError = (e) => {
-    var password =
+    var confPasswordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (e.target.value.match(password)) {
+    if (e.target.value.match(confPasswordCheck)) {
       setConfPswdError(false);
     } else {
       setConfPswdError(true);
@@ -224,30 +278,42 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
-
-    var password =
+    let isError = false;
+    var passwordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (!e.target.password.value.match(password)) {
+    if (!e.target.password.value.match(passwordCheck)) {
       setPswdError(true);
-      return;
+      // return;
+      isError = true;
     }
 
-    var password =
+    var confPasswordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (!e.target.confPassword.value.match(password)) {
+    if (!e.target.confPassword.value.match(confPasswordCheck)) {
       setConfPswdError(true);
-      return;
+      // return;
+      isError = true;
     }
 
     var regno = /^[0-9]{6,6}$/g;
     if (!e.target.regno.value.match(regno)) {
       setRegError(true);
-      return;
+      // return;
+      isError = true;
     }
 
     var phoneno = /^\d{10}$/;
     if (!e.target.phoneno.value.match(phoneno)) {
       setPhoneError(true);
+      isError = true;
+      // return;
+    }
+    if (e.target.confPassword.value !== e.target.password.value) {
+      // alert("Ho")
+      setConfPasswordCheck(true);
+      return;
+    }
+    if (isError) {
       return;
     }
     myHeaders.append("Content-Type", "application/json");
@@ -306,6 +372,8 @@ const RegisterPage = () => {
     setValues({ ...values, ["confPassword"]: e.target.value });
     confpswdError && handleConfPasswordError(e);
   };
+
+  const [checked, setChecked] = useState(false);
   return (
     <Container>
       <SignUpWrapper>
@@ -316,7 +384,7 @@ const RegisterPage = () => {
               <Heading>Sign Up</Heading>
             </LogoTitle>
 
-            <InputTag
+            <InputTagUser
               name="username"
               type={"text"}
               label="User name"
@@ -327,15 +395,16 @@ const RegisterPage = () => {
 
             <Wrapper>
               <QueryText>Are you a Neristien?</QueryText>
-              <CustomizedSwitches />
+              <CustomizedSwitches checked={checked} setChecked={setChecked} />
             </Wrapper>
 
-            <InputTag
+            <InputTagReg
               name="regno"
               label="Registration No"
               variant="standard"
               sx={SxStyles}
               error={regError}
+              isNerist={checked}
               helperText={
                 regError ? "Please enter a valid 6 digit reg no. with no /" : ""
               }
@@ -344,12 +413,13 @@ const RegisterPage = () => {
               }}
             />
 
-            <InputTag
+            <InputTagPh
               name="phoneno"
               label="Phone No"
               variant="standard"
               sx={SxStyles}
               error={phoneError}
+              isNerist={checked}
               helperText={
                 phoneError ? "Please enter a valid 10 digit number" : ""
               }
@@ -365,6 +435,7 @@ const RegisterPage = () => {
             >
               <InputLabel>Password</InputLabel>
               <SignUpPassword
+              focused
                 name="password"
                 label="Password"
                 variant="standard"
@@ -432,6 +503,13 @@ const RegisterPage = () => {
               {confpswdError ? (
                 <FormHelperText>
                   Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                </FormHelperText>
+              ) : (
+                ""
+              )}
+              {confPasswordCheck ? (
+                <FormHelperText sx={{color: 'red'}}>
+                  Password And Confirm Password Should be same
                 </FormHelperText>
               ) : (
                 ""

@@ -11,15 +11,15 @@ const Component = styled.div`
    min-height: 100vh;
    height: 100%;
    overflow: hidden;
-
+   background-color: #130912;
 `
 const Home = () => {
   return (
     <Component>
 
       <Topbar />
-      {/* <Landing />
-      <Bottom /> */}
+      <Landing />
+      <Bottom />
     </Component>
   )
 }
