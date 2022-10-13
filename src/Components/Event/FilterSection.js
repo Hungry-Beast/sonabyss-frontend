@@ -108,7 +108,9 @@ const PopupIcon = (
   </span>
 );
 
-const FilterSection = () => {
+const FilterSection = ({clubs,setSelectedClub,getEvents}) => {
+  console.log(clubs)
+
   return (
     <StyleFilter className='event-card'>
       <PreEventDiv>
@@ -120,11 +122,17 @@ const FilterSection = () => {
         <Autocomplete
           className="AutoCom"
           disablePortal
-          options={Events}
+          options={clubs}
           sx={AutoStyle}
           // open={true}
           popupIcon={PopupIcon}
           disableClearable
+          onChange={(event, newValue) => {
+          setSelectedClub(newValue);
+          getEvents(newValue.value)
+          // console.log(newValue)
+
+        }}
           renderInput={(params) => (
             <TextField
               placeholder="Clubs"
