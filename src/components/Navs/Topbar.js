@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak } from "../../breakPoints";
 import { imgUrl } from "../../config";
@@ -84,7 +85,7 @@ const MobileMenuContainer = styled.div`
   justify-content: center;
   flex-direction: column-reverse;
 `;
-const Button = styled.a`
+const Button = styled(Link)`
   text-decoration: none;
   background-color: transparent;
   padding: 0;
@@ -120,10 +121,10 @@ const Topbar = () => {
             <></>
           ) : (
             <>
-              <Button href="#">EVENTS</Button>
-              <Button href="#">SCHEDULE</Button>
-              <Button href="#">SIGN IN</Button>
-              <Button href="#">SIGN UP</Button>
+              <Button to="/events">EVENTS</Button>
+              <Button to="/schedule">SCHEDULE</Button>
+              <Button to="/signin">SIGN IN</Button>
+              <Button to="signup">SIGN UP</Button>
             </>
           )}
         </PcMenu>
@@ -135,10 +136,10 @@ const Topbar = () => {
             </CloseDiv>
             <MenuLogo src={imgUrl + "/logoWB.png"} />
             <MobileMenuContainer>
-              <Button href="#">EVENTS</Button>
-              <Button href="#">SCHEDULE</Button>
-              <Button href="#">SIGN IN</Button>
-              <Button href="#">SIGN UP</Button>
+              <Button to="#">EVENTS</Button>
+              <Button to="#">SCHEDULE</Button>
+              <Button to="#">SIGN IN</Button>
+              <Button to="#">SIGN UP</Button>
             </MobileMenuContainer>
           </PhoneMenuComponent>
         </HamburgerMenu>
