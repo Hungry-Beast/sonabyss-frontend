@@ -139,7 +139,8 @@ const SignUpPassword = styled(Input)`
     }
   } */
   @media (min-width: 992px) {
-    margin-bottom: 5px !important;
+    /* margin-bottom: 5px !important; */
+    margin-bottom: 0 !important;
   }
 `;
 
@@ -266,7 +267,7 @@ const Container = styled.div`
 const PrimaryContainer = styled.div`
   /* display: none; */
   @media (min-width: 992px) {
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
     position: relative;
     z-index: -1;
     height: 100vh;
@@ -277,7 +278,7 @@ const PrimaryContainer = styled.div`
 const SecondaryContainer = styled.div`
   /* display: none; */
   @media (min-width: 992px) {
-    background-color: rgba(62,28,51,0.38);
+    background-color: rgba(62, 28, 51, 0.38);
     position: absolute;
     z-index: 1;
     top: 3%;
@@ -347,6 +348,13 @@ const BallonGifContainer = styled.div`
   left: 23%;
 `;
 const BallonImage = styled.img`
+  width: 30%;
+`;
+
+const BatManContainer = styled.div`
+  position: absolute;
+`;
+const BatImage = styled.img`
   width: 30%;
 `;
 const RegisterPage = () => {
@@ -527,8 +535,9 @@ const RegisterPage = () => {
                 type={"text"}
                 label="User name"
                 variant="standard"
+                autoComplete="off"
                 sx={SxStyles}
-                // required
+                required
               />
 
               <Wrapper>
@@ -557,6 +566,7 @@ const RegisterPage = () => {
                 name="phoneno"
                 label="Phone No"
                 variant="standard"
+                autoComplete="off"
                 sx={SxStyles}
                 error={phoneError}
                 isNerist={checked}
@@ -621,6 +631,7 @@ const RegisterPage = () => {
                   autoComplete="off"
                   label="Password"
                   variant="standard"
+                  // autoComplete="off"
                   sx={SxStyles}
                   type={values.showConfPassword ? "text" : "password"}
                   value={values.confPassword}
@@ -661,6 +672,10 @@ const RegisterPage = () => {
               <SignUpButton>SIGN UP</SignUpButton>
             </SignUpForm>
           </FormContainer>
+
+          <BatManContainer>
+            <BatImage />
+          </BatManContainer>
 
           <FooterWrapper>
             <Footer>Don't have an accoutnt?</Footer>
