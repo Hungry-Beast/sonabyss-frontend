@@ -112,7 +112,7 @@ const InputTagReg = styled(TextField)`
 `;
 
 const InputTagPh = styled(InputTagReg)`
-  display: ${(props) => (!props.isNerist ? "inline-flex" : "none")} !important;
+  display: ${(props) => (true ? "inline-flex" : "none")} !important;
 `;
 
 // const SignUpPassword = styled(Input)`
@@ -444,18 +444,27 @@ const RegisterPage = () => {
       return;
     }
     myHeaders.append("Content-Type", "application/json");
-    var formdata = new FormData();
+    let formdata;
 
-    formdata.append("name", e.target.username.value);
-    formdata.append("password", e.target.password.value);
-    formdata.append("phoneNo", e.target.phoneno.value);
-    formdata.append("regNo", e.target.regno.value);
-
+    if (checked) {
+       formdata = {
+        name: e.target.name.value,
+        password: e.target.password.value,
+        phoneNo: e.target.phoneno.value,
+        regNo: e.target.regno.value,
+      };
+    }else{
+       formdata = {
+        name: e.target.name.value,
+        password: e.target.password.value,
+        phoneNo: e.target.phoneno.value,
+       };
+      
+    }
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
+      body: JSON.stringify(formdata),
     };
 
     fetch(prodURL + "/auth/createUser", requestOptions)
