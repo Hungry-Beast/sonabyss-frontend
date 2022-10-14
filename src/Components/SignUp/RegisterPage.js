@@ -11,6 +11,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { imgUrl, prodURL } from "../../config";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./SignUpCustomization.css";
 import CustomizedSwitches from "./CustomSwitch";
@@ -185,7 +186,7 @@ const Footer = styled.span`
     text-decoration: underline;
   }
 `;
-const LoginLink = styled.a`
+const LoginLink = styled(Link)`
   color: #ff461f;
   font-weight: 400;
   font-size: 15px;
@@ -507,8 +508,8 @@ const RegisterPage = () => {
 
           <BallonGifContainer>
             <BallonImage
-              // src={imgUrl + "/BallonGhost.gif"}
-              src="https://assets7.lottiefiles.com/packages/lf20_rt9mhehe.json"
+              src={imgUrl + "/BallonGhost.gif"}
+              // src="https://assets7.lottiefiles.com/packages/lf20_rt9mhehe.json"
               alt="Ghost Ballon Image"
             ></BallonImage>
           </BallonGifContainer>
@@ -663,10 +664,9 @@ const RegisterPage = () => {
 
           <FooterWrapper>
             <Footer>Don't have an accoutnt?</Footer>
-            <LoginLink href="/login">Log In</LoginLink>
+            <LoginLink to="/login"> Log In</LoginLink>
           </FooterWrapper>
         </SignUpWrapper>
-        {/* <RightContainer></RightContainer> */}
       </Container>
     </ParentContainer>
   );
