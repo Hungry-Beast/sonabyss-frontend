@@ -11,6 +11,7 @@ import styled from "@emotion/styled";
 
 const Bckground = styled.div`
   height: 100vh;
+  width: 100%;
 `;
 const OuterEventPage = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const EventAndPre = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
-  max-width: 100%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 
@@ -45,20 +46,28 @@ const EventAndPre = styled.div`
     max-width: 100%;
   }
 `;
+const PleaseSelect = styled.div``;
 
 function EventPage(props) {
   // const url = "https://sonabyss.herokuapp.com";
   const location = useLocation();
 
-  const [userAccess, setUserAccess] = useState(null)
+  const [userAccess, setUserAccess] = useState(null);
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
-  // console.log()
+  console.log(userAccess);
+
   const getEvents = (val) => {
-    console.log("hi")
+    console.log("hi");
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + user.authToken);
+    let url = "";
+    if (userAccess) {
+      myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
+      url = prodURL + "/events/";
+    } else {
+      url = prodURL + "/events/noAuth/";
+    }
 
     var requestOptions = {
       method: "GET",
@@ -66,13 +75,13 @@ function EventPage(props) {
       redirect: "follow",
     };
     let clubId;
-    if (!val) {
-      clubId = location.pathname.split("/")[2];
-    }else{
-      clubId=val
+    if (location.state) {
+      clubId = location.state.user.id;
+    } else {
+      clubId = val;
     }
 
-    fetch(prodURL + "/events/" + clubId, requestOptions)
+    fetch(url +clubId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -82,7 +91,9 @@ function EventPage(props) {
   };
   const getClubs = () => {
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + user.authToken);
+    if (userAccess) {
+      myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
+    }
 
     var requestOptions = {
       method: "GET",
@@ -100,6 +111,10 @@ function EventPage(props) {
             label: club.name,
             value: club["_id"],
           });
+          if (result.length !== 0 && !selectedClub) {
+            getEvents(tempClub[0].value);
+            setSelectedClub(tempClub[0]);
+          }
         });
         setClubs(tempClub);
       })
@@ -130,10 +145,13 @@ function EventPage(props) {
   // const getEventsById
 
   useEffect(() => {
-    getEvents();
-
+    setUserAccess(user);
+    if (location.state) {
+      setSelectedClub(location.state.club["id"]);
+      getEvents();
+    }
     getClubs();
-  }, []);
+  }, [userAccess]);
   console.log(selectedClub);
   return (
     <Bckground>
@@ -141,14 +159,19 @@ function EventPage(props) {
       <OuterEventPage>
         <FilterSection
           clubs={clubs}
+          selectedClub={selectedClub}
           setSelectedClub={setSelectedClub}
           getEvents={getEvents}
         />
         <EventAndPre>
-          {Events ? (
-            Events.map((data) => <EventBox data={data} />)
+          {selectedClub ? (
+            Events ? (
+              Events.map((data) => <EventBox data={data} userAccess={userAccess} />)
+            ) : (
+              <CircularProgress />
+            )
           ) : (
-            <CircularProgress />
+            <PleaseSelect>Please Select Message</PleaseSelect>
           )}
         </EventAndPre>
       </OuterEventPage>

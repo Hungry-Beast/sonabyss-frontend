@@ -36,7 +36,7 @@ const PreEvent = styled.div`
 `;
 const Pre =styled.span`
 font-size: 2em;
-font-family: Midnight Minutes;
+font-family: "midnight";
 max-width: 100%;
 `;
 
@@ -55,7 +55,7 @@ const AutoStyle = {
     backgroundColor: "#000000",
     color:"#FFFFFF",
     fontsize: "25px",
-    fontfamily: "Midnight Minutes",
+    fontfamily: "midnight",
     width: "17em",
     borderRadius: "70px",
     border:" solid #FF0000",
@@ -108,7 +108,7 @@ const PopupIcon = (
   </span>
 );
 
-const FilterSection = ({clubs,setSelectedClub,getEvents}) => {
+const FilterSection = ({clubs,setSelectedClub,getEvents,selectedClub}) => {
   console.log(clubs)
 
   return (
@@ -124,7 +124,7 @@ const FilterSection = ({clubs,setSelectedClub,getEvents}) => {
           disablePortal
           options={clubs}
           sx={AutoStyle}
-          // open={true}
+          // open={!selectedClub}
           popupIcon={PopupIcon}
           disableClearable
           onChange={(event, newValue) => {

@@ -12,7 +12,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { imgUrl, prodURL } from "../../config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./LoginCustomization.css";
 import CustomizedSwitches from "./LogInCustomSwitch";
@@ -21,7 +21,7 @@ const Container = styled.div`
   background-color: #1e1e1e;
   width: 100%;
   display: flex;
-  height: 100vh; 
+  height: 100vh;
 `;
 
 const LogInForm = styled.form`
@@ -82,9 +82,8 @@ const InputTagReg = styled(TextField)`
   &:focus {
     label {
       color: #ff461f !important;
-    } 
-   
-   }
+    }
+  }
   /* .css-15o4x5l-MuiFormControl-root-MuiTextField-root
     .MuiInput-underline::after {
     border-bottom-color: #ff461f;
@@ -212,7 +211,7 @@ const LogInPage = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
-
+  const navigate = useNavigate();
   const handleRegChange = (e) => {
     var regno = /^[0-9]{6,6}$/g;
     if (e.target.value.match(regno)) {
@@ -251,43 +250,60 @@ const LogInPage = () => {
     if (!e.target.password.value.match(password)) {
       setPswdError(true);
       // return;
-      isError = true
+      isError = true;
     }
-
-    var regno = /^[0-9]{6,6}$/g;
-    if (!e.target.regno.value.match(regno)) {
-      setRegError(true);
-      // return;
-      isError=true
+    if (checked) {
+      var regno = /^[0-9]{6,6}$/g;
+      if (!e.target.regno.value.match(regno)) {
+        setRegError(true);
+        // return;
+        isError = true;
+      }
+    } else {
+      var phoneno = /^\d{10}$/;
+      if (!e.target.phoneno.value.match(phoneno)) {
+        setPhoneError(true);
+        // return;
+        isError = true;
+      }
     }
-
-    var phoneno = /^\d{10}$/;
-    if (!e.target.phoneno.value.match(phoneno)) {
-      setPhoneError(true);
-      // return;
-      isError=true
-    }
-    if(isError){
-      return
+    if (isError) {
+      return;
     }
     myHeaders.append("Content-Type", "application/json");
-    var formdata = new FormData();
+    let formdata;
 
     // formdata.append("name", e.target.username.value);
-    formdata.append("regNo", e.target.regno.value);
-    formdata.append("password", e.target.password.value);
-    // formdata.append("phoneNo", e.target.phoneno.value);
-
+    if (checked) {
+      formdata = {
+        regNo: e.target.regno.value,
+        password: e.target.password.value,
+      };
+    } else {
+      formdata = {
+        phoneNo: e.target.phoneno.value,
+        password: e.target.password.value,
+      };
+    }
+    console.log(formdata);
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: formdata,
+      body: JSON.stringify(formdata),
       redirect: "follow",
     };
 
     fetch(prodURL + "/auth/login", requestOptions)
-      .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+
+        localStorage.setItem("user", JSON.stringify(result));
+        navigate("/");
+      })
       .catch((error) => {
         // <Alert severity="error">Servier issues</Alert>
         console.log("error", error);
