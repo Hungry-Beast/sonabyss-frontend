@@ -164,7 +164,7 @@ const SignUpButton = styled.button`
   @media (min-width: 992px) {
     margin: 0 auto;
     position: absolute;
-    top: 81%;
+    top: 80%;
   }
 `;
 
@@ -252,10 +252,10 @@ const Container = styled.div`
   @media (min-width: 992px) {
     /* display: none; */
     position: absolute;
-    top: 14%;
+    top: 10%;
     right: 17%;
     z-index: 3;
-    height: 75vh;
+    height: 82vh;
     width: 69vw;
     background-color: blue;
     margin: auto;
@@ -276,12 +276,12 @@ const PrimaryContainer = styled.div`
 const SecondaryContainer = styled.div`
   /* display: none; */
   @media (min-width: 992px) {
-    background-color: rgba(62, 28, 51, 0.38);
+    background-color: rgba(62,28,51,0.38);
     position: absolute;
     z-index: 1;
-    top: 6%;
+    top: 3%;
     right: 8%;
-    height: 90vh;
+    height: 94vh;
     width: 86vw;
     border-radius: 132px;
     filter: blur(4px);

@@ -18,6 +18,11 @@
   color: #ff461f !important;
   
 }
+.signnup-container .css-1d1r5q-MuiFormHelperText-root.Mui-error {
+  /* color: #ff461f !important; */
+  z-index: 1 !important;
+  
+}
 
 MuiInputLabel-root:hover {
   color: #ff461f !important;
