@@ -15,13 +15,6 @@ import styled from "styled-components";
 import "./SignUpCustomization.css";
 import CustomizedSwitches from "./CustomSwitch";
 
-const Container = styled.div`
-  background-color: #1e1e1e;
-  width: 100%;
-  display: flex;
-  height: 100vh;
-`;
-
 const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -38,6 +31,9 @@ const LogoTitle = styled.div`
   flex-direction: column;
   padding-top: 20%;
   color: white;
+  @media (min-width: 992px) {
+    padding-top: 0;
+  }
 `;
 
 const SignUpLogo = styled.img`
@@ -81,6 +77,9 @@ const InputTagUser = styled(TextField)`
       color: #ff461f !important;
     }
   }
+  @media (min-width: 992px) {
+    margin-bottom: 0px !important;
+  }
 `;
 
 const InputTagReg = styled(TextField)`
@@ -100,12 +99,15 @@ const InputTagReg = styled(TextField)`
     }
   }
   /* .css-15o4x5l-MuiFormControl-root-MuiTextField-root
-    .MuiInput-underline::after {
+  .MuiInput-underline::after {
     border-bottom-color: #ff461f;
   }
   .login-container .css-1ptx2yq-MuiInputBase-root-MuiInput-root::after {
     border-bottom: 2px solid #ff461f;
   } */
+  @media (min-width: 992px) {
+    margin-bottom: 3px !important;
+  }
 `;
 
 const InputTagPh = styled(InputTagReg)`
@@ -135,6 +137,9 @@ const SignUpPassword = styled(Input)`
       color: #ff461f !important;
     }
   } */
+  @media (min-width: 992px) {
+    margin-bottom: 5px !important;
+  }
 `;
 
 const SignUpButton = styled.button`
@@ -156,11 +161,20 @@ const SignUpButton = styled.button`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
+  @media (min-width: 992px) {
+    margin: 0 auto;
+    position: absolute;
+    top: 81%;
+  }
 `;
 
 const FooterWrapper = styled.div`
   text-align: center;
   padding-bottom: 19%;
+  @media (min-width: 992px) {
+    margin-top: 0;
+    padding: 0;
+  }
 `;
 const Footer = styled.span`
   color: #d5c6dc;
@@ -221,14 +235,118 @@ const SignUpWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 1rem;
+  /* Desktop */
+  @media (min-width: 992px) {
+    padding-top: 19px;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
-const RightContainer = styled.div`
+const Container = styled.div`
+  background-color: #1e1e1e;
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  /* Desktop */
+  @media (min-width: 992px) {
+    /* display: none; */
+    position: absolute;
+    top: 14%;
+    right: 17%;
+    z-index: 3;
+    height: 75vh;
+    width: 69vw;
+    background-color: blue;
+    margin: auto;
+  }
+`;
+
+const PrimaryContainer = styled.div`
+  /* display: none; */
+  @media (min-width: 992px) {
+    background-color: #1E1E1E;
+    position: relative;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+  }
+`;
+
+const SecondaryContainer = styled.div`
+  /* display: none; */
+  @media (min-width: 992px) {
+    background-color: rgba(62, 28, 51, 0.38);
+    position: absolute;
+    z-index: 1;
+    top: 6%;
+    right: 8%;
+    height: 90vh;
+    width: 86vw;
+    border-radius: 132px;
+    filter: blur(4px);
+  }
+`;
+
+const ParentContainer = styled.div``;
+
+const LeftContainer = styled.div`
   display: none;
+  /* Desktop */
   @media (min-width: 992px) {
     display: flex;
-    flex: 3;
+    flex: 2;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3%;
+    background-color: #000000;
+    flex-direction: column;
   }
+`;
+
+const WelcomeText = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const FirstLine = styled.h2`
+  font-family: "Midnight";
+  font-weight: 400;
+  color: white;
+  margin: 0;
+  font-size: 39px;
+`;
+const SecondLine = styled.h1`
+  font-family: "Midnight";
+  font-weight: 400;
+  font-size: 74px;
+  line-height: 1;
+  color: white;
+  margin: 0;
+`;
+const ThirdLine = styled.h2`
+  font-family: "Midnight";
+  font-weight: 400;
+  font-size: 39px;
+  color: white;
+  margin: 0;
+`;
+const FourthLine = styled.h3`
+  font-family: "Midnight";
+  font-weight: 400;
+  font-size: 26px;
+  color: white;
+  margin: 0;
+`;
+const BallonGifContainer = styled.div`
+  position: absolute;
+  top: 55%;
+  left: 23%;
+`;
+const BallonImage = styled.img`
+  width: 30%;
 `;
 const RegisterPage = () => {
   const [phoneError, setPhoneError] = useState(false);
@@ -375,158 +493,182 @@ const RegisterPage = () => {
 
   const [checked, setChecked] = useState(false);
   return (
-    <Container>
-      <SignUpWrapper>
-        <FormContainer>
-          <SignUpForm className="signnup-container" onSubmit={handleSubmit}>
-            <LogoTitle>
-              <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
-              <Heading>Sign Up</Heading>
-            </LogoTitle>
+    <ParentContainer>
+      <PrimaryContainer></PrimaryContainer>
+      <SecondaryContainer></SecondaryContainer>
+      <Container>
+        <LeftContainer>
+          <WelcomeText>
+            <FirstLine>Welcome to</FirstLine>
+            <SecondLine>Horror land</SecondLine>
+            <ThirdLine>Where nightmare comes to life</ThirdLine>
+            <FourthLine>let's get you sign up real quick</FourthLine>
+          </WelcomeText>
 
-            <InputTagUser
-              name="username"
-              type={"text"}
-              label="User name"
-              variant="standard"
-              sx={SxStyles}
-              // required
-            />
+          <BallonGifContainer>
+            <BallonImage
+              // src={imgUrl + "/BallonGhost.gif"}
+              src="https://assets7.lottiefiles.com/packages/lf20_rt9mhehe.json"
+              alt="Ghost Ballon Image"
+            ></BallonImage>
+          </BallonGifContainer>
+        </LeftContainer>
+        <SignUpWrapper>
+          <FormContainer>
+            <SignUpForm className="signnup-container" onSubmit={handleSubmit}>
+              <LogoTitle>
+                <SignUpLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
+                <Heading>Sign Up</Heading>
+              </LogoTitle>
 
-            <Wrapper>
-              <QueryText>Are you a Neristien?</QueryText>
-              <CustomizedSwitches checked={checked} setChecked={setChecked} />
-            </Wrapper>
-
-            <InputTagReg
-              name="regno"
-              label="Registration No"
-              variant="standard"
-              sx={SxStyles}
-              error={regError}
-              isNerist={checked}
-              helperText={
-                regError ? "Please enter a valid 6 digit reg no. with no /" : ""
-              }
-              onChange={(e) => {
-                regError && handleRegChange(e);
-              }}
-            />
-
-            <InputTagPh
-              name="phoneno"
-              label="Phone No"
-              variant="standard"
-              sx={SxStyles}
-              error={phoneError}
-              isNerist={checked}
-              helperText={
-                phoneError ? "Please enter a valid 10 digit number" : ""
-              }
-              onChange={(e) => {
-                phoneError && handlePhoneChange(e);
-              }}
-            />
-
-            <FormControl
-              variant="standard"
-              error={pswdError}
-              className="password-container"
-            >
-              <InputLabel>Password</InputLabel>
-              <SignUpPassword
-              focused
-                name="password"
-                label="Password"
+              <InputTagUser
+                name="username"
+                type={"text"}
+                label="User name"
                 variant="standard"
                 sx={SxStyles}
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleEventChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? (
-                        <VisibilityOff sx={{ color: "white" }} />
-                      ) : (
-                        <Visibility sx={{ color: "white" }} />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
+                // required
               />
-              {pswdError ? (
-                <FormHelperText>
-                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
-                </FormHelperText>
-              ) : (
-                ""
-              )}
-            </FormControl>
 
-            <FormControl
-              variant="standard"
-              error={confpswdError}
-              className="password-container"
-            >
-              <InputLabel>Confirm Password</InputLabel>
-              <SignUpPassword
-                name="confPassword"
-                label="Password"
+              <Wrapper>
+                <QueryText>Are you a Neristien?</QueryText>
+                <CustomizedSwitches checked={checked} setChecked={setChecked} />
+              </Wrapper>
+
+              <InputTagReg
+                name="regno"
+                label="Registration No"
                 variant="standard"
                 sx={SxStyles}
-                type={values.showConfPassword ? "text" : "password"}
-                value={values.confPassword}
-                onChange={handleConfEventChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowConfPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showConfPassword ? (
-                        <VisibilityOff sx={{ color: "white" }} />
-                      ) : (
-                        <Visibility sx={{ color: "white" }} />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
+                error={regError}
+                isNerist={checked}
+                helperText={
+                  regError
+                    ? "Please enter a valid 6 digit reg no. with no /"
+                    : ""
                 }
+                onChange={(e) => {
+                  regError && handleRegChange(e);
+                }}
               />
-              {confpswdError ? (
-                <FormHelperText>
-                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
-                </FormHelperText>
-              ) : (
-                ""
-              )}
-              {confPasswordCheck ? (
-                <FormHelperText sx={{color: 'red'}}>
-                  Password And Confirm Password Should be same
-                </FormHelperText>
-              ) : (
-                ""
-              )}
-            </FormControl>
 
-            <SignUpButton>SIGN UP</SignUpButton>
-          </SignUpForm>
-        </FormContainer>
+              <InputTagPh
+                name="phoneno"
+                label="Phone No"
+                variant="standard"
+                sx={SxStyles}
+                error={phoneError}
+                isNerist={checked}
+                helperText={
+                  phoneError ? "Please enter a valid 10 digit number" : ""
+                }
+                onChange={(e) => {
+                  phoneError && handlePhoneChange(e);
+                }}
+              />
 
-        <FooterWrapper>
-          <Footer>Don't have an accoutnt?</Footer>
-          <LoginLink href="/login">Log In</LoginLink>
-        </FooterWrapper>
-      </SignUpWrapper>
-      <RightContainer></RightContainer>
-    </Container>
+              <FormControl
+                variant="standard"
+                error={pswdError}
+                className="password-container"
+              >
+                <InputLabel>Password</InputLabel>
+                <SignUpPassword
+                  focused
+                  name="password"
+                  label="Password"
+                  variant="standard"
+                  autoComplete="off"
+                  sx={SxStyles}
+                  type={values.showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleEventChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff sx={{ color: "white" }} />
+                        ) : (
+                          <Visibility sx={{ color: "white" }} />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                {pswdError ? (
+                  <FormHelperText>
+                    Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                  </FormHelperText>
+                ) : (
+                  ""
+                )}
+              </FormControl>
+
+              <FormControl
+                variant="standard"
+                error={confpswdError}
+                className="password-container"
+              >
+                <InputLabel>Confirm Password</InputLabel>
+                <SignUpPassword
+                  name="confPassword"
+                  autoComplete="off"
+                  label="Password"
+                  variant="standard"
+                  sx={SxStyles}
+                  type={values.showConfPassword ? "text" : "password"}
+                  value={values.confPassword}
+                  onChange={handleConfEventChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowConfPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showConfPassword ? (
+                          <VisibilityOff sx={{ color: "white" }} />
+                        ) : (
+                          <Visibility sx={{ color: "white" }} />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                {confpswdError ? (
+                  <FormHelperText>
+                    Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                  </FormHelperText>
+                ) : (
+                  ""
+                )}
+                {confPasswordCheck ? (
+                  <FormHelperText sx={{ color: "red" }}>
+                    Password And Confirm Password Should be same
+                  </FormHelperText>
+                ) : (
+                  ""
+                )}
+              </FormControl>
+
+              <SignUpButton>SIGN UP</SignUpButton>
+            </SignUpForm>
+          </FormContainer>
+
+          <FooterWrapper>
+            <Footer>Don't have an accoutnt?</Footer>
+            <LoginLink href="/login">Log In</LoginLink>
+          </FooterWrapper>
+        </SignUpWrapper>
+        {/* <RightContainer></RightContainer> */}
+      </Container>
+    </ParentContainer>
   );
 };
 
