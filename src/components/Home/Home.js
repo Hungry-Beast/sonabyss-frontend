@@ -12,6 +12,7 @@ const Component = styled.div`
    height: 100%;
    overflow: hidden;
    background-color: #130912;
+   border: 3px solid green;
 `
 const Home = () => {
   return (

@@ -7,7 +7,7 @@ export const CentralContainer = styled.div`
 
 export const Heading = styled.div`
     font-size: 40px;
-    font-family: 'Jolly Lodger';
+    font-family: "midnight";
 `
 
 export const ViewAllButton = styled.button`
@@ -23,10 +23,15 @@ export const ViewAllButton = styled.button`
 /* About Section Start */
 
 export const Container = styled.div`
-    width: 1220px;
+    width: 100%;
     color: white;
     margin: 0 auto;
     padding: 60px 0;
+    margin-bottom: 60px;
+    @media screen and (max-width: 600px) {
+        /* width: 100%; */
+        /* background-color: aqua; */
+    }
 `
 
 export const AboutDiv = styled.div`
@@ -36,7 +41,9 @@ export const AboutDiv = styled.div`
     position: relative;
     border-radius: 50px;
     text-align: center;
-    height: 550px;
+    min-height: 600px;
+    opacity: 1;
+    /* border: 3px solid yellow; */
 
     &::after {
     content: '';
@@ -44,10 +51,10 @@ export const AboutDiv = styled.div`
     height: 108%;
     position: absolute;
     top: 0;
-    left: -10px;
-    filter: blur(35px);
+    left: -4%;
+    filter: blur(30px);
     border-radius: 50px;
-    background: #3e1c33ac;
+    background: #3e1c33c2;
 }
 `
 
@@ -55,20 +62,24 @@ export const AboutDivContent = styled.div`
     position: relative;
     z-index: 2;
     height: 90%;
+    /* border: 3px solid green; */
+    width: 100%;
+    height: 500px;
 `
 
 export const AboutText = styled.div`
-    width: 85%;
-    height: 400px;
+    width: 100%;
     position: relative;
     background: rgba(22, 10, 19, 0.7);
-    font-size: 32px;
+    /* background: rgba(169, 28, 133, 0.7); */
+    font-size: 31px;
     margin: 0 auto;
-    font-family: 'Jolly Lodger';
+    font-family: "midnight";
     letter-spacing: 1px;
-    padding: 20px 10%;
-    line-height: 32px;
+    padding: 70px 10% 50px 10%;
+    line-height: 34px;
     border-radius: 50px;
+    /* border: 3px solid pink; */
 `
 
 export const ImageContainer = styled.div`
@@ -118,7 +129,7 @@ export const SponserImgMainContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
+    width: 100%;
     height: 400px;
     position: relative;
     background: rgba(22, 10, 19, 0.7);
@@ -146,7 +157,7 @@ export const Footer = styled.div`
     align-items: center;
     position: relative;
     background-color: #170b16;
-    width: 1220px;
+    /* width: 1220px; */
     margin: 0 auto;
 `
 
