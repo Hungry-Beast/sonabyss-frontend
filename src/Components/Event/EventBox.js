@@ -57,7 +57,7 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-size: 2em;
   /* padding: 0.2em 1em;
   margin: 10px 0; */
@@ -66,7 +66,7 @@ const Stylespan1 = styled.span`
   }
   `;
 const Stylespan2 = styled.span`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-size: 1.5em;
   @media (max-width: ${phoneBreak}) {
   font-size: 1.2em;
@@ -74,7 +74,7 @@ const Stylespan2 = styled.span`
   `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-size: 1em;
   @media (max-width: ${phoneBreak}) {
   font-size: 0.8em;
@@ -147,7 +147,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
         })
         .catch((error) => console.log("error", error));
     } else {
-      navigate("/login");
+      navigate("/signin");
     }
   };
   return (

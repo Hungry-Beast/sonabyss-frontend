@@ -66,7 +66,7 @@ const ReadyText = styled.h2`
   top: 22%;
   left: 14%;
   transform: rotate(7.68deg);
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-size: 1.9rem;
   font-style: normal;
   font-weight: 400;
@@ -131,7 +131,7 @@ const Rectangle = styled.div`
   height: 9rem;
 `;
 const SkeletonText = styled.h2`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -140,7 +140,7 @@ const SkeletonText = styled.h2`
   left: 42%;
 `;
 const SkeletonTextOutside = styled.h2`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -192,7 +192,7 @@ const Date = styled.h2`
   margin: 0;
   mix-blend-mode: normal;
   text-shadow: 0px 10px 6pxrgba (0, 0, 0, 0.32);
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   font-size: 2.2rem;
@@ -220,7 +220,7 @@ const RightPart = styled.div`
   }
 `;
 const WelcomeText = styled.h2`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   max-width: 16rem;
@@ -233,7 +233,7 @@ const WelcomeText = styled.h2`
   }
 `;
 const RegisterText = styled.h2`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   font-size: 2rem;
@@ -243,7 +243,7 @@ const RegisterText = styled.h2`
   }
 `;
 const RegisterButton = styled.button`
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   font-style: normal;
   font-weight: 400;
   background: #ff461f;

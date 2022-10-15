@@ -47,7 +47,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: "midnight";
+  font-family: 'Midnight Minutes', sans-serif;;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
@@ -79,7 +79,7 @@ const AutoStyle = {
     backgroundColor: "#000000",
     color: "#FFFFFF",
     fontsize: "15px",
-    fontfamily: "midnight",
+    fontfamily: 'Midnight Minutes',
     width: "17em",
     borderRadius: "70px",
     border: " solid #FF0000",
@@ -97,7 +97,7 @@ const AutoStyle = {
     // fontSize: "2em",
     padding: "0.5em",
     color: "#FFFFFF",
-    fontfamily: "Midnight",
+    fontfamily: 'Midnight Minutes',
   },
 };
 
