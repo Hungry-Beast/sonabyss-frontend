@@ -1,13 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { phoneBreak, phoneBreakSm } from "../../../breakPoints";
 import { imgUrl } from "../../../config";
 
 const Component = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 800px;
+  max-height: 1000px;
   color: white;
+  /* overflow-x: hidden; */
+  @media (max-width: ${phoneBreak}) {
+    flex-direction: row-reverse;
+    margin-top: 2rem;
+    min-height: 60vh;
+  }
 `;
 const LeftPart = styled.div`
   flex: 1;
@@ -15,10 +22,16 @@ const LeftPart = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  @media (max-width: ${phoneBreak}) {
+    flex: 0;
+  }
 `;
 const LeftUpperPart = styled.div`
   display: flex;
   position: relative;
+  @media (max-width: ${phoneBreak}) {
+    display: none;
+  }
 `;
 const TriangleAndReady = styled.div`
   display: flex;
@@ -87,28 +100,41 @@ const LeftLowerPart = styled.div`
   /* display: none; */
   position: fixed;
   bottom: 0%;
+  /* @media(max-width:${phoneBreak}){
+    position: absolute;
+    bottom: 0;
+  } */
+`;
+const LeftLowerPartPh = styled.div`
+  display: none;
+  @media (max-width: ${phoneBreak}) {
+    display: block;
+    position: absolute;
+    bottom: 0%;
+  }
 `;
 const SkeletonContainer = styled.div`
   display: flex;
   align-items: flex-end;
   position: relative;
+  z-index: 100;
 `;
 const Skeleton = styled.img`
   mix-blend-mode: exclusion;
   transform: matrix(1, 0, 0, 1, 0, 0);
-  height: 15rem;
+  height: 10rem;
 `;
 const Rectangle = styled.div`
   position: absolute;
   background-color: #000000;
-  width: 7rem;
-  height: 14rem;
+  width: 5rem;
+  height: 9rem;
 `;
 const SkeletonText = styled.h2`
   font-family: "midnight";
   font-style: normal;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   margin: 0;
   position: absolute;
   left: 42%;
@@ -117,7 +143,7 @@ const SkeletonTextOutside = styled.h2`
   font-family: "midnight";
   font-style: normal;
   font-weight: 400;
-  font-size: 2.2rem;
+  font-size: 1.3rem;
   margin: 0;
   text-align: left;
   margin-left: 0.8rem;
@@ -135,6 +161,12 @@ const Background = styled.img`
   width: 100%;
   left: -18%;
   top: -8%;
+  @media (max-width: ${phoneBreak}) {
+    position: absolute;
+    width: 100vw;
+    left: -18%;
+    top: 0%;
+  }
 `;
 const WhiteLogoContainer = styled.div`
   z-index: 2;
@@ -144,10 +176,17 @@ const WhiteLogoContainer = styled.div`
   transform: rotate(-6.63deg);
   bottom: 3%;
   left: 18%;
+  @media (max-width: ${phoneBreak}) {
+    bottom: 24%;
+    left: 18%;
+  }
 `;
 const WhiteLogo = styled.img`
   /* position: absolute; */
   width: 20rem;
+  @media (max-width: ${phoneBreakSm}) {
+    width: 16rem;
+  }
 `;
 const Date = styled.h2`
   margin: 0;
@@ -156,7 +195,11 @@ const Date = styled.h2`
   font-family: "midnight";
   font-style: normal;
   font-weight: 400;
-  font-size: 2.3rem;
+  font-size: 2.2rem;
+  @media (max-width: ${phoneBreak}) {
+    width: 14rem;
+    font-size: 2rem;
+  }
   transform: translateX(16%) translateY(-31%);
 `;
 
@@ -167,7 +210,14 @@ const RightPart = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
   width: 100%;
+  @media (max-width: ${phoneBreak}) {
+    padding-left: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    /* font-size: 1.7rem; */
+  }
 `;
 const WelcomeText = styled.h2`
   font-family: "midnight";
@@ -175,12 +225,20 @@ const WelcomeText = styled.h2`
   font-weight: 400;
   max-width: 16rem;
   font-size: 2rem;
+  @media (max-width: ${phoneBreak}) {
+    font-size: 1.7rem;
+    margin-left: 2rem;
+  }
 `;
 const RegisterText = styled.h2`
   font-family: "midnight";
   font-style: normal;
   font-weight: 400;
   font-size: 2rem;
+  @media (max-width: ${phoneBreak}) {
+    /* font-size: 1.7rem; */
+    display: none;
+  }
 `;
 const RegisterButton = styled.button`
   font-family: "midnight";
@@ -194,6 +252,10 @@ const RegisterButton = styled.button`
   font-size: 2rem;
   padding: 0.2rem 1rem;
   margin-top: 5rem;
+  @media (max-width: ${phoneBreak}) {
+    /* font-size: 1.7rem; */
+    display: none;
+  }
 `;
 const Body = () => {
   return (
@@ -238,6 +300,18 @@ const Body = () => {
         </WelcomeText>
         <RegisterText>“Did you register?”</RegisterText>
         <RegisterButton>Register</RegisterButton>
+        <LeftLowerPartPh>
+          <SkeletonContainer>
+            <Rectangle />
+            <Skeleton src={imgUrl + "/skeleton.png"} />
+            <SkeletonText>
+              trick <br /> or <br /> treat.
+            </SkeletonText>
+          </SkeletonContainer>
+          <SkeletonTextOutside>
+            “Can you survive the <br /> night?”
+          </SkeletonTextOutside>
+        </LeftLowerPartPh>
       </RightPart>
     </Component>
   );

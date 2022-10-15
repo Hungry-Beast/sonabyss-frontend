@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { prodURL } from "../../config";
+import { phoneBreak } from "../../breakPoints";
 
 const BackCard = styled.div`
   display: flex;
@@ -51,20 +52,34 @@ const Cardfooter = styled.div`
   justify-content: space-between;
   margin: 12px 0;
   width: 100%;
+  @media (max-width: ${phoneBreak}) {
+    flex-direction: column;
+  }
 `;
 const Stylespan1 = styled.span`
   font-family: "midnight";
   font-size: 2em;
-`;
+  /* padding: 0.2em 1em;
+  margin: 10px 0; */
+  @media (max-width: ${phoneBreak}) {
+  font-size: 1.5em;
+  }
+  `;
 const Stylespan2 = styled.span`
   font-family: "midnight";
   font-size: 1.5em;
-`;
+  @media (max-width: ${phoneBreak}) {
+  font-size: 1.2em;
+  }
+  `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
   font-family: "midnight";
   font-size: 1em;
-`;
+  @media (max-width: ${phoneBreak}) {
+  font-size: 0.8em;
+  }
+  `;
 const BtnDiv = styled.div`
   display: flex;
   /* justify-content: flex-end;
@@ -91,23 +106,30 @@ const Button = styled.button`
   font-size: 1rem;
   line-height: 29px;
   color: #000000;
+  @media (max-width: ${phoneBreak}) {
+    padding: 0.2em 1em;
+    margin: 10px 0;
+    font-size: 0.8rem;
+  }
 `;
 
-const EventBox = ({ data,userAccess }) => {
+const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
   console.log(data);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleClick = () => {
+    // const user
     if (userAccess) {
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + userAccess.token);
+      myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
       myHeaders.append("Content-Type", "application/json");
-
+      const date = new Date();
+      console.log(data);
       var raw = JSON.stringify({
         date: "13-10-2000",
-        clubId: "6322e56fb3ac64c6f9b87b6e",
-        clubName: "kaddos",
-        eventId: "6341c8059253bd24df89387d",
-        eventName: "Pintu",
+        clubId: selectedClub.value,
+        clubName: selectedClub.value,
+        eventId: data["_id"],
+        eventName: data.name,
       });
 
       var requestOptions = {
@@ -117,12 +139,15 @@ const EventBox = ({ data,userAccess }) => {
         redirect: "follow",
       };
 
-      fetch(prodURL+"/registration", requestOptions)
+      fetch(prodURL + "/registration", requestOptions)
         .then((response) => response.text())
-        .then((result) => console.log(result))
+        .then((result) => {
+          console.log(result);
+          getEvents(selectedClub.value);
+        })
         .catch((error) => console.log("error", error));
-    }else{
-        navigate('/login')
+    } else {
+      navigate("/login");
     }
   };
   return (
@@ -136,8 +161,13 @@ const EventBox = ({ data,userAccess }) => {
         <Stylespan2>{data.venue}</Stylespan2>
         <Cardfooter>
           <SpanDiv />
-          <BtnDiv onClick={handleClick(data)}>
-            <Button>Register</Button>
+          <BtnDiv>
+            <Button
+              disabled={data.isRegistered || data.disabled}
+              onClick={() => handleClick(data)}
+            >
+              {data.isRegistered ? "Registered" : "Register"}
+            </Button>
           </BtnDiv>
           <SpanDiv>
             <Stylespan3>View details</Stylespan3>

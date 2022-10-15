@@ -7,6 +7,11 @@ import {
   Input,
   InputLabel,
   FormHelperText,
+  Snackbar,
+  Button,
+  Alert,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -14,6 +19,8 @@ import { imgUrl, prodURL } from "../../config";
 import styled from "styled-components";
 import "./SignUpCustomization.css";
 import CustomizedSwitches from "./CustomSwitch";
+import { Link, useNavigate } from "react-router-dom";
+import { Close } from "@mui/icons-material";
 
 const Container = styled.div`
   background-color: #1e1e1e;
@@ -150,9 +157,10 @@ const SignUpButton = styled.button`
   background: #ff461f;
   color: #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
+  transition: 80ms ease-in-out;
   &:hover {
-    transition: 80ms ease-in-out;
-    padding: 0.8rem 3.4rem 1rem 3rem;
+    /* padding: 0.8rem 3.4rem 1rem 3rem; */
+    
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
@@ -171,7 +179,7 @@ const Footer = styled.span`
     text-decoration: underline;
   }
 `;
-const LoginLink = styled.a`
+const LoginLink = styled(Link)`
   color: #ff461f;
   font-weight: 400;
   font-size: 15px;
@@ -236,7 +244,34 @@ const RegisterPage = () => {
   const [confpswdError, setConfPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
   const [confPasswordCheck, setConfPasswordCheck] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <Close fontSize="small" />
+      </IconButton>
+    </>
+  );
+  const navigate = useNavigate();
   const handleRegChange = (e) => {
     var regno = /^[0-9]{6,6}$/g;
     if (e.target.value.match(regno)) {
@@ -277,6 +312,7 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     var myHeaders = new Headers();
     let isError = false;
     var passwordCheck =
@@ -306,33 +342,36 @@ const RegisterPage = () => {
     if (!e.target.phoneno.value.match(phoneno)) {
       setPhoneError(true);
       isError = true;
+
       // return;
     }
     if (e.target.confPassword.value !== e.target.password.value) {
       // alert("Ho")
       setConfPasswordCheck(true);
+      setLoading(false);
       return;
     }
     if (isError) {
+      setLoading(false);
       return;
     }
     myHeaders.append("Content-Type", "application/json");
     let formdata;
 
     if (checked) {
-       formdata = {
+      formdata = {
         name: e.target.name.value,
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
         regNo: e.target.regno.value,
+        userType: checked ? "s" : "o",
       };
-    }else{
-       formdata = {
+    } else {
+      formdata = {
         name: e.target.name.value,
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
-       };
-      
+      };
     }
     var requestOptions = {
       method: "POST",
@@ -342,8 +381,24 @@ const RegisterPage = () => {
 
     fetch(prodURL + "/auth/createUser", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .then((result) => {
+        setLoading(false);
+        if (result.success) {
+          localStorage.setItem("user", JSON.stringify(result));
+
+          navigate("/", { state: result });
+        } else {
+          if (result.error == 1) {
+            setPhoneError(2);
+          } else if (result.error == 1) {
+            setRegError(2);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+        setLoading(false);
+      });
   };
 
   /// Handling Password
@@ -396,14 +451,14 @@ const RegisterPage = () => {
             <InputTagUser
               name="name"
               type={"text"}
-              label="Full name"
+              label="Full Name"
               variant="standard"
               sx={SxStyles}
               // required
             />
 
             <Wrapper>
-              <QueryText>Are you a Neristien?</QueryText>
+              <QueryText>Are you a Neristian?</QueryText>
               <CustomizedSwitches checked={checked} setChecked={setChecked} />
             </Wrapper>
 
@@ -530,8 +585,30 @@ const RegisterPage = () => {
         </FormContainer>
 
         <FooterWrapper>
-          <Footer>Don't have an accoutnt?</Footer>
-          <LoginLink href="/login">Log In</LoginLink>
+          <Footer>Don't have an account? </Footer>
+          <LoginLink to="/signin"> Sign In</LoginLink>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            // message=""
+            action={action}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Account Created Successfully
+            </Alert>
+          </Snackbar>
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
+            // onClick={handleCloseBd}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </FooterWrapper>
       </SignUpWrapper>
       <RightContainer></RightContainer>

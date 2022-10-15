@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/events" element={<EventPage />} />
-        <Route path="/login" element={<LogInPage />} />
+        <Route path="/signin" element={<LogInPage />} />
         <Route path="/signup" element={<RegisterPage />} />
       </Routes>
     </Component>

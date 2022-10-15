@@ -9,29 +9,29 @@
   width: 100%;
   font-size: 1.5rem;
 }
-.event-card .css-b7k0tb-MuiAutocomplete-listbox{
-    width: 80%;
-    margin: 0 auto;
-    /* max-height: 50vh; */
+.event-card .css-b7k0tb-MuiAutocomplete-listbox {
+  width: 80%;
+  margin: 0 auto;
+  /* max-height: 50vh; */
 }
 .event-card .css-b7k0tb-MuiAutocomplete-listbox::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .event-card .css-b7k0tb-MuiAutocomplete-listbox {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.event-card .css-b7k0tb-MuiAutocomplete-listbox {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 .event-card .css-b7k0tb-MuiAutocomplete-listbox .MuiAutocomplete-option {
-  width:100% !important;
+  width: 100% !important;
   margin: 0.5rem auto !important;
   /* background: rgba(19, 9, 18, 0.9);
   border: 2px solid #ff0000;
   border-radius: 14px; */
   background: #000000;
-  border: 4px solid #FF0000;
-  box-shadow: inset 0px 1px 1px 1px #FFFFFF;
+  border: 4px solid #ff0000;
+  box-shadow: inset 0px 1px 1px 1px #ffffff;
   border-radius: 0.5em;
 }
 
@@ -43,9 +43,27 @@
   font-size: 2em;
   /* width: 60%; */
   text-align: center;
-  
 }
 
 .AutoCom .css-1q60rmi-MuiAutocomplete-endAdornment {
   width: 20%;
+}
+@media screen and (max-width: 920px) {
+  .eventPage .topbar {
+    display: none !important;
+  }
+  .AutoCom {
+    font-size: 1.2em !important;
+    /* width: 12em !important; */
+  }
+  .AutoCom .MuiAutocomplete-inputRoot {
+    width: 12em !important;
+  }
+  .AutoCom input::placeholder {
+    font-size: 0.7em !important;
+    /* width: 40%; */
+  }
+  .eventPage .topbar{
+    display: none !important;
+  }
 }

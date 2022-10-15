@@ -209,7 +209,7 @@ const RightContainer = styled.div`
 `;
 const LogInPage = () => {
   const [phoneError, setPhoneError] = useState(false);
-  const [pswdError, setPswdError] = useState(false);
+  const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
   const navigate = useNavigate();
   const handleRegChange = (e) => {
@@ -236,7 +236,7 @@ const LogInPage = () => {
     if (e.target.value.match(password)) {
       setPswdError(false);
     } else {
-      setPswdError(true);
+      setPswdError(1);
     }
   };
 
@@ -248,7 +248,7 @@ const LogInPage = () => {
     var password =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(password)) {
-      setPswdError(true);
+      setPswdError(1);
       // return;
       isError = true;
     }
@@ -296,13 +296,19 @@ const LogInPage = () => {
     fetch(prodURL + "/auth/login", requestOptions)
       .then((response) => {
         console.log(response);
-        return response.json();
+        if (response.status === 400) {
+          setPswdError(2);
+          return 0;
+        } else {
+          return response.json();
+        }
       })
       .then((result) => {
         console.log(result);
-
-        localStorage.setItem("user", JSON.stringify(result));
-        navigate("/");
+        if (result) {
+          localStorage.setItem("user", JSON.stringify(result));
+          navigate("/");
+        }
       })
       .catch((error) => {
         // <Alert severity="error">Servier issues</Alert>
@@ -345,7 +351,7 @@ const LogInPage = () => {
               <Heading>Log In</Heading>
             </LogoTitle>
             <Wrapper>
-              <QueryText>Are you a Neristien?</QueryText>
+              <QueryText>Are you a Neristian?</QueryText>
               <CustomizedSwitches checked={checked} setChecked={setChecked} />
             </Wrapper>
 
@@ -414,21 +420,25 @@ const LogInPage = () => {
                 }
                 autoComplete="on"
               />
-              {pswdError ? (
+              {pswdError === 1 ? (
                 <FormHelperText>
                   Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                </FormHelperText>
+              ) : pswdError === 2 ? (
+                <FormHelperText>
+                  Incorrect Password 
                 </FormHelperText>
               ) : (
                 ""
               )}
             </FormControl>
-            <LogInButton>LOG IN</LogInButton>
+            <LogInButton>SIGN IN</LogInButton>
           </LogInForm>
         </FormContainer>
 
         <FooterWrapper>
           <Footer>Don't have an account? </Footer>
-          <LoginLink to="/register"> Sign Up</LoginLink>
+          <LoginLink to="/signup"> Sign Up</LoginLink>
         </FooterWrapper>
       </LogInWrapper>
       // <RightContainer></RightContainer>

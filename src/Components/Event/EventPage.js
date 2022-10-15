@@ -8,7 +8,13 @@ import FilterSection from "./FilterSection";
 import EventBox from "./EventBox";
 import { CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
+import { phoneBreak } from "../../breakPoints";
 
+const EventTopbar=styled(Topbar)`
+      @media(max-width: ${phoneBreak}){
+        display: none !important;
+      }
+    `
 const Bckground = styled.div`
   height: 100vh;
   width: 100%;
@@ -81,7 +87,7 @@ function EventPage(props) {
       clubId = val;
     }
 
-    fetch(url +clubId, requestOptions)
+    fetch(url + clubId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -145,17 +151,20 @@ function EventPage(props) {
   // const getEventsById
 
   useEffect(() => {
+    const user = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
     setUserAccess(user);
     if (location.state) {
       setSelectedClub(location.state.club["id"]);
       getEvents();
     }
     getClubs();
-  }, [userAccess]);
+  }, []);
   console.log(selectedClub);
   return (
-    <Bckground>
-      {/* <Topbar/> */}
+    <Bckground className="eventPage">
+      <EventTopbar />
       <OuterEventPage>
         <FilterSection
           clubs={clubs}
@@ -166,7 +175,14 @@ function EventPage(props) {
         <EventAndPre>
           {selectedClub ? (
             Events ? (
-              Events.map((data) => <EventBox data={data} userAccess={userAccess} />)
+              Events.map((data) => (
+                <EventBox
+                  data={data}
+                  getEvents={getEvents}
+                  selectedClub={selectedClub}
+                  userAccess={userAccess}
+                />
+              ))
             ) : (
               <CircularProgress />
             )

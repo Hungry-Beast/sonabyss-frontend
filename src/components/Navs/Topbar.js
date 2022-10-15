@@ -1,9 +1,14 @@
+import { Logout } from "@mui/icons-material";
+import { Avatar, IconButton, ListItemIcon, Menu, Tooltip } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak } from "../../breakPoints";
-import { imgUrl } from "../../config";
-import { user } from "../../localStore";
+import { imgUrl, prodURL } from "../../config";
+// import { user } from "../../localStore";
 
 const Component = styled.div`
   display: flex;
@@ -14,6 +19,9 @@ const Component = styled.div`
   padding-bottom: 0.2rem;
   z-index: 2;
   overflow: hidden;
+  /* position: relative; */
+  /* width: 100%; */
+  /* overflow: hidden; */
 `;
 const LeftPart = styled.div`
   @media (max-width: ${phoneBreak}) {
@@ -36,22 +44,28 @@ const RightPart = styled.div`
   /* justify-content: space-evenly; */
   /* width: 40%; */
   margin-top: 1rem;
+  /* overflow-x: hidden; */
+  /* position: relative; */
 `;
 const HamburgerMenu = styled.div`
   /* position: relative; */
   display: none;
+  @media (max-width: ${phoneBreak}) {
+    display: block;
+  }
 `;
 const HamburgerMenuIcon = styled.img``;
 const PhoneMenuComponent = styled.div`
   transition: 500ms ease-in-out;
-  transform:translateX(${(props) => (props.open ? "0" : "100%")});
+  display: ${(props) => (props.openMenu ? "block" : "hidden")};
+  transform: translateX(${(props) => (props.openMenu ? "0" : "100%")});
   flex-direction: column;
   position: absolute;
   width: 100vw;
   height: 100vh;
   background: #130912;
   left: 0;
-  z-index: 10;
+  z-index: 100;
   top: 0;
 `;
 const CloseDiv = styled.div`
@@ -65,8 +79,15 @@ const CloseIcon = styled.img`
   width: 2rem;
   margin-top: 2rem;
   margin-right: 1.5rem;
-  cursor: pointer;
+  /* cursor: pointer; */
 `;
+const MenuLogoDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const MenuLogo = styled.img`
   width: 80%;
   margin: 2rem auto;
@@ -106,19 +127,153 @@ const Button = styled(Link)`
     transform: translateY(-10%);
   }
 `;
+const ButtonLog = styled.button`
+  text-decoration: none;
+  background-color: transparent;
+  padding: 0;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  transition: 200ms ease-in-out;
+  font-family: "nightOfTerror";
+  font-style: normal;
+  font-weight: 400;
+  margin: 1rem auto;
+  cursor: pointer;
+  @media (min-width: ${phoneBreak}) {
+    margin: 0 1rem;
+  }
+  &:hover {
+    transform: translateY(-10%);
+  }
+`;
 
 const Topbar = () => {
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [userAccess, setUserAccess] = useState();
+  const [userInfo, setUserInfo] = useState();
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const getUserInfo = () => {
+    var myHeaders = new Headers();
+    const user = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+    if (user) {
+      myHeaders.append("Authorization", "Bearer " + user.authToken);
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      fetch(prodURL + "/auth/getuser", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          localStorage.setItem("userInfo", JSON.stringify(result));
+          setUserInfo(result);
+        })
+        .catch((error) => console.log("error", error));
+    }
+  };
+  useEffect(() => {
+    // console.log(user);
+    const user = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+    // if()
+    if (user) {
+      getUserInfo();
+    }
+
+    setUserAccess(user);
+  }, []);
+  console.log(userAccess);
+
   return (
-    <Component>
+    <Component className="topbar">
       <LeftPart>
         <Logo src={imgUrl + "/logo.svg"} />
       </LeftPart>
       <RightPart>
-
         <PcMenu>
-          {user ? (
-            <></>
+          {userInfo ? (
+            <>
+              <Button to="/events">EVENTS</Button>
+              <Button to="/schedule">SCHEDULE</Button>
+              {/* <Button to="/signin">SIGN IN</Button> */}
+              <Button>
+                <Tooltip title="Account settings">
+                  <IconButton
+                    onClick={handleClick}
+                    size="large"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                  >
+                    <Avatar sx={{ width: 32, height: 32 }}>
+                      {userInfo.name ? userInfo.name[0] : "A"}
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
           ) : (
             <>
               <Button to="/events">EVENTS</Button>
@@ -129,21 +284,41 @@ const Topbar = () => {
           )}
         </PcMenu>
         <HamburgerMenu>
-          <HamburgerMenuIcon onClick={()=>setOpen(true)} src={imgUrl + "/hambergerIcon.svg"} />
-          <PhoneMenuComponent open={open}>
+          <HamburgerMenuIcon
+            onClick={() => setOpenMenu(true)}
+            src={imgUrl + "/hambergerIcon.svg"}
+          />
+          <PhoneMenuComponent openMenu={openMenu}>
             <CloseDiv>
-              <CloseIcon onClick={()=>setOpen(false)} src={imgUrl + "/closeIcon.svg"} />
+              <CloseIcon
+                onClick={() => setOpenMenu(false)}
+                src={imgUrl + "/closeIcon.svg"}
+              />
             </CloseDiv>
-            <MenuLogo src={imgUrl + "/logoWB.png"} />
+            <MenuLogoDiv>
+              <MenuLogo src={imgUrl + "/logoWB.png"} />
+            </MenuLogoDiv>
             <MobileMenuContainer>
-              <Button to="#">EVENTS</Button>
-              <Button to="#">SCHEDULE</Button>
-              <Button to="#">SIGN IN</Button>
-              <Button to="#">SIGN UP</Button>
+              <Button to="/events">EVENTS</Button>
+              <Button to="/schedule">SCHEDULE</Button>
+              {userAccess ? (
+                <ButtonLog
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </ButtonLog>
+              ) : (
+                <>
+                  <Button to="/signin">SIGN IN</Button>
+                  <Button to="signup">SIGN UP</Button>
+                </>
+              )}
             </MobileMenuContainer>
           </PhoneMenuComponent>
         </HamburgerMenu>
-
       </RightPart>
     </Component>
   );

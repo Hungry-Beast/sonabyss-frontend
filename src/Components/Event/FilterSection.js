@@ -4,25 +4,36 @@ import TextField from "@mui/material/TextField";
 import { Autocomplete } from "@mui/material";
 import styled from "@emotion/styled";
 import { imgUrl } from "../../config";
-import './Style.css'
+import "./Style.css";
+import { phoneBreak } from "../../breakPoints";
+import { useNavigate } from "react-router-dom";
 
 const StyleFilter = styled.div`
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
   /* justify-content: center; */
   /* padding: 1em 0; */
   margin-bottom: 2em;
-  background-color: rgba(19, 9, 18, 0.9); ;
+  background-color: rgba(19, 9, 18, 0.9);
   width: 100%;
+  @media (max-width: ${phoneBreak}) {
+    flex-direction: column-reverse;
+  }
   /* position: fi; */
 `;
 
 const PreEventDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content:flex-end;
+  justify-content: flex-end;
   width: 60%;
+  @media (max-width: ${phoneBreak}) {
+    width: 100%;
+    margin-top: 1rem;
+    /* margin: 0; */
+    justify-content: center;
+  }
 `;
 const PreEvent = styled.div`
   display: flex;
@@ -30,14 +41,17 @@ const PreEvent = styled.div`
   justify-content: center;
   padding: 4px 2.5em;
   background-color: #000000;
-  border: solid #FF0000;
+  border: solid #ff0000;
   border-radius: 70px;
   color: white;
 `;
-const Pre =styled.span`
-font-size: 2em;
-font-family: "midnight";
-max-width: 100%;
+const Pre = styled.span`
+  font-size: 2em;
+  font-family: "midnight";
+  max-width: 100%;
+  @media (max-width: ${phoneBreak}) {
+    font-size: 1.3em;
+  }
 `;
 
 const AutoCompleteDiv = styled.div`
@@ -45,40 +59,47 @@ const AutoCompleteDiv = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 40%;
+  @media (max-width: ${phoneBreak}) {
+    width: 100%;
+    justify-content: space-between;
+  }
+`;
+const BackArrow = styled.img`
+  display: none;
+  @media (max-width: ${phoneBreak}) {
+    display: block;
+  }
 `;
 const AutoStyle = {
   "& .MuiAutocomplete-inputRoot": {
-    display:"flex",
-    flexdirection:"row",
-    alignitem:"center",
-    justifycontent:"flexend",
+    display: "flex",
+    flexdirection: "row",
+    alignitem: "center",
+    justifycontent: "flexend",
     backgroundColor: "#000000",
-    color:"#FFFFFF",
-    fontsize: "25px",
+    color: "#FFFFFF",
+    fontsize: "15px",
     fontfamily: "midnight",
     width: "17em",
     borderRadius: "70px",
-    border:" solid #FF0000",
-  
+    border: " solid #FF0000",
+
     // padding: "0 0 0 1em",
     // margin: "6px",
-    
   },
 
   "& input::placeholder": {
     fontSize: "1em",
-    opacity:"5",
-    color:"#FFFFFF",
+    opacity: "5",
+    color: "#FFFFFF",
   },
   "& input": {
     // fontSize: "2em",
-    padding:"0.5em",
-    color:"#FFFFFF",
+    padding: "0.5em",
+    color: "#FFFFFF",
     fontfamily: "Midnight",
   },
-
 };
-
 
 const Events = [
   {
@@ -108,17 +129,24 @@ const PopupIcon = (
   </span>
 );
 
-const FilterSection = ({clubs,setSelectedClub,getEvents,selectedClub}) => {
-  console.log(clubs)
+const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
+  const navigate = useNavigate();
+  console.log(clubs);
 
   return (
-    <StyleFilter className='event-card'>
+    <StyleFilter className="event-card">
       <PreEventDiv>
-      <PreEvent>
-        <Pre>PreEvents</Pre>
-      </PreEvent>
+        <PreEvent>
+          <Pre>PreEvents</Pre>
+        </PreEvent>
       </PreEventDiv>
       <AutoCompleteDiv>
+        <BackArrow
+          onClick={() => {
+            navigate(-1);
+          }}
+          src={imgUrl + "/backArrow.svg"}
+        />
         <Autocomplete
           className="AutoCom"
           disablePortal
@@ -128,11 +156,10 @@ const FilterSection = ({clubs,setSelectedClub,getEvents,selectedClub}) => {
           popupIcon={PopupIcon}
           disableClearable
           onChange={(event, newValue) => {
-          setSelectedClub(newValue);
-          getEvents(newValue.value)
-          // console.log(newValue)
-
-        }}
+            setSelectedClub(newValue);
+            getEvents(newValue.value);
+            // console.log(newValue)
+          }}
           renderInput={(params) => (
             <TextField
               placeholder="Clubs"
@@ -143,7 +170,6 @@ const FilterSection = ({clubs,setSelectedClub,getEvents,selectedClub}) => {
           )}
         />
       </AutoCompleteDiv>
-
     </StyleFilter>
   );
 };
