@@ -6,7 +6,7 @@ const Component = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 800px;
+  min-height: 80vh;
   color: white;
 `;
 const LeftPart = styled.div`
@@ -39,7 +39,7 @@ const ReadyPart = styled.div`
   position: relative;
   transform: translateY(-19%);
   margin-left: 9%;
-  z-index: 3;
+  z-index: 1;
 `;
 const ReadyImg = styled.img`
   height: 8rem;
@@ -63,7 +63,6 @@ const CatAndMoon = styled.div`
   position: absolute;
   top: -20%;
   left: 53%;
-  z-index: 2;
 
   /* display: none; */
 `;
@@ -84,116 +83,16 @@ const Cat = styled.img`
   z-index: 2;
 `;
 const LeftLowerPart = styled.div`
-  /* display: none; */
-  position: fixed;
-  bottom: 0%;
+  display: none;
 `;
-const SkeletonContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-`;
-const Skeleton = styled.img`
-  mix-blend-mode: exclusion;
-  transform: matrix(1, 0, 0, 1, 0, 0);
-  height: 15rem;
-`;
-const Rectangle = styled.div`
-  position: absolute;
-  background-color: #000000;
-  width: 7rem;
-  height: 14rem;
-`;
-const SkeletonText = styled.h2`
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.8rem;
-  margin: 0;
-  position: absolute;
-  left: 42%;
-`;
-const SkeletonTextOutside = styled.h2`
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2.2rem;
-  margin: 0;
-  text-align: left;
-  margin-left: 0.8rem;
-`;
+const SkeletonContainer = styled.div``;
+const Skeleton = styled.img``;
+const SkeletonText = styled.h2``;
 const MiddlePart = styled.div`
   flex: 1.5;
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  /* min-height: 80vh; */
 `;
-const Background = styled.img`
-  /* position: absolute; */
-  max-width: 46rem;
-  width: 100%;
-  left: -18%;
-  top: -8%;
-`;
-const WhiteLogoContainer = styled.div`
-  z-index: 2;
-  position: absolute;
-  -webkit-transform: rotate(-6.63deg);
-  -ms-transform: rotate(-6.63deg);
-  transform: rotate(-6.63deg);
-  bottom: 3%;
-  left: 18%;
-`;
-const WhiteLogo = styled.img`
-  /* position: absolute; */
-  width: 20rem;
-`;
-const Date = styled.h2`
-  margin: 0;
-  mix-blend-mode: normal;
-  text-shadow: 0px 10px 6pxrgba (0, 0, 0, 0.32);
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2.3rem;
-  transform: translateX(16%) translateY(-31%);
-`;
-
 const RightPart = styled.div`
   flex: 1;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-`;
-const WelcomeText = styled.h2`
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  max-width: 16rem;
-  font-size: 2rem;
-`;
-const RegisterText = styled.h2`
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2rem;
-`;
-const RegisterButton = styled.button`
-  font-family: "midnight";
-  font-style: normal;
-  font-weight: 400;
-  background: #ff461f;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px 5px #ff1b12;
-  border-radius: 165.5px;
-  border: none;
-  outline: none;
-  font-size: 2rem;
-  padding: 0.2rem 1rem;
-  margin-top: 5rem;
 `;
 const Body = () => {
   return (
@@ -214,31 +113,14 @@ const Body = () => {
         </LeftUpperPart>
         <LeftLowerPart>
           <SkeletonContainer>
-            <Rectangle />
-            <Skeleton src={imgUrl + "/skeleton.png"} />
-            <SkeletonText>
-              trick <br /> or <br /> treat.
-            </SkeletonText>
+            <Skeleton src={imgUrl + "/skeleton.svg"} />
+            <SkeletonText>trick or treat.</SkeletonText>
           </SkeletonContainer>
-          <SkeletonTextOutside>
-            “Can you survive the <br /> night?”
-          </SkeletonTextOutside>
+          <SkeletonText>“Can you survive the night?”</SkeletonText>
         </LeftLowerPart>
       </LeftPart>
-      <MiddlePart>
-        <Background src={imgUrl + "/background.png"} />
-        <WhiteLogoContainer>
-          <WhiteLogo src={imgUrl + "/logoWhite.png"} />
-          <Date>3 Nov - 5 Nov</Date>
-        </WhiteLogoContainer>
-      </MiddlePart>
-      <RightPart>
-        <WelcomeText>
-          Welcoming you to the most awaited fest of arunachal pradesh.
-        </WelcomeText>
-        <RegisterText>“Did you register?”</RegisterText>
-        <RegisterButton>Register</RegisterButton>
-      </RightPart>
+      <MiddlePart>a</MiddlePart>
+      <RightPart>a</RightPart>
     </Component>
   );
 };
