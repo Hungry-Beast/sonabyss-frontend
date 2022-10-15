@@ -5,9 +5,18 @@
     color: #D5C6DC !important;
     z-index: 1;
   }
+
+  .password-container {
+    margin-top: 10px;
+  }
   
   .login-container label:hover:focus {
     color: #ff461f !important;
+
+  }
+
+  .login-container .css-1d1r5q-MuiFormHelperText-root.Mui-error {
+    z-index: 1 !important;
 
   }
 

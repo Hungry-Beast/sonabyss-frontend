@@ -4,7 +4,6 @@ import Body from './Body';
 
 const Component=styled.div`
     height: 100%;
-
 `
 const Landing = () => {
   return (

@@ -10,20 +10,15 @@ import { Route, Routes } from "react-router-dom";
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color: #130912;
-  display: flex;
-  justify-content: center;
-  max-width: 1600px;
-  margin: 0 auto;
 `;
 function App() {
   return (
     <Component className="App">
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/events" element={<EventPage />} />
+        <Route path="/events/:id" element={<EventPage />} />
         <Route path="/login" element={<LogInPage />} />
-        <Route path="/signup" element={<RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Component>
   );
