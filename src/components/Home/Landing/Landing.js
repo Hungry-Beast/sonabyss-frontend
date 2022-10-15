@@ -13,7 +13,7 @@ const BlackBox = styled.div`
   justify-content: center;
   flex-direction: column;
   color: #fff;
-  width: 90%;
+  width: 80%;
   margin: 2rem auto;
   padding: 3rem 2rem;
   background: rgba(0, 0, 0, 0.32);
@@ -28,6 +28,7 @@ const RegisterText = styled.h2`
   font-style: normal;
   font-weight: 400;
   font-size: 2.5rem;
+  margin: 1rem 0;
   @media (max-width: ${phoneBreak}) {
     /* font-size: 1.7rem; */
     /* display: none; */
@@ -52,6 +53,7 @@ const RegisterButton = styled.button`
   color: white;
   color: #000;
 `;
+
 const Landing = () => {
   return (
     <Component>

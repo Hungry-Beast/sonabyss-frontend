@@ -279,7 +279,7 @@ const Topbar = () => {
               <Button to="/events">EVENTS</Button>
               <Button to="/schedule">SCHEDULE</Button>
               <Button to="/signin">SIGN IN</Button>
-              <Button to="signup">SIGN UP</Button>
+              <Button to="/signup">SIGN UP</Button>
             </>
           )}
         </PcMenu>
@@ -313,7 +313,7 @@ const Topbar = () => {
               ) : (
                 <>
                   <Button to="/signin">SIGN IN</Button>
-                  <Button to="signup">SIGN UP</Button>
+                  <Button to="/signup">SIGN UP</Button>
                 </>
               )}
             </MobileMenuContainer>

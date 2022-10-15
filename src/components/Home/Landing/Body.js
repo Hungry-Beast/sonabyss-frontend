@@ -165,7 +165,7 @@ const Background = styled.img`
     position: absolute;
     width: 100vw;
     left: -18%;
-    top: 0%;
+    top: -2%;
   }
 `;
 const WhiteLogoContainer = styled.div`
@@ -178,7 +178,7 @@ const WhiteLogoContainer = styled.div`
   left: 18%;
   @media (max-width: ${phoneBreak}) {
     bottom: 24%;
-    left: 18%;
+    left: 0;
   }
 `;
 const WhiteLogo = styled.img`
@@ -228,6 +228,8 @@ const WelcomeText = styled.h2`
   @media (max-width: ${phoneBreak}) {
     font-size: 1.7rem;
     margin-left: 2rem;
+    position: absolute;
+    width: 11rem;
   }
 `;
 const RegisterText = styled.h2`
@@ -296,7 +298,7 @@ const Body = () => {
       </MiddlePart>
       <RightPart>
         <WelcomeText>
-          Welcoming you to the most awaited fest of arunachal pradesh.
+          Welcoming you to the most awaited fest of Arunachal Pradesh.
         </WelcomeText>
         <RegisterText>“Did you register?”</RegisterText>
         <RegisterButton>Register</RegisterButton>

@@ -1,7 +1,7 @@
 .signnup-container label {
   font-size: 15px !important;
   margin-left: 15px;
-  margin-top: 0px;
+  margin-top: 5px;
   /* color: #D5C6DC !important; */
   z-index: 1;
 }
@@ -10,12 +10,21 @@
   color: #D5C6DC !important;
 }
 
+.signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root:hover {
+  color: #ff461f !important;
+}
+
 .Mui-focused {
   color: #D5C6DC !important;
 }
 
 .signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root:hover:focus {
   color: #ff461f !important;
+  
+}
+.signnup-container .css-1d1r5q-MuiFormHelperText-root.Mui-error {
+  /* color: #ff461f !important; */
+  z-index: 1 !important;
   
 }
 

@@ -17,7 +17,6 @@ const Component = styled.div`
 const Home = () => {
   return (
     <Component>
-
       <Topbar />
       <Landing />
       <Bottom />

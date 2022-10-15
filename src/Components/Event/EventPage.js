@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState,useEffect } from "react";
+// import axios from "axios";
 import { user } from "../../localStore";
 import { prodURL } from "../../config";
 import { useLocation } from "react-router-dom";
@@ -16,8 +17,9 @@ const EventTopbar=styled(Topbar)`
       }
     `
 const Bckground = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
+
 `;
 const OuterEventPage = styled.div`
   display: flex;
@@ -128,7 +130,8 @@ function EventPage(props) {
   };
 
   const getEventsById = () => {
-    var myHeaders = new Headers();
+
+ var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + user.authToken);
 
     var requestOptions = {
@@ -136,20 +139,15 @@ function EventPage(props) {
       headers: myHeaders,
       redirect: "follow",
     };
-    const clubId = location.pathname.split("/")[2];
+    const clubId=location.pathname.split('/')[2]
     fetch(
-      prodURL + "/registration/6324407faa284d2404190d16/" + clubId,
+      prodURL+"/events/"+clubId,
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        // setEvents
-      })
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
-  // const getEventsById
-
   useEffect(() => {
     const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -192,7 +190,7 @@ function EventPage(props) {
         </EventAndPre>
       </OuterEventPage>
     </Bckground>
-  );
+ );
 }
 
 export default EventPage;
