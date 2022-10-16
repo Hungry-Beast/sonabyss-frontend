@@ -95,7 +95,7 @@ const InputTagReg = styled(TextField)`
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
-  display: ${(props) => (props.isNerist ? "inline-flex" : "none")} !important;
+  display: ${(props) => (props.isnerist==="1" ? "inline-flex" : "none")} !important;
   &:hover {
     label {
       color: #ff461f !important;
@@ -172,9 +172,9 @@ const SignUpButton = styled.button`
     cursor: pointer;
   }
   @media (min-width: 992px) {
-    margin: 0 auto;
-    position: absolute;
-    top: 80%;
+    margin: 1rem auto;
+    /* position: absolute;
+    top: 80%; */
   }
 `;
 
@@ -351,12 +351,17 @@ const FourthLine = styled.h3`
   margin: 0;
 `;
 const BallonGifContainer = styled.div`
-  position: absolute;
+  /* position: absolute; */
   top: 55%;
   left: 23%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: ; */
 `;
 const BallonImage = styled.img`
   width: 30%;
+  margin: 2rem auto;
 `;
 
 const BatManContainer = styled.div`
@@ -373,6 +378,8 @@ const RegisterPage = () => {
   const [confPasswordCheck, setConfPasswordCheck] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [checked, setChecked] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
@@ -435,11 +442,13 @@ const RegisterPage = () => {
     } else {
       setConfPswdError(true);
     }
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    console.log("hi");
+    // setLoading(true);
     var myHeaders = new Headers();
     let isError = false;
     var passwordCheck =
@@ -459,7 +468,8 @@ const RegisterPage = () => {
     }
 
     var regno = /^[0-9]{6,6}$/g;
-    if (!e.target.regno.value.match(regno)) {
+
+    if (checked && !e.target.regno.value.match(regno)) {
       setRegError(true);
       // return;
       isError = true;
@@ -479,9 +489,9 @@ const RegisterPage = () => {
       return;
     }
     if (isError) {
-      setLoading(false);
       return;
     }
+    setLoading(true);
     myHeaders.append("Content-Type", "application/json");
     let formdata;
 
@@ -557,6 +567,7 @@ const RegisterPage = () => {
   const handleEventChange = (e) => {
     setValues({ ...values, ["password"]: e.target.value });
     pswdError && handlePasswordChange(e);
+    confPasswordCheck&& handlePasswordChange(e);
   };
 
   const handleConfEventChange = (e) => {
@@ -564,7 +575,6 @@ const RegisterPage = () => {
     confpswdError && handleConfPasswordError(e);
   };
 
-  const [checked, setChecked] = useState(false);
   return (
     <ParentContainer>
       <PrimaryContainer></PrimaryContainer>
@@ -595,9 +605,9 @@ const RegisterPage = () => {
               </LogoTitle>
 
               <InputTagUser
-                name="username"
+                name="name"
                 type={"text"}
-                label="User name"
+                label="Full Name"
                 variant="standard"
                 autoComplete="off"
                 sx={SxStyles}
@@ -615,7 +625,7 @@ const RegisterPage = () => {
                 variant="standard"
                 sx={SxStyles}
                 error={regError}
-                isNerist={checked}
+                isnerist={checked ? "1" : null}
                 helperText={
                   regError
                     ? "Please enter a valid 6 digit reg no. with no /"
@@ -633,7 +643,7 @@ const RegisterPage = () => {
                 autoComplete="off"
                 sx={SxStyles}
                 error={phoneError}
-                isNerist={checked}
+                isnerist={checked ? "1" : null}
                 helperText={
                   phoneError ? "Please enter a valid 10 digit number" : ""
                 }
@@ -649,7 +659,7 @@ const RegisterPage = () => {
               >
                 <InputLabel>Password</InputLabel>
                 <SignUpPassword
-                  focused
+                  // focused
                   name="password"
                   label="Password"
                   variant="standard"
@@ -733,7 +743,7 @@ const RegisterPage = () => {
                 )}
               </FormControl>
 
-              <SignUpButton>SIGN UP</SignUpButton>
+              <SignUpButton type="submit">SIGN UP</SignUpButton>
             </SignUpForm>
           </FormContainer>
 

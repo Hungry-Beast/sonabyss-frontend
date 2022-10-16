@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
-
+import './Style.css'
 const BackCard = styled.div`
   display: flex;
   flex-direction: column;

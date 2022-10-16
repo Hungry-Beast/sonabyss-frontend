@@ -7,6 +7,7 @@ import { imgUrl } from "../../config";
 import "./Style.css";
 import { phoneBreak } from "../../breakPoints";
 import { useNavigate } from "react-router-dom";
+import './Style.css'
 
 const StyleFilter = styled.div`
   display: flex;

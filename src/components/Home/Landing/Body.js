@@ -14,6 +14,7 @@ const Component = styled.div`
     flex-direction: row-reverse;
     margin-top: 2rem;
     min-height: 60vh;
+    justify-content: center;
   }
 `;
 const LeftPart = styled.div`
@@ -108,7 +109,7 @@ const LeftLowerPart = styled.div`
 const LeftLowerPartPh = styled.div`
   display: none;
   @media (max-width: ${phoneBreak}) {
-    display: block;
+    display: none;
     position: absolute;
     bottom: 0%;
   }
@@ -123,6 +124,10 @@ const Skeleton = styled.img`
   mix-blend-mode: exclusion;
   transform: matrix(1, 0, 0, 1, 0, 0);
   height: 10rem;
+  @media(max-width:${phoneBreak}){
+    height: 7rem;
+    display: none;
+  }
 `;
 const Rectangle = styled.div`
   position: absolute;
@@ -153,6 +158,7 @@ const MiddlePart = styled.div`
   position: relative;
   z-index: 1;
   width: 100%;
+  margin: 0 auto;
   /* min-height: 80vh; */
 `;
 const Background = styled.img`
@@ -162,7 +168,7 @@ const Background = styled.img`
   left: -18%;
   top: -8%;
   @media (max-width: ${phoneBreak}) {
-    position: absolute;
+    /* position: absolute; */
     width: 100vw;
     left: -18%;
     top: -2%;
@@ -177,8 +183,16 @@ const WhiteLogoContainer = styled.div`
   bottom: 3%;
   left: 18%;
   @media (max-width: ${phoneBreak}) {
-    bottom: 24%;
-    left: 0;
+    /* position: relative; */
+    bottom: 34%;
+    left: 10%;
+    /* margin: 0 auto; */
+  }
+  @media (max-width: ${phoneBreakSm}) {
+    /* position: relative; */
+    bottom: 48%;
+    left: 15%;
+    /* margin: 0 auto; */
   }
 `;
 const WhiteLogo = styled.img`
@@ -216,6 +230,7 @@ const RightPart = styled.div`
     padding-left: 0.5rem;
     align-items: center;
     justify-content: flex-start;
+    flex: 0;
     /* font-size: 1.7rem; */
   }
 `;
@@ -230,6 +245,7 @@ const WelcomeText = styled.h2`
     margin-left: 2rem;
     position: absolute;
     width: 11rem;
+    display: none;
   }
 `;
 const RegisterText = styled.h2`

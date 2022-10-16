@@ -317,12 +317,13 @@ const ThirdLine = styled.h2`
 //   margin: 0;
 // `;
 const BallonGifContainer = styled.div`
-  position: absolute;
-  top: 48%;
-  left: 23%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const BallonImage = styled.img`
   width: 30%;
+  margin:2rem 0;
   /* mix-blend-mode: difference; */
   /* mix-blend-mode: multiply; */
 `;

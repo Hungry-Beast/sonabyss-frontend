@@ -10,6 +10,7 @@ import EventBox from "./EventBox";
 import { CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 import { phoneBreak } from "../../breakPoints";
+import './Style.css'
 
 const EventTopbar=styled(Topbar)`
       @media(max-width: ${phoneBreak}){
