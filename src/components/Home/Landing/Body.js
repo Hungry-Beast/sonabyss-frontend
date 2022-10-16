@@ -99,12 +99,11 @@ const Cat = styled.img`
 `;
 const LeftLowerPart = styled.div`
   /* display: none; */
-  position: fixed;
-  bottom: 0%;
-  /* @media(max-width:${phoneBreak}){
-    position: absolute;
-    bottom: 0;
-  } */
+  /* position: fixed;
+  bottom: 0%; */
+  @media(max-width:${phoneBreak}){
+  display: none;
+  }
 `;
 const LeftLowerPartPh = styled.div`
   display: none;

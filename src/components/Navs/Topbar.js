@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak } from "../../breakPoints";
-import { imgUrl, prodURL } from "../../config";
+import { imgUrl, pdfUrl, prodURL } from "../../config";
 // import { user } from "../../localStore";
 
 const Component = styled.div`
@@ -222,14 +222,18 @@ const Topbar = () => {
   return (
     <Component className="topbar">
       <LeftPart>
-        <Logo src={imgUrl + "/logo.svg"} />
+        <Link to="/">
+          <Logo src={imgUrl + "/logo.svg"} />
+        </Link>
       </LeftPart>
       <RightPart>
         <PcMenu>
           {userInfo ? (
             <>
               <Button to="/events">EVENTS</Button>
-              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
+              <SceduleButton  href={pdfUrl} download target="_blank">
+                SCHEDULE
+              </SceduleButton>
               {/* <Button to="/signin">SIGN IN</Button> */}
               <Button>
                 <Tooltip title="Account settings">
@@ -298,7 +302,9 @@ const Topbar = () => {
           ) : (
             <>
               <Button to="/events">EVENTS</Button>
-              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
+              <SceduleButton  href={pdfUrl}  target="_blank">
+                SCHEDULE
+              </SceduleButton>
               <Button to="/signin">SIGN IN</Button>
               <Button to="/signup">SIGN UP</Button>
             </>
@@ -321,7 +327,9 @@ const Topbar = () => {
             </MenuLogoDiv>
             <MobileMenuContainer>
               <Button to="/events">EVENTS</Button>
-              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
+              <SceduleButton  href={pdfUrl} download target="_blank">
+                SCHEDULE
+              </SceduleButton>
               {userAccess ? (
                 <ButtonLog
                   onClick={() => {
