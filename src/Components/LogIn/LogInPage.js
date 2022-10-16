@@ -8,6 +8,8 @@ import {
   InputLabel,
   FormHelperText,
   Alert,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -16,7 +18,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./LoginCustomization.css";
 import CustomizedSwitches from "./LogInCustomSwitch";
-
 
 const LogInForm = styled.form`
   display: flex;
@@ -211,20 +212,19 @@ const LogInWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 1rem;
-    /* Desktop */
-    @media (min-width: 992px) {
+  /* Desktop */
+  @media (min-width: 992px) {
     padding-top: 19px;
     display: flex;
     justify-content: space-between;
   }
 `;
 
-
 const Container = styled.div`
   background-color: #1e1e1e;
   width: 100%;
   display: flex;
-  height: 100vh; 
+  height: 100vh;
   @media (min-width: 992px) {
     /* display: none; */
     position: absolute;
@@ -241,7 +241,7 @@ const Container = styled.div`
 const PrimaryContainer = styled.div`
   /* display: none; */
   @media (min-width: 992px) {
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
     position: relative;
     z-index: -1;
     height: 100vh;
@@ -252,7 +252,7 @@ const PrimaryContainer = styled.div`
 const SecondaryContainer = styled.div`
   /* display: none; */
   @media (min-width: 992px) {
-    background-color: rgba(62,28,51,0.38);
+    background-color: rgba(62, 28, 51, 0.38);
     position: absolute;
     z-index: 1;
     top: 3%;
@@ -317,18 +317,23 @@ const ThirdLine = styled.h2`
 //   margin: 0;
 // `;
 const BallonGifContainer = styled.div`
-  position: absolute;
-  top: 48%;
-  left: 23%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const BallonImage = styled.img`
   width: 30%;
+  margin:2rem 0;
+  /* mix-blend-mode: difference; */
+  /* mix-blend-mode: multiply; */
 `;
 
 const LogInPage = () => {
   const [phoneError, setPhoneError] = useState(false);
-  const [pswdError, setPswdError] = useState(false);
+  const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const handleRegChange = (e) => {
     var regno = /^[0-9]{6,6}$/g;
@@ -354,7 +359,7 @@ const LogInPage = () => {
     if (e.target.value.match(password)) {
       setPswdError(false);
     } else {
-      setPswdError(true);
+      setPswdError(1);
     }
   };
 
@@ -366,7 +371,7 @@ const LogInPage = () => {
     var password =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(password)) {
-      setPswdError(true);
+      setPswdError(1);
       // return;
       isError = true;
     }
@@ -388,6 +393,7 @@ const LogInPage = () => {
     if (isError) {
       return;
     }
+    setLoading(true);
     myHeaders.append("Content-Type", "application/json");
     let formdata;
 
@@ -413,14 +419,22 @@ const LogInPage = () => {
 
     fetch(prodURL + "/auth/login", requestOptions)
       .then((response) => {
+        setLoading(false);
         console.log(response);
-        return response.json();
+        if (response.status === 400) {
+          setPswdError(2);
+          return 0;
+        } else {
+          return response.json();
+        }
       })
       .then((result) => {
+        setLoading(false);
         console.log(result);
-
-        localStorage.setItem("user", JSON.stringify(result));
-        navigate("/");
+        if (result) {
+          localStorage.setItem("user", JSON.stringify(result));
+          navigate("/");
+        }
       })
       .catch((error) => {
         // <Alert severity="error">Servier issues</Alert>
@@ -455,7 +469,7 @@ const LogInPage = () => {
 
   return (
     <ParentContainer>
-    <PrimaryContainer></PrimaryContainer>
+      <PrimaryContainer></PrimaryContainer>
       <SecondaryContainer></SecondaryContainer>
       <Container>
         <LeftContainer>
@@ -474,102 +488,112 @@ const LogInPage = () => {
             ></BallonImage>
           </BallonGifContainer>
         </LeftContainer>
-      <LogInWrapper>
-        <FormContainer>
-          <LogInForm className="login-container" onSubmit={handleSubmit}>
-            <LogoTitle>
-              <LogInLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
-              <Heading>Log In</Heading>
-            </LogoTitle>
-            <Wrapper>
-              <QueryText>Are you a Neristien?</QueryText>
-              <CustomizedSwitches checked={checked} setChecked={setChecked} />
-            </Wrapper>
+        <LogInWrapper>
+          <FormContainer>
+            <LogInForm className="login-container" onSubmit={handleSubmit}>
+              <LogoTitle>
+                <LogInLogo src={imgUrl + "/Slogo.svg"} alt="LogIn Logo" />
+                <Heading>Log In</Heading>
+              </LogoTitle>
+              <Wrapper>
+                <QueryText>Are you a Neristian?</QueryText>
+                <CustomizedSwitches checked={checked} setChecked={setChecked} />
+              </Wrapper>
 
-            <InputTagReg
-              name="regno"
-              label="Registration No"
-              variant="standard"
-              sx={SxStyles}
-              isNerist={checked}
-              error={regError}
-              helperText={
-                regError ? "Please enter a valid 6 digit reg no. with no /" : ""
-              }
-              onChange={(e) => {
-                regError && handleRegChange(e);
-              }}
-              autoComplete="off"
-            />
-
-            <InputTagPh
-              // sx={{display: checked ? 'block' : 'none'}}
-              name="phoneno"
-              label="Phone No"
-              variant="standard"
-              sx={SxStyles}
-              isNerist={checked}
-              // focused
-              error={phoneError}
-              helperText={
-                phoneError ? "Please enter a valid 10 digit number" : ""
-              }
-              onChange={(e) => {
-                phoneError && handlePhoneChange(e);
-              }}
-            />
-
-            <FormControl
-              variant="standard"
-              error={pswdError}
-              className="password-container"
-            >
-              <InputLabel>Password</InputLabel>
-              <LogInPassword
-                name="password"
-                label="Password"
+              <InputTagReg
+                name="regno"
+                label="Registration No"
                 variant="standard"
                 sx={SxStyles}
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleEventChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? (
-                        <VisibilityOff sx={{ color: "white" }} />
-                      ) : (
-                        <Visibility sx={{ color: "white" }} />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
+                isNerist={checked}
+                error={regError}
+                helperText={
+                  regError
+                    ? "Please enter a valid 6 digit reg no. with no /"
+                    : ""
                 }
-                autoComplete="on"
+                onChange={(e) => {
+                  regError && handleRegChange(e);
+                }}
+                autoComplete="off"
               />
-              {pswdError ? (
-                <FormHelperText>
-                  Enter a valid pasword having A-Z, a-z, @#%* ,0-9
-                </FormHelperText>
-              ) : (
-                ""
-              )}
-            </FormControl>
-            <LogInButton>LOG IN</LogInButton>
-          </LogInForm>
-        </FormContainer>
 
-        <FooterWrapper>
-          <Footer>Don't have an account? </Footer>
-          <LoginLink to="/register"> Sign Up</LoginLink>
-        </FooterWrapper>
-      </LogInWrapper>
-      {/* // <RightContainer></RightContainer> */}
-    </Container>
+              <InputTagPh
+                // sx={{display: checked ? 'block' : 'none'}}
+                name="phoneno"
+                label="Phone No"
+                variant="standard"
+                sx={SxStyles}
+                isNerist={checked}
+                // focused
+                error={phoneError}
+                helperText={
+                  phoneError ? "Please enter a valid 10 digit number" : ""
+                }
+                onChange={(e) => {
+                  phoneError && handlePhoneChange(e);
+                }}
+              />
+
+              <FormControl
+                variant="standard"
+                error={pswdError}
+                className="password-container"
+              >
+                <InputLabel>Password</InputLabel>
+                <LogInPassword
+                  name="password"
+                  label="Password"
+                  variant="standard"
+                  sx={SxStyles}
+                  type={values.showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleEventChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff sx={{ color: "white" }} />
+                        ) : (
+                          <Visibility sx={{ color: "white" }} />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  autoComplete="on"
+                />
+                {pswdError === 1 ? (
+                  <FormHelperText>
+                    Enter a valid pasword having A-Z, a-z, @#%* ,0-9
+                  </FormHelperText>
+                ) : pswdError === 2 ? (
+                  <FormHelperText>Incorrect Password</FormHelperText>
+                ) : (
+                  ""
+                )}
+              </FormControl>
+              <LogInButton>SIGN IN</LogInButton>
+            </LogInForm>
+          </FormContainer>
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
+            // onClick={handleCloseBd}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+          <FooterWrapper>
+            <Footer>Don't have an account? </Footer>
+            <LoginLink to="/signup"> Sign Up</LoginLink>
+          </FooterWrapper>
+        </LogInWrapper>
+        {/* // <RightContainer></RightContainer> */}
+      </Container>
     </ParentContainer>
   );
 };

@@ -7,14 +7,21 @@ import {
   Input,
   InputLabel,
   FormHelperText,
+  Snackbar,
+  Button,
+  Alert,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { imgUrl, prodURL } from "../../config";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./SignUpCustomization.css";
 import CustomizedSwitches from "./CustomSwitch";
+import { Link, useNavigate } from "react-router-dom";
+import { Close } from "@mui/icons-material";
 
 const SignUpForm = styled.form`
   display: flex;
@@ -88,7 +95,7 @@ const InputTagReg = styled(TextField)`
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
-  display: ${(props) => (props.isNerist ? "inline-flex" : "none")} !important;
+  display: ${(props) => (props.isnerist==="1" ? "inline-flex" : "none")} !important;
   &:hover {
     label {
       color: #ff461f !important;
@@ -157,16 +164,17 @@ const SignUpButton = styled.button`
   background: #ff461f;
   color: #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
+  transition: 80ms ease-in-out;
   &:hover {
-    transition: 80ms ease-in-out;
-    padding: 0.8rem 3.4rem 1rem 3rem;
+    /* padding: 0.8rem 3.4rem 1rem 3rem; */
+
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
   @media (min-width: 992px) {
-    margin: 0 auto;
-    position: absolute;
-    top: 80%;
+    margin: 1rem auto;
+    /* position: absolute;
+    top: 80%; */
   }
 `;
 
@@ -343,12 +351,17 @@ const FourthLine = styled.h3`
   margin: 0;
 `;
 const BallonGifContainer = styled.div`
-  position: absolute;
+  /* position: absolute; */
   top: 55%;
   left: 23%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: ; */
 `;
 const BallonImage = styled.img`
   width: 30%;
+  margin: 2rem auto;
 `;
 
 const BatManContainer = styled.div`
@@ -363,7 +376,36 @@ const RegisterPage = () => {
   const [confpswdError, setConfPswdError] = useState(false);
   const [regError, setRegError] = useState(false);
   const [confPasswordCheck, setConfPasswordCheck] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const [checked, setChecked] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <Close fontSize="small" />
+      </IconButton>
+    </>
+  );
+  const navigate = useNavigate();
   const handleRegChange = (e) => {
     var regno = /^[0-9]{6,6}$/g;
     if (e.target.value.match(regno)) {
@@ -400,10 +442,13 @@ const RegisterPage = () => {
     } else {
       setConfPswdError(true);
     }
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("hi");
+    // setLoading(true);
     var myHeaders = new Headers();
     let isError = false;
     var passwordCheck =
@@ -423,7 +468,8 @@ const RegisterPage = () => {
     }
 
     var regno = /^[0-9]{6,6}$/g;
-    if (!e.target.regno.value.match(regno)) {
+
+    if (checked && !e.target.regno.value.match(regno)) {
       setRegError(true);
       // return;
       isError = true;
@@ -433,33 +479,36 @@ const RegisterPage = () => {
     if (!e.target.phoneno.value.match(phoneno)) {
       setPhoneError(true);
       isError = true;
+
       // return;
     }
     if (e.target.confPassword.value !== e.target.password.value) {
       // alert("Ho")
       setConfPasswordCheck(true);
+      setLoading(false);
       return;
     }
     if (isError) {
       return;
     }
+    setLoading(true);
     myHeaders.append("Content-Type", "application/json");
     let formdata;
 
     if (checked) {
-       formdata = {
+      formdata = {
         name: e.target.name.value,
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
         regNo: e.target.regno.value,
+        userType: checked ? "s" : "o",
       };
-    }else{
-       formdata = {
+    } else {
+      formdata = {
         name: e.target.name.value,
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
-       };
-      
+      };
     }
     var requestOptions = {
       method: "POST",
@@ -469,8 +518,24 @@ const RegisterPage = () => {
 
     fetch(prodURL + "/auth/createUser", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .then((result) => {
+        setLoading(false);
+        if (result.success) {
+          localStorage.setItem("user", JSON.stringify(result));
+
+          navigate("/", { state: result });
+        } else {
+          if (result.error == 1) {
+            setPhoneError(2);
+          } else if (result.error == 1) {
+            setRegError(2);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+        setLoading(false);
+      });
   };
 
   /// Handling Password
@@ -502,6 +567,7 @@ const RegisterPage = () => {
   const handleEventChange = (e) => {
     setValues({ ...values, ["password"]: e.target.value });
     pswdError && handlePasswordChange(e);
+    confPasswordCheck&& handlePasswordChange(e);
   };
 
   const handleConfEventChange = (e) => {
@@ -509,7 +575,6 @@ const RegisterPage = () => {
     confpswdError && handleConfPasswordError(e);
   };
 
-  const [checked, setChecked] = useState(false);
   return (
     <ParentContainer>
       <PrimaryContainer></PrimaryContainer>
@@ -540,9 +605,9 @@ const RegisterPage = () => {
               </LogoTitle>
 
               <InputTagUser
-                name="username"
+                name="name"
                 type={"text"}
-                label="User name"
+                label="Full Name"
                 variant="standard"
                 autoComplete="off"
                 sx={SxStyles}
@@ -560,7 +625,7 @@ const RegisterPage = () => {
                 variant="standard"
                 sx={SxStyles}
                 error={regError}
-                isNerist={checked}
+                isnerist={checked ? "1" : null}
                 helperText={
                   regError
                     ? "Please enter a valid 6 digit reg no. with no /"
@@ -578,7 +643,7 @@ const RegisterPage = () => {
                 autoComplete="off"
                 sx={SxStyles}
                 error={phoneError}
-                isNerist={checked}
+                isnerist={checked ? "1" : null}
                 helperText={
                   phoneError ? "Please enter a valid 10 digit number" : ""
                 }
@@ -594,7 +659,7 @@ const RegisterPage = () => {
               >
                 <InputLabel>Password</InputLabel>
                 <SignUpPassword
-                  focused
+                  // focused
                   name="password"
                   label="Password"
                   variant="standard"
@@ -678,7 +743,7 @@ const RegisterPage = () => {
                 )}
               </FormControl>
 
-              <SignUpButton>SIGN UP</SignUpButton>
+              <SignUpButton type="submit">SIGN UP</SignUpButton>
             </SignUpForm>
           </FormContainer>
 
@@ -687,8 +752,30 @@ const RegisterPage = () => {
           </BatManContainer>
 
           <FooterWrapper>
-            <Footer>Don't have an accoutnt?</Footer>
-            <LoginLink to="/login"> Log In</LoginLink>
+            <Footer>Don't have an account? </Footer>
+            <LoginLink to="/signin"> Sign In</LoginLink>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              // message=""
+              action={action}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Account Created Successfully
+              </Alert>
+            </Snackbar>
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={loading}
+              // onClick={handleCloseBd}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           </FooterWrapper>
         </SignUpWrapper>
       </Container>
