@@ -1,13 +1,10 @@
 import { CentralContainer, ViewAllButton, Image, ImageContainer, Container, AboutDiv, AboutDivContent, AboutText, SponserImg, SponserImgCont, SponserImgMainContainer, Heading, Footer, LogoDiv, InstaIcon, SonabyssIcon, FooterText, HR } from './Styles/Home.styles'
-// import back from '../images/back.png'
-// import back from '../images/Homepage.png'
-// import cat from '../images/Cat.jpg'
 import Slider from './Slider'
-// import instalogo from '../images/insta-logo.png'
-// import sonabysslogo from '../images/Logo-short 1.png'
 import { imgUrl } from '../../../config'
+import { Navigate } from 'react-router-dom'
 
 function Bottom() {
+    // Navigate('/route',{state:{club}})
     return (
         <>
             <CentralContainer>
@@ -38,14 +35,16 @@ function Bottom() {
                         <AboutDivContent>
                             <Heading>About</Heading>
                             <ImageContainer>
-                                {/* <Image src={back} /> */}
                                 <Image src={imgUrl + "/Homepage.png"} />
                             </ImageContainer>
                             <AboutText>
-                                Survive the Night is an intense hide and seek horror game created by Aurek Team, where you must run, hide, and do whatever you can to survive until 6am while trying to avoid the slasher. Every intermission, one player is chosen as the slasher,
-                                while the rest are playing as survivors. The slasher has to try to hunt down and kill all survivors, and the survivors will have to survive until 6am, while trying to avoid
-                                getting killed by the slasher. The game includes a wild variety of gears and perks which survivors can use to survive, and different kinds of slashers with each having their own unique
-                                abilities to counter survivors. Players gain points (P||) and XP after every victory, where they can use points to purchase new equipment and XP to rank up and unlock special things.
+                                SONABYSS '22
+                                EMBRACE YOUR FEARS
+                                Ed: 35
+                                Sonabyss is the yearly cultural fiesta organised by the Recreational And Cultural Activity Forum (RACAF) Committee of NERIST. Orchestrated over a span of three days, it's the time of the year when students from the institute and beyond showcase their talents in various events. It is one of the biggest cultural fests of North Eastern India.
+                                This year, we present to you this spook-tacular 35th edition of Sonabyss,
+                                "Sonabyss 2022- Embrace Your Fears" —where talents lurking in the basements come out of the shadows, where we raise our cauldrons high and cheer this ritual with enchanted enthusiasm, it is the annual parade where we conclude the year with ecstasy dancing on the jingle of joy and truly embody the spectre spirit of youth. It is more than a fest, it is more than a feat where we learn the magic within ourselves— it is a custom, a conclusion, a craft of creation.
+                                So come cast a spell this carnival, come hex it with your charisma; let the magic posess and pierce, come join us and truly—embrace your fears.
                             </AboutText>
                         </AboutDivContent>
 
