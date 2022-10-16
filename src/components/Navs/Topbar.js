@@ -127,6 +127,27 @@ const Button = styled(Link)`
     transform: translateY(-10%);
   }
 `;
+const SceduleButton = styled.a`
+  text-decoration: none;
+  background-color: transparent;
+  padding: 0;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  transition: 200ms ease-in-out;
+  font-family: "nightOfTerror";
+  font-style: normal;
+  font-weight: 400;
+  margin: 1rem auto;
+  cursor: pointer;
+  @media (min-width: ${phoneBreak}) {
+    margin: 0 1rem;
+  }
+  &:hover {
+    transform: translateY(-10%);
+  }
+`;
 const ButtonLog = styled.button`
   text-decoration: none;
   background-color: transparent;
@@ -208,7 +229,7 @@ const Topbar = () => {
           {userInfo ? (
             <>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
               {/* <Button to="/signin">SIGN IN</Button> */}
               <Button>
                 <Tooltip title="Account settings">
@@ -277,7 +298,7 @@ const Topbar = () => {
           ) : (
             <>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
               <Button to="/signin">SIGN IN</Button>
               <Button to="/signup">SIGN UP</Button>
             </>
@@ -300,7 +321,7 @@ const Topbar = () => {
             </MenuLogoDiv>
             <MobileMenuContainer>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton href="" target="_blank">SCHEDULE</SceduleButton>
               {userAccess ? (
                 <ButtonLog
                   onClick={() => {

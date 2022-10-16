@@ -4,10 +4,10 @@ import TextField from "@mui/material/TextField";
 import { Autocomplete } from "@mui/material";
 import styled from "@emotion/styled";
 import { imgUrl } from "../../config";
-import "./Style.css";
+// import "./Style.css";
 import { phoneBreak } from "../../breakPoints";
 import { useNavigate } from "react-router-dom";
-import './Style.css'
+import "./Style.css";
 
 const StyleFilter = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
@@ -72,6 +72,10 @@ const BackArrow = styled.img`
   }
 `;
 const AutoStyle = {
+  '& .MuiPaper-root': {
+    background: "rgba(0, 0, 0, 0.98) ",
+    color: "white",
+  },
   "& .MuiAutocomplete-inputRoot": {
     display: "flex",
     flexdirection: "row",
@@ -80,7 +84,7 @@ const AutoStyle = {
     backgroundColor: "#000000",
     color: "#FFFFFF",
     fontsize: "15px",
-    fontfamily: 'Midnight Minutes',
+    fontfamily: "Midnight Minutes",
     width: "17em",
     borderRadius: "70px",
     border: " solid #FF0000",
@@ -98,7 +102,7 @@ const AutoStyle = {
     // fontSize: "2em",
     padding: "0.5em",
     color: "#FFFFFF",
-    fontfamily: 'Midnight Minutes',
+    fontfamily: "Midnight Minutes",
   },
 };
 
@@ -113,7 +117,9 @@ const Events = [
   { label: "Dance club" },
 ];
 const PopupIcon = (
-  <span>
+  <span sx={{
+    margin:"0 5px "
+  }}>
     <svg
       width="22"
       // height="21"
@@ -129,7 +135,48 @@ const PopupIcon = (
     </svg>
   </span>
 );
+const Select = styled.select`
+  width: 10rem;
+    height: 35px;
+  background: white;
+  color: gray;
+  padding-left: 5px;
+  font-size: 14px;
+  border: none;
+  margin-left: 10px;
 
+  option {
+    color: black;
+    background: black;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+    width: 60%;
+    margin: 0.5rem auto !important;
+
+    background: black;
+    border: 14px solid #ff0000;
+    box-shadow: inset 0px 1px 1px 1px #ffffff;
+    border-radius: 0.5em;
+    font-size: 1.7rem;
+    color:white;
+
+  }
+`;
+const SelectBox = styled(Autocomplete)`
+  .css-9e5uuu-MuiPaper-root-MuiAutocomplete-paper {
+    background: rgba(0, 0, 0, 0.98) !important;
+  border: 5px solid #ffffff !important;
+  border-radius: 35px !important;
+  color: #ffffff !important;
+  font-family: "midnight" !important;
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  font-size: 1.5rem;
+  }
+`;
 const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
   const navigate = useNavigate();
   console.log(clubs);
@@ -148,12 +195,12 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
           }}
           src={imgUrl + "/backArrow.svg"}
         />
-        <Autocomplete
+        <SelectBox
           className="AutoCom"
           disablePortal
           options={clubs}
           sx={AutoStyle}
-          // open={!selectedClub}
+          // open={true}
           popupIcon={PopupIcon}
           disableClearable
           onChange={(event, newValue) => {
@@ -170,6 +217,16 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
             />
           )}
         />
+        {/* <Select 
+        >
+          <option value="" hidden>
+            Type
+          </option>
+          <option value="1">Audi</option>
+          <option value="2">BMW</option>
+          <option value="3">Citroen</option>
+          <option value="4">Ford</option>
+        </Select> */}
       </AutoCompleteDiv>
     </StyleFilter>
   );

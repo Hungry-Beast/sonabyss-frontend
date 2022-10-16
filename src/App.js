@@ -10,7 +10,9 @@ import { Route, Routes } from "react-router-dom";
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color:#130912 ;
+  background-color:#130912;
+  display: flex;
+  justify-content: center;
 `;
 function App() {
   return (
