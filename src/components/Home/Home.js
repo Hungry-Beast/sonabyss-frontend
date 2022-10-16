@@ -5,6 +5,7 @@ import Landing from './Landing/Landing';
 import Bottom from './LandingSecond/Bottom';
 
 const Component = styled.div`
+
    
    max-width: 1600px;
    width: 100%;
@@ -12,6 +13,8 @@ const Component = styled.div`
    height: 100%;
    overflow: hidden;
    background-color: #130912;
+    background-color: #130912;
+    height: 100%;
    position: relative;
 `
 const Home = () => {

@@ -1,0 +1,43 @@
+.desktop-slider .swiper {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    margin-left: 4vw;
+}
+
+.desktop-slider .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 260px;
+    height: 360px;
+}
+
+.desktop-slider .swiper-slide img {
+    display: block;
+    width: 80%;
+    border-radius: 15px;
+    height: 100%;
+}
+
+.desktop-slider .swiper-pagination {
+    bottom: -3px !important;
+}
+
+.desktop-slider .swiper-pagination.swiper-pagination-fraction {
+    left: -5%;
+}
+
+.desktop-slider .swiper-slide.swiper-slide-visible.swiper-slide-active {
+    transform: translate3d(0px, 0px, 150px) rotateX(0deg) rotateY(0deg) scale(1) !important;
+    transition: transform 0.3s ease-in !important;
+}
+
+.desktop-slider .swiper-slide.swiper-slide-visible.swiper-slide-prev {
+    transform: translate3d(118px, 0px, -100px) rotateX(-1deg) rotateY(1deg) scale(1) !important;
+}
+
+.desktop-slider .swiper-slide.swiper-slide-visible.swiper-slide-next {
+    transform: translate3d(-144px, 0px, -98px) rotateX(1deg) rotateY(-2deg) scale(1) !important;
+}
+
+/* transform: translate3d(-144px, 0px, -98px) rotateX(1deg) rotateY(-2deg) scale(1) !important; */

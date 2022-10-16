@@ -1,64 +1,31 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useState, useEffect } from "react";
+import MobileSlider from './MobileSlider'
+import DesktopSlider from './DesktopSlider'
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
+const useCheckMobileScreen = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+    const handleWindowSizeChange = () => {
+        setWidth(window.innerWidth);
+    }
 
-import "./Slider.css";
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
 
-// import required modules
-import { EffectCoverflow, Pagination } from "swiper";
+    return (width <= 650);
+}
 
 export default function Slider() {
+    const isMobile = useCheckMobileScreen();
+
     return (
         <>
-            <Swiper
-                effect={"coverflow"}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={"auto"}
-                coverflowEffect={{
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                }}
-                pagination={true}
-                modules={[EffectCoverflow, Pagination]}
-                className="mySwiper"
-            >
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </SwiperSlide>
-            </Swiper>
+            {
+                isMobile ? <MobileSlider /> : <DesktopSlider />
+            }
         </>
     );
 }
