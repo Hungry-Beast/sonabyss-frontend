@@ -8,7 +8,7 @@ import {
   InputLabel,
   FormHelperText,
   Snackbar,
-  Button,
+  // Button,
   Alert,
   Backdrop,
   CircularProgress,
@@ -359,16 +359,18 @@ const FourthLine = styled.h3`
 `;
 const BallonGifContainer = styled.div`
   /* position: absolute; */
-  top: 55%;
-  left: 23%;
+  /* top: 55%;
+  left: 23%; */
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   /* width: ; */
 `;
 const BallonImage = styled.img`
-  width: 30%;
-  margin: 2rem auto;
+
+  width: 39%;
+  /* margin: 2rem auto; */
 `;
 
 const BatManContainer = styled.div`
