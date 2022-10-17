@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./LoginCustomization.css";
 import CustomizedSwitches from "./LogInCustomSwitch";
+import { phoneBreak } from "../../breakPoints";
 
 const LogInForm = styled.form`
   display: flex;
@@ -27,6 +28,9 @@ const LogInForm = styled.form`
   /* border: 2px solid green; */
   /* max-width: 390px; */
   align-items: center;
+  @media(max-width:${phoneBreak}){
+    max-height: 500px;
+  }
 `;
 
 const LogoTitle = styled.div`
