@@ -1,19 +1,20 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import EventPage from "./components/Event/EventPage";
+import EventPage from "./Components/Event/EventPage";
 import styled from "styled-components";
-import Home from "./components/Home/Home";
-import LogInPage from "./components/LogIn/LogInPage";
-import RegisterPage from "./components/SignUp/RegisterPage";
+import Home from "./Components/Home/Home";
+import LogInPage from "./Components/LogIn/LogInPage";
+import RegisterPage from "./Components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 import Topbar from "./components/Navs/Topbar";
 
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color:#130912;
-  display: flex;
+  background-color:#130912 ;
+  display:flex;
   justify-content: center;
+
 `;
 function App() {
   return (
