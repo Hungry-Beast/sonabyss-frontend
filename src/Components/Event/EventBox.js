@@ -117,7 +117,7 @@ const Button = styled.button`
 `;
 
 const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
 
@@ -125,10 +125,10 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
   console.log(data);
   const navigate = useNavigate();
   const handleClick = () => {
-    if(data.isPaid||true){
+    if(data.isPaid){
 
     }
-    // const user
+    const user=localStorage.getItem("user")&&JSON.parse(localStorage.getItem("user"))
     if (userAccess) {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + userAccess.authToken);

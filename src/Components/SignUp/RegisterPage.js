@@ -379,7 +379,7 @@ const BatManContainer = styled.div`
 const BatImage = styled.img`
   width: 30%;
 `;
-const RegisterPage = () => {
+const RegisterPage = ({setUserAccesss}) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
   const [confpswdError, setConfPswdError] = useState(false);
@@ -529,6 +529,7 @@ const RegisterPage = () => {
       .then((result) => {
         setLoading(false);
         if (result.success) {
+          setUserAccesss(result)
           localStorage.setItem("user", JSON.stringify(result));
 
           navigate("/", { state: result });

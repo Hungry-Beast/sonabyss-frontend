@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 // import axios from "axios";
-import { user } from "../../localStore";
+// import { user } from "../../localStore";
 import { prodURL } from "../../config";
 import { useLocation } from "react-router-dom";
 import Topbar from "../Navs/Topbar";
@@ -13,7 +13,6 @@ import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
 
 const EventTopbar = styled(Topbar)`
-
   @media (max-width: ${phoneBreak}) {
     display: none !important;
   }
@@ -58,23 +57,27 @@ const EventAndPre = styled.div`
 `;
 const PleaseSelect = styled.div``;
 
-function EventPage(props) {
+function EventPage({ userAccess, setUserAccess }) {
   // const url = "https://sonabyss.herokuapp.com";
   const location = useLocation();
 
-  const [userAccess, setUserAccess] = useState(null);
+  // const [userAccess, setUserAccess] = useState(null);
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
   const [eventLoading, setEventLoading] = useState(false);
-  console.log(userAccess);
+  //console.log(userAccess);
 
   const getEvents = (val) => {
-    console.log("hi");
+    //console.log("hi");
     var myHeaders = new Headers();
     let url = "";
-    if (userAccess) {
-      myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
+    console.log(userAccess);
+    const user =
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
+
+    if (userAccess || user) {
+      myHeaders.append("Authorization", "Bearer " + user.authToken);
       url = prodURL + "/events/";
     } else {
       url = prodURL + "/events/noAuth/";
@@ -95,13 +98,13 @@ function EventPage(props) {
     fetch(url + clubId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         setEvents(result);
         setEventLoading(false);
       })
       .catch((error) => {
         setEventLoading(false);
-        console.log("error", error);
+        //console.log("error", error);
       });
   };
   const getClubs = () => {
@@ -119,57 +122,51 @@ function EventPage(props) {
     fetch(prodURL + "/clubs", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         let tempClub = [];
         result.map((club) => {
           tempClub.push({
             label: club.name,
             value: club["_id"],
           });
-          if (result.length !== 0 && !selectedClub) {
-            getEvents(tempClub[0].value);
-            setSelectedClub(tempClub[0]);
-          }
         });
+        if (result.length !== 0 && !selectedClub) {
+          getEvents(tempClub[0].value);
+          setSelectedClub(tempClub[0]);
+        }
         setClubs(tempClub);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        //console.log("error", error)
+      });
   };
 
-  const getEventsById = () => {
+  // const getEventsById = () => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Authorization", "Bearer " + user.authToken);
 
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + user.authToken);
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-    const clubId = location.pathname.split('/')[2]
-    fetch(
-      prodURL + "/events/" + clubId,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  };
+  //   var requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+  //   const clubId = location.pathname.split("/")[2];
+  //   fetch(prodURL + "/events/" + clubId, requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => //console.log(result))
+  //     .catch((error) => //console.log("error", error));
+  // };
   useEffect(() => {
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
-    setUserAccess(user);
     if (location.state) {
       setSelectedClub(location.state.club["id"]);
       getEvents();
     }
     getClubs();
   }, []);
-  console.log(selectedClub);
+  //console.log(selectedClub);
   return (
     <Bckground className="eventPage">
-      <EventTopbar />
+      <EventTopbar userAccess={userAccess} />
       <OuterEventPage>
         <FilterSection
           clubs={clubs}

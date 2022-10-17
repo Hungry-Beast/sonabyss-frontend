@@ -170,11 +170,11 @@ const ButtonLog = styled.button`
   }
 `;
 
-const Topbar = () => {
+const Topbar = ({userAccess,setUserAccess}) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [userAccess, setUserAccess] = useState();
-  const [userInfo, setUserInfo] = useState();
+  // const [userAccess, setUserAccess] = useState();
+  // const [userInfo, setUserInfo] = useState();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -182,43 +182,43 @@ const Topbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const getUserInfo = () => {
-    var myHeaders = new Headers();
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
-    if (user) {
-      myHeaders.append("Authorization", "Bearer " + user.authToken);
+  // const getUserInfo = () => {
+  //   var myHeaders = new Headers();
+  //   const user = localStorage.getItem("user")
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : null;
+  //   if (user) {
+  //     myHeaders.append("Authorization", "Bearer " + user.authToken);
 
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
+  //     var requestOptions = {
+  //       method: "GET",
+  //       headers: myHeaders,
+  //       redirect: "follow",
+  //     };
 
-      fetch(prodURL + "/auth/getuser", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          localStorage.setItem("userInfo", JSON.stringify(result));
-          setUserInfo(result);
-        })
-        .catch((error) => console.log("error", error));
-    }
-  };
-  useEffect(() => {
-    // console.log(user);
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
-    // if()
-    if (user) {
-      getUserInfo();
-    }
+  //     fetch(prodURL + "/auth/getuser", requestOptions)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         localStorage.setItem("userInfo", JSON.stringify(result));
+  //         setUserInfo(result);
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   }
+  // };
+  // useEffect(() => {
+  //   // console.log(user);
+  //   const user = localStorage.getItem("user")
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : null;
+  //   // if()
+  //   if (user) {
+  //     getUserInfo();
+  //   }
 
-    setUserAccess(user);
-  }, []);
+  //   setUserAccess(user);
+  // }, []);
   console.log(userAccess);
-
+// userAccess
   return (
     <Component className="topbar">
       <LeftPart>
@@ -228,7 +228,7 @@ const Topbar = () => {
       </LeftPart>
       <RightPart>
         <PcMenu>
-          {userInfo ? (
+          {userAccess ? (
             <>
               <Button to="/events">EVENTS</Button>
               <SceduleButton  href={pdfUrl} download target="_blank">
@@ -246,7 +246,7 @@ const Topbar = () => {
                     aria-expanded={open ? "true" : undefined}
                   >
                     <Avatar sx={{ width: 32, height: 32 }}>
-                      {userInfo.name ? userInfo.name[0] : "A"}
+                      {userAccess.name ? userAccess.name[0] : "A"}
                     </Avatar>
                   </IconButton>
                 </Tooltip>

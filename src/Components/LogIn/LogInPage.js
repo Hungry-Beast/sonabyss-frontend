@@ -336,7 +336,7 @@ const BallonImage = styled.img`
   /* mix-blend-mode: multiply; */
 `;
 
-const LogInPage = () => {
+const LogInPage = ({setUserAccess}) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
@@ -440,6 +440,7 @@ const LogInPage = () => {
         setLoading(false);
         console.log(result);
         if (result) {
+          setUserAccess(result)
           localStorage.setItem("user", JSON.stringify(result));
           navigate("/");
         }
