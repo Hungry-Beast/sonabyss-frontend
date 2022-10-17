@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Backdrop, CircularProgress, Modal } from "@mui/material";
+import PaymentPopUp from "./PaymentPopUp";
 
 const BackCard = styled.div`
   display: flex;
@@ -116,10 +117,17 @@ const Button = styled.button`
 `;
 
 const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
+  const [modal, setModal] = useState(true);
+  const handleOpen = () => setModal(true);
+  const handleClose = () => setModal(false);
+
   const [registerLoading, setRegisterLoading] = useState(false);
   console.log(data);
   const navigate = useNavigate();
   const handleClick = () => {
+    if(data.isPaid||true){
+
+    }
     // const user
     if (userAccess) {
       var myHeaders = new Headers();
@@ -132,7 +140,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
 
       if (dd < 10) dd = "0" + dd;
       if (mm < 10) mm = "0" + mm;
-      console.log(data)
+      console.log(data);
       const formattedToday = dd + "/" + mm + "/" + yyyy;
       var raw = JSON.stringify({
         date: formattedToday,
@@ -141,7 +149,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
         eventId: data["_id"],
         eventName: data.name,
       });
-      console.log(raw)
+      console.log(raw);
 
       var requestOptions = {
         method: "POST",
@@ -189,6 +197,16 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
           </SpanDiv>
         </Cardfooter>
       </Details>
+      <Modal
+        open={modal}
+        // onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        {/* <Box sx={style}> */}
+        <PaymentPopUp />
+        {/* </Box> */}
+      </Modal>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={registerLoading}
