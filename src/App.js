@@ -36,6 +36,7 @@ function App() {
         <Route path="/events" element={<EventPage userAccess={userAccess}  setUserAccess={setUserAccess} />} />
         <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess}/>} />
         <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
+        <Route path="/error" element={<ErrorNet />} />
       </Routes>
     </Component>
   );
