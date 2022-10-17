@@ -7,7 +7,7 @@ const Component = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 1000px;
+  /* max-height: 1000px; */
   color: white;
   /* overflow-x: hidden; */
   @media (max-width: ${phoneBreak}) {
@@ -16,6 +16,7 @@ const Component = styled.div`
     min-height: 60vh;
     justify-content: center;
   }
+  
 `;
 const LeftPart = styled.div`
   flex: 1;
@@ -23,6 +24,7 @@ const LeftPart = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
   @media (max-width: ${phoneBreak}) {
     flex: 0;
   }
@@ -99,8 +101,8 @@ const Cat = styled.img`
 `;
 const LeftLowerPart = styled.div`
   /* display: none; */
-  /* position: fixed;
-  bottom: 0%; */
+  position: absolute;
+  bottom: 0%;
   @media(max-width:${phoneBreak}){
   display: none;
   }
