@@ -5,6 +5,11 @@
   z-index: 1;
 }
 
+
+.signnup-container .css-a30pf7-MuiInputBase-root-MuiInput-root::after {
+  border-bottom: 2px solid #D5C6DC;
+} 
+
 .signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
   color: #D5C6DC !important;
 }

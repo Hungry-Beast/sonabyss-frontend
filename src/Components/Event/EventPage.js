@@ -13,10 +13,12 @@ import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
 
 const EventTopbar = styled(Topbar)`
+
   @media (max-width: ${phoneBreak}) {
     display: none !important;
   }
 `;
+
 const Bckground = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -85,7 +87,7 @@ function EventPage(props) {
     };
     let clubId;
     if (location.state) {
-      clubId = location.state.user.id;
+      clubId = location.state.club.id;
     } else {
       clubId = val;
     }
@@ -135,6 +137,7 @@ function EventPage(props) {
   };
 
   const getEventsById = () => {
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + user.authToken);
 
@@ -143,8 +146,11 @@ function EventPage(props) {
       headers: myHeaders,
       redirect: "follow",
     };
-    const clubId = location.pathname.split("/")[2];
-    fetch(prodURL + "/events/" + clubId, requestOptions)
+    const clubId = location.pathname.split('/')[2]
+    fetch(
+      prodURL + "/events/" + clubId,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
