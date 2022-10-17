@@ -13,6 +13,7 @@ import parse from 'html-react-parser';
 import { EffectCoverflow, Pagination, Navigation, EffectCards } from "swiper";
 import { prodURL } from "../../../config";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 
 const Div = styled(SwiperSlide)`
 /* position: relative !important; */
@@ -52,7 +53,7 @@ img {
     font-family: 'midnight';
     letter-spacing: 0.09em;
     color: rgb(255,18,33);
-    font-size: 1.9rem;
+    font-size: 1.3rem;
     position: absolute;
     top: 50%;
     left: 39%;
@@ -85,13 +86,9 @@ export default function Slider() {
             .catch(error => console.log('error', error));
 
 
-
-
-
-
     }, [])
     // const [ref, setfirst] = useState(second)
-
+    const navigate = useNavigate();
     return (
         <div className="desktop-slider" >
             <Swiper
@@ -114,8 +111,9 @@ export default function Slider() {
                 {
                     events.map(e => {
                         return (
-                            <Div  >
+                            <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
+
                                 <img src={e.image} className='image' ref={refr} />
                                 <div className="overlay" >
                                     <div class="text">

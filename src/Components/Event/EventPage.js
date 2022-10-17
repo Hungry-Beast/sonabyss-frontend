@@ -85,7 +85,7 @@ function EventPage(props) {
     };
     let clubId;
     if (location.state) {
-      clubId = location.state.club.id;
+      clubId = location.state.e.id;
     } else {
       clubId = val;
     }
