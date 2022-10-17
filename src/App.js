@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Home from "./components/Home/Home";
 import LogInPage from "./components/LogIn/LogInPage";
 import RegisterPage from "./components/SignUp/RegisterPage";
+import ErrorNet from "./components/Error_Page/ErrorNet";
 import { Route, Routes } from "react-router-dom";
 import Topbar from "./components/Navs/Topbar";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/events" element={<EventPage />} />
         <Route path="/signin" element={<LogInPage />} />
         <Route path="/signup" element={<RegisterPage />} />
+        <Route path="/error" element={<ErrorNet />} />
       </Routes>
     </Component>
   );
