@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
-import './Style.css'
+import "./Style.css";
+import { Backdrop, CircularProgress } from "@mui/material";
+
 const BackCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,29 +59,29 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-size: 2em;
   /* padding: 0.2em 1em;
   margin: 10px 0; */
   @media (max-width: ${phoneBreak}) {
-  font-size: 1.5em;
+    font-size: 1.5em;
   }
-  `;
+`;
 const Stylespan2 = styled.span`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-size: 1.5em;
   @media (max-width: ${phoneBreak}) {
-  font-size: 1.2em;
+    font-size: 1.2em;
   }
-  `;
+`;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-size: 1em;
   @media (max-width: ${phoneBreak}) {
-  font-size: 0.8em;
+    font-size: 0.8em;
   }
-  `;
+`;
 const BtnDiv = styled.div`
   display: flex;
   /* justify-content: flex-end;
@@ -114,6 +116,7 @@ const Button = styled.button`
 `;
 
 const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
+  const [registerLoading, setRegisterLoading] = useState(false);
   console.log(data);
   const navigate = useNavigate();
   const handleClick = () => {
@@ -122,15 +125,23 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
       myHeaders.append("Content-Type", "application/json");
-      const date = new Date();
-      console.log(data);
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = today.getMonth() + 1; // Months start at 0!
+      let dd = today.getDate();
+
+      if (dd < 10) dd = "0" + dd;
+      if (mm < 10) mm = "0" + mm;
+      console.log(data)
+      const formattedToday = dd + "/" + mm + "/" + yyyy;
       var raw = JSON.stringify({
-        date: "13-10-2000",
+        date: formattedToday,
         clubId: selectedClub.value,
         clubName: selectedClub.value,
         eventId: data["_id"],
         eventName: data.name,
       });
+      console.log(raw)
 
       var requestOptions = {
         method: "POST",
@@ -138,14 +149,18 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
         body: raw,
         redirect: "follow",
       };
-
+      setRegisterLoading(true);
       fetch(prodURL + "/registration", requestOptions)
         .then((response) => response.text())
         .then((result) => {
+          setRegisterLoading(false);
           console.log(result);
           getEvents(selectedClub.value);
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => {
+          console.log("error", error);
+          setRegisterLoading(false);
+        });
     } else {
       navigate("/signin");
     }
@@ -174,6 +189,13 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
           </SpanDiv>
         </Cardfooter>
       </Details>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={registerLoading}
+        // onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </BackCard>
   );
 };

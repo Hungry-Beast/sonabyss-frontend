@@ -7,20 +7,21 @@ import { useLocation } from "react-router-dom";
 import Topbar from "../Navs/Topbar";
 import FilterSection from "./FilterSection";
 import EventBox from "./EventBox";
-import { CircularProgress } from "@mui/material";
+import { Backdrop, CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 import { phoneBreak } from "../../breakPoints";
-import './Style.css'
+import "./Style.css";
 
 const EventTopbar = styled(Topbar)`
-      @media(max-width: ${phoneBreak}){
-        display: none !important;
-      }
-    `
+
+  @media (max-width: ${phoneBreak}) {
+    display: none !important;
+  }
+`;
+
 const Bckground = styled.div`
   min-height: 100vh;
   width: 100%;
-
 `;
 const OuterEventPage = styled.div`
   display: flex;
@@ -65,6 +66,7 @@ function EventPage(props) {
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
+  const [eventLoading, setEventLoading] = useState(false);
   console.log(userAccess);
 
   const getEvents = (val) => {
@@ -89,14 +91,18 @@ function EventPage(props) {
     } else {
       clubId = val;
     }
-
+    setEventLoading(true);
     fetch(url + clubId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
         setEvents(result);
+        setEventLoading(false);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        setEventLoading(false);
+        console.log("error", error);
+      });
   };
   const getClubs = () => {
     var myHeaders = new Headers();
@@ -190,6 +196,13 @@ function EventPage(props) {
           )}
         </EventAndPre>
       </OuterEventPage>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={eventLoading}
+        // onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Bckground>
   );
 }

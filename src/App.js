@@ -6,6 +6,7 @@ import Home from "./Components/Home/Home";
 import LogInPage from "./Components/LogIn/LogInPage";
 import RegisterPage from "./Components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
+import Topbar from "./components/Navs/Topbar";
 
 const Component = styled.div`
   width: 100%;
@@ -18,6 +19,7 @@ const Component = styled.div`
 function App() {
   return (
     <Component className="App">
+      {/* <Topbar/> */}
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/events" element={<EventPage />} />
