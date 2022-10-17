@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 // import axios from "axios";
 import { user } from "../../localStore";
 import { prodURL } from "../../config";
@@ -12,7 +12,7 @@ import styled from "@emotion/styled";
 import { phoneBreak } from "../../breakPoints";
 import './Style.css'
 
-const EventTopbar=styled(Topbar)`
+const EventTopbar = styled(Topbar)`
       @media(max-width: ${phoneBreak}){
         display: none !important;
       }
@@ -85,7 +85,7 @@ function EventPage(props) {
     };
     let clubId;
     if (location.state) {
-      clubId = location.state.user.id;
+      clubId = location.state.club.id;
     } else {
       clubId = val;
     }
@@ -132,7 +132,7 @@ function EventPage(props) {
 
   const getEventsById = () => {
 
- var myHeaders = new Headers();
+    var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + user.authToken);
 
     var requestOptions = {
@@ -140,9 +140,9 @@ function EventPage(props) {
       headers: myHeaders,
       redirect: "follow",
     };
-    const clubId=location.pathname.split('/')[2]
+    const clubId = location.pathname.split('/')[2]
     fetch(
-      prodURL+"/events/"+clubId,
+      prodURL + "/events/" + clubId,
       requestOptions
     )
       .then((response) => response.json())
@@ -191,7 +191,7 @@ function EventPage(props) {
         </EventAndPre>
       </OuterEventPage>
     </Bckground>
- );
+  );
 }
 
 export default EventPage;
