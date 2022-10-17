@@ -12,7 +12,7 @@ import ErrorNet from "./components/Error_Page/ErrorNet";
 // import RegisterPage from "./Components/SignUp/RegisterPage";
 // >>>>>>> 6936a459d3196179c2df24b4483d7f28341296db
 import { Route, Routes } from "react-router-dom";
-import Topbar from "./components/Navs/Topbar";
+// import Topbar from "./components/Navs/Topbar";
 
 const Component = styled.div`
   width: 100%;
