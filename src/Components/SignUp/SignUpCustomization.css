@@ -1,13 +1,18 @@
 .signnup-container label {
   font-size: 15px !important;
   margin-left: 15px;
-  margin-top: 5px;
+  margin-top: 5px !important;
   z-index: 1;
+}
+
+.signnup-container label+.css-a30pf7-MuiInputBase-root-MuiInput-root{
+  margin-top: 0px;
 }
 
 
 .signnup-container .css-a30pf7-MuiInputBase-root-MuiInput-root::after {
   border-bottom: 2px solid #D5C6DC;
+  margin-top: 0px;
 } 
 
 .signnup-container .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
@@ -39,7 +44,7 @@
 
 .signnup-container input {
   font-size: 15px;
-  margin-left: 15px;
+  margin-left: 15px !important;
 }
 .css-1d159sf-MuiSvgIcon-root {
   margin-right: 10px;
@@ -82,3 +87,4 @@
   border-bottom: 2px solid #ff461f;
   
 }
+
