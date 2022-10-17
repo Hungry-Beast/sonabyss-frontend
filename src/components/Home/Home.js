@@ -16,6 +16,7 @@ const Component = styled.div`
     background-color: #130912;
     height: 100%;
    position: relative;
+   margin: 0 auto;
 `
 const Home = () => {
   return (
