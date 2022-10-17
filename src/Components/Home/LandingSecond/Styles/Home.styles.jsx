@@ -6,17 +6,26 @@ export const CentralContainer = styled.div`
 `
 
 export const Heading = styled.div`
-    font-size: 40px;
+    font-size: 58px;
     font-family: "midnight";
+    opacity: 1;
+    position: relative;
+    z-index: 3;
+    padding-bottom: 10px;
 `
 
 export const ViewAllButton = styled.button`
-    padding: 10px 22px;
+    font-family: "midnight";
+    padding: 10px 45px;
     border-radius: 30px;
     background: #FF461F;
     border: transparent;
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 23px;
+    margin: 3vh 5.5% 0 0;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25), 4.2px 3.5px 3px 3px #ff1b12;
+    @media screen and (max-width: 650px) {
+        margin: 4vh 5% 0 0;
+    }
 `
 
 /* Clubs Section end */
@@ -28,10 +37,6 @@ export const Container = styled.div`
     margin: 0 auto;
     padding: 60px 0;
     margin-bottom: 60px;
-    @media screen and (max-width: 600px) {
-        /* width: 100%; */
-        /* background-color: aqua; */
-    }
 `
 
 export const AboutDiv = styled.div`
@@ -43,7 +48,10 @@ export const AboutDiv = styled.div`
     text-align: center;
     min-height: 600px;
     opacity: 1;
-    /* border: 3px solid yellow; */
+    @media screen and (max-width: 650px) {
+        width: 100%;
+        padding: 80px 0px 0px 0px;
+    }
 
     &::after {
     content: '';
@@ -62,39 +70,56 @@ export const AboutDivContent = styled.div`
     position: relative;
     z-index: 2;
     height: 90%;
-    /* border: 3px solid green; */
     width: 100%;
-    height: 500px;
+    text-align: center;
+    
 `
 
 export const AboutText = styled.div`
-    width: 100%;
-    position: relative;
+    width: 92%;
     background: rgba(22, 10, 19, 0.7);
-    /* background: rgba(169, 28, 133, 0.7); */
-    font-size: 31px;
+    font-size: 26px;
     margin: 0 auto;
     font-family: "midnight";
-    letter-spacing: 1px;
-    padding: 70px 10% 50px 10%;
-    line-height: 34px;
+    letter-spacing: 1.2px;
+    padding: 30px 10% 30px 10%;
+    line-height: 28px;
     border-radius: 50px;
-    /* border: 3px solid pink; */
+    font-weight: 400;
+    /* margin-top: -30px; */
+    @media screen and (max-width: 650px) {
+        padding: 40px 20px 50px 20px;
+        line-height: 25px;
+        border-radius: 0;
+        font-size: 18px;
+        width: 100%;
+    }
 `
 
 export const ImageContainer = styled.div`
-    height: 650px;
-    width: 1000px;
+    height: 130%;
+    width: 100%;
+    max-height: 1000px;
+    max-width: 1150px;
     position: absolute;
-    left: 10%;
-    top: -25%;
+    top: 32%; right: 50%;
+    mix-blend-mode: color-dodge;
+    z-index: -1;
+    transform: translate(50%,-50%);
+    @media screen and (max-width: 650px) {
+        width: 180%;
+        max-height: 460px;
+        left: -40%;
+        top: 0;
+        transform: translate(0,0);
+    }
 
 `
 
 export const Image = styled.img`
     height: 100%;
     width: 100%;
-    opacity: 0.8;
+    opacity: 0.6;
     mix-blend-mode: color-dodge;
 `
 
@@ -106,12 +131,23 @@ export const SponserImg = styled.img`
     width: 100%;
     border-radius: 50%;
 `
+export const ExtraMarqueeImg = styled.img`
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    display: none;
+    @media screen and (max-width: 650px) {
+        display: inline;
+    }
+`
+
 
 export const SponserImgCont = styled.div`
     height: 170px;
     width: 170px;
     position: relative;
     border-radius: 50%;
+    flex-shrink: 0;
     &::after{
         content: '';
         height: 101%;
@@ -123,19 +159,64 @@ export const SponserImgCont = styled.div`
         border-radius: 50%;
         box-shadow: inset 0px 0px 11px 10px rgb(0 0 0 / 90%);
     }
+
+`
+export const ExtraMarqueeImgCont = styled.div`
+    height: 170px;
+    width: 170px;
+    position: relative;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: none;
+    &::after{
+        content: '';
+        height: 101%;
+        width: 101%;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        z-index: 5;
+        border-radius: 50%;
+        box-shadow: inset 0px 0px 11px 10px rgb(0 0 0 / 90%);
+    }
+    @media screen and (max-width: 650px) {
+        display: block;
+    }
 `
 
 export const SponserImgMainContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 400px;
+    width: 92%;
+    height: 450px;
     position: relative;
     background: rgba(22, 10, 19, 0.7);
     margin: 0 auto;
     padding: 20px 10%;
+    overflow: hidden;
     border-radius: 50px;
+    @media screen and (max-width: 650px) {
+        border-radius: 0;
+        width: 100%;
+    } 
+`
+
+export const SponserHolder = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @media screen and (max-width: 650px) {
+        width: 780px;
+        border-radius: 0;
+        gap: 30px;
+        animation: scrolling 4s linear infinite;
+    }
+
+    @keyframes scrolling {
+        0% {left:780px;}
+        100% {left: -810px;}
+  }
 `
 
 /* Sponsors Section end */
@@ -151,37 +232,53 @@ export const HR = styled.hr`
 
 export const Footer = styled.div`
     height: 100px;
-    /* border: 2px solid black; */
     display : flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     background-color: #170b16;
-    /* width: 1220px; */
     margin: 0 auto;
+`
+export const IconContainers = styled.div`
+    display: flex;
+    margin-left: 3%;
+`
+
+export const TextContainer = styled.div`
+    margin-right: 8%;
+`
+
+export const Dummy = styled.div`
+    @media screen and (max-width: 650px) {display: none;}
 `
 
 export const InstaIcon = styled.img`
     mix-blend-mode: color-dodge;
-    position: absolute;
-    width: 70px;
-    height: 65px;
-    top: 10px;
-    left: 150px;
+    margin-left: 20px;
+    width: 65px;
+    height: 60px;
+    @media screen and (max-width: 650px) {
+        height: 45px;
+        width: 50px;
+        margin-left: 5px;
+    }
 `
 
 export const SonabyssIcon = styled.img`
-    position: absolute;
-    top: 23px;
-    left: 40%;
     height: 40px;
+    margin: 10px 0 -18px 0;
+    @media screen and (max-width: 650px) {
+        height: 32px;
+        width: 110px;
+    }
 `
 
 export const FooterText = styled.p`
-    position: absolute;
-    top: 60px;
-    left: 39%;
+    margin-left: -10px;
+    font-family: "nightOfTerror";
     color: white;
-    z-index: 6;
     font-size: 13px;
+    @media screen and (max-width: 650px) {
+        font-size: 12px;
+    }
 `
