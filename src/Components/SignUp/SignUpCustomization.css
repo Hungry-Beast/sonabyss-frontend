@@ -10,6 +10,27 @@
 }
 
 
+/* Hosting class css */
+.signnup-container .css-j7o63n.Mui-error {
+  z-index: 1;
+}
+
+/* Hosting class css */
+.signnup-container .css-mqt2s5 {
+  color:#D5C6DC;
+}
+
+/* Hosting class css */
+.signnup-container .css-1ue7bz7::after {
+  color:#D5C6DC
+}
+
+/* Hosting class css */
+.signnup-container label + .css-1ue7bz7 {
+  margin-top: 0px;
+}
+
+
 .signnup-container .css-a30pf7-MuiInputBase-root-MuiInput-root::after {
   border-bottom: 2px solid #D5C6DC;
   margin-top: 0px;
