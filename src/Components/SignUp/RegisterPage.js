@@ -134,7 +134,7 @@ const InputTagPh = styled(InputTagReg)`
 // `;
 
 const SignUpPassword = styled(Input)`
-  /* margin-bottom: 10px !important; */
+  margin-bottom: 1rem !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
