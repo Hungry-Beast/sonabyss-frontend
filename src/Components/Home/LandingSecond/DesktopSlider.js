@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,12 +13,13 @@ import parse from 'html-react-parser';
 import { EffectCoverflow, Pagination, Navigation, EffectCards } from "swiper";
 import { prodURL } from "../../../config";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Div = styled(SwiperSlide)`
 /* position: relative !important; */
 /* width:50%; */
 img {
-    object-fit: fill;
+    object-fit: cover;
    transition: all 0.5s ease-in-out;
 
   }
@@ -52,7 +53,7 @@ img {
     font-family: 'midnight';
     letter-spacing: 0.09em;
     color: rgb(255,18,33);
-    font-size: 1.9rem;
+    font-size: 1.3rem;
     position: absolute;
     top: 50%;
     left: 39%;
@@ -67,14 +68,11 @@ img {
 
 export default function Slider() {
     const [events, setEvents] = useState([])
-    const refr = useRef()
-    const ref1 = useRef()
+
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
     };
-
-    let img, club_Hover;
     useEffect(() => {
         fetch(`${prodURL}/clubs`, requestOptions)
             .then(response => response.json())
@@ -85,13 +83,9 @@ export default function Slider() {
             .catch(error => console.log('error', error));
 
 
-
-
-
-
     }, [])
     // const [ref, setfirst] = useState(second)
-
+    const navigate = useNavigate();
     return (
         <div className="desktop-slider" >
             <Swiper
@@ -114,9 +108,10 @@ export default function Slider() {
                 {
                     events.map(e => {
                         return (
-                            <Div  >
+                            <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
-                                <img src={e.image} className='image' ref={refr} />
+
+                                <img src={e.image} className='image' />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>
