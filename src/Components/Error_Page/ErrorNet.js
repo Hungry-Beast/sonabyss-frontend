@@ -1,34 +1,48 @@
-import React from "react";
-import "./CustomizeErrorr.css";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { imgUrl } from "../../config";
 
-const ErrorNet = () => {
-  return (
-    <div className="error-container">
-      <section className="page_404">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 ">
-              <div className="col-sm-10 col-sm-offset-1  text-center">
-                <div className="four_zero_four_bg">
-                  <h1 className="text-center ">NETWORK ERROR</h1>
-                </div>
 
-                <div className="contant_box_404">
-                  <h3 className="h2">Look like you're lost</h3>
 
-                  <p>the page you are looking for not avaible!</p>
 
-                  <a href="" className="link_404">
-                    Go to Home
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+const Image = styled.img`
+
+`;
+
+const Heading = styled.h1`
+  
+`;
+
+
+const NoInternetConnection = (props) => {
+  // state variable holds the state of the internet connection
+  const [isOnline, setOnline] = useState(true);
+
+  // On initization set the isOnline state.
+  useEffect(() => {
+    setOnline(navigator.onLine);
+  }, []);
+
+  // event listeners to update the state
+  window.addEventListener("online", () => {
+    setOnline(true);
+  });
+
+  window.addEventListener("offline", () => {
+    setOnline(false);
+  });
+
+  // if user is online, return the child component else return a custom component
+  if (isOnline) {
+    return props.children;
+  } else {
+    return (
+      <div>
+        <Heading>No Interner Connection. Please try again later.</Heading>
+        <Image src={imgUrl + "/ErrorVideo.gif"} alt="Error Image" />
+      </div>
+    );
+  }
 };
 
-export default ErrorNet;
+export default NoInternetConnection;

@@ -5,10 +5,10 @@ import styled from "styled-components";
 import Home from "./components/Home/Home";
 import LogInPage from "./components/LogIn/LogInPage";
 import RegisterPage from "./components/SignUp/RegisterPage";
-import ErrorNet from "./components/Error_Page/ErrorNet";
 import { Route, Routes } from "react-router-dom";
 import Topbar from "./components/Navs/Topbar";
 import { useEffect, useState } from "react";
+import NoInternetConnection from "../src/components/Error_Page/ErrorNet"
 
 const Component = styled.div`
   width: 100%;
@@ -31,13 +31,15 @@ function App() {
   return (
     <Component className="App">
       {/* <Topbar/> */}
-      <Routes>
-        <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess}/>} />
-        <Route path="/events" element={<EventPage userAccess={userAccess}  setUserAccess={setUserAccess} />} />
-        <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess}/>} />
-        <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
-        <Route path="/error" element={<ErrorNet />} />
-      </Routes>
+      <NoInternetConnection>
+        <Routes>
+          <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess}/>} />
+          <Route path="/events" element={<EventPage userAccess={userAccess}  setUserAccess={setUserAccess} />} />
+          <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess}/>} />
+          <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
+          <Route path="/error" element={<NoInternetConnection />} />
+        </Routes>
+      </NoInternetConnection>
     </Component>
   );
 }
