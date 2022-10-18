@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,13 +13,13 @@ import parse from 'html-react-parser';
 import { EffectCoverflow, Pagination, Navigation, EffectCards } from "swiper";
 import { prodURL } from "../../../config";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Div = styled(SwiperSlide)`
 /* position: relative !important; */
 /* width:50%; */
 img {
-    object-fit: fill;
+    object-fit: cover;
    transition: all 0.5s ease-in-out;
 
   }
@@ -68,14 +68,11 @@ img {
 
 export default function Slider() {
     const [events, setEvents] = useState([])
-    const refr = useRef()
-    const ref1 = useRef()
+
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
     };
-
-    let img, club_Hover;
     useEffect(() => {
         fetch(`${prodURL}/clubs`, requestOptions)
             .then(response => response.json())
@@ -114,7 +111,7 @@ export default function Slider() {
                             <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
 
-                                <img src={e.image} className='image' ref={refr} />
+                                <img src={e.image} className='image' />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>
