@@ -189,7 +189,7 @@ function EventPage({ userAccess, setUserAccess }) {
               <CircularProgress />
             )
           ) : (
-            <PleaseSelect>Please Select Message</PleaseSelect>
+            <PleaseSelect>Please Select Club</PleaseSelect>
           )}
         </EventAndPre>
       </OuterEventPage>
