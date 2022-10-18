@@ -11,6 +11,10 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
+import { Modal } from "@mui/material";
+import PaymentPopUp from "./PaymentPopUp"
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 const EventTopbar = styled(Topbar)`
   @media (max-width: ${phoneBreak}) {
@@ -163,7 +167,11 @@ function EventPage({ userAccess, setUserAccess }) {
     }
     getClubs();
   }, []);
-  //console.log(selectedClub);
+  // ..............................................................
+
+  // const [modal, setModal] = useState(true);
+  
+  // .................................................................
   return (
     <Bckground className="eventPage">
       <EventTopbar userAccess={userAccess} />
@@ -189,8 +197,16 @@ function EventPage({ userAccess, setUserAccess }) {
               <CircularProgress />
             )
           ) : (
-            <PleaseSelect>Please Select Message</PleaseSelect>
+              [1, 2, 3,4].map((arr) => (
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton variant="rectangular" height={200} sx={{ bgcolor: 'grey.900' }}/>
+                    <Skeleton sx={{ bgcolor: 'grey.900' }}/>
+                    <Skeleton width="60%"  sx={{ bgcolor: 'grey.900' }}/>
+                  </Box>
+                
+              ))
           )}
+
         </EventAndPre>
       </OuterEventPage>
       <Backdrop
@@ -200,7 +216,20 @@ function EventPage({ userAccess, setUserAccess }) {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      {/* //........................................................................... */}
+      {/* <Modal */}
+          {/* open={modal}
+          // onClose={handleClose}
+          aria-labelledby="modal-modal-title" */}
+          {/* aria-describedby="modal-modal-description" */}
+        {/* > */}
+          {/* <Box sx={style}> */}
+          {/* <PaymentPopUp /> */}
+          {/* </Box> */}
+      {/* </Modal> */}
+      {/* ....................................................................................... */}
     </Bckground>
+    
   );
 }
 
