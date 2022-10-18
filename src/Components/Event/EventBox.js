@@ -8,7 +8,6 @@ import "./Style.css";
 import { Backdrop, CircularProgress, Modal } from "@mui/material";
 import PaymentPopUp from "./PaymentPopUp";
 
-
 const BackCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,22 +117,22 @@ const Button = styled.button`
 `;
 
 const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
 
   const [registerLoading, setRegisterLoading] = useState(false);
   console.log(data);
   const navigate = useNavigate();
-  const handleClick = () => {
-    if(data.isPaid){
+  const handleClick = (file) => {
+    console.log(file);
 
-    }
-    const user=localStorage.getItem("user")&&JSON.parse(localStorage.getItem("user"))
+    const user =
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
     if (userAccess) {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
-      myHeaders.append("Content-Type", "application/json");
+      // myHeaders.append("Content-Type", "application/json");
       const today = new Date();
       const yyyy = today.getFullYear();
       let mm = today.getMonth() + 1; // Months start at 0!
@@ -141,21 +140,31 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
 
       if (dd < 10) dd = "0" + dd;
       if (mm < 10) mm = "0" + mm;
-      console.log(data);
       const formattedToday = dd + "/" + mm + "/" + yyyy;
-      var raw = JSON.stringify({
-        date: formattedToday,
-        clubId: selectedClub.value,
-        clubName: selectedClub.value,
-        eventId: data["_id"],
-        eventName: data.name,
-      });
-      console.log(raw);
+      console.log(data);
+      var formdata = new FormData();
+      formdata.append("date", formattedToday);
+      formdata.append("clubId", data.club);
+      formdata.append("clubName", data.clubName);
+      formdata.append("eventId", data.id);
+      formdata.append("eventName", data.eventName);
+      if (file) {
+        formdata.append("file", file);
+      }
+      setModal(false);
+      // var raw = JSON.stringify({
+      //   date: formattedToday,
+      //   clubId: selectedClub.value,
+      //   clubName: selectedClub.value,
+      //   eventId: data.id,
+      //   eventName: data.name,
+      // });
+      // console.log(raw);
 
       var requestOptions = {
         method: "POST",
         headers: myHeaders,
-        body: raw,
+        body: formdata,
         redirect: "follow",
       };
       setRegisterLoading(true);
@@ -188,7 +197,13 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
           <BtnDiv>
             <Button
               disabled={data.isRegistered || data.disabled}
-              onClick={() => handleClick(data)}
+              onClick={() => {
+                !userAccess
+                  ? navigate("/signin")
+                  : data.isPaid
+                  ? setModal(true)
+                  : handleClick();
+              }}
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
@@ -200,12 +215,16 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       </Details>
       <Modal
         open={modal}
-        // onClose={handleClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         {/* <Box sx={style}> */}
-        <PaymentPopUp />
+        <PaymentPopUp
+          data={data}
+          handleClose={handleClose}
+          handleClick={handleClick}
+        />
         {/* </Box> */}
       </Modal>
       <Backdrop
