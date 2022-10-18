@@ -38,7 +38,7 @@ const LogoTitle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20%;
+  /* padding-top: 20%; */
   color: white;
   @media (min-width: 992px) {
     padding-top: 0;
@@ -92,7 +92,7 @@ const InputTagUser = styled(TextField)`
 `;
 
 const InputTagReg = styled(TextField)`
-  margin-bottom: 21px !important;
+  margin-bottom: 1rem !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
@@ -122,6 +122,7 @@ const InputTagReg = styled(TextField)`
 
 const InputTagPh = styled(InputTagReg)`
   display: ${(props) => (true ? "inline-flex" : "none")} !important;
+  margin-bottom: 1rem !important;
 `;
 
 // const SignUpPassword = styled(Input)`
@@ -133,7 +134,7 @@ const InputTagPh = styled(InputTagReg)`
 // `;
 
 const SignUpPassword = styled(Input)`
-  margin-bottom: 10px !important;
+  margin-bottom: 1rem !important;
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
@@ -182,7 +183,7 @@ const SignUpButton = styled.button`
 
 const FooterWrapper = styled.div`
   text-align: center;
-  padding-bottom: 19%;
+  /* padding-bottom: 19%; */
   @media (min-width: 992px) {
     margin-top: 0;
     padding: 0;

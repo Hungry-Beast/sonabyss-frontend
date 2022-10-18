@@ -38,7 +38,7 @@ const LogoTitle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20%;
+  /* padding-top: 20%; */
   color: white;
   @media (min-width: 992px) {
     padding-top: 0;
@@ -103,7 +103,7 @@ const InputTagPh = styled(InputTagReg)`
 `;
 
 const LogInPassword = styled(Input)`
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
@@ -123,12 +123,12 @@ const LogInPassword = styled(Input)`
   }
 `;
 
+
 const LogInButton = styled.button`
   font-family: "Midnight";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
-  /* margin: 1rem auto; */
-  margin: 0;
+  margin: 1rem auto;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -136,24 +136,24 @@ const LogInButton = styled.button`
   outline: none;
   background: #ff461f;
   color: #000000;
-  margin:10rem 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
+  transition: 80ms ease-in-out;
   &:hover {
-    transition: 80ms ease-in-out;
-    padding: 0.8rem 3.4rem 1rem 3rem;
+    /* padding: 0.8rem 3.4rem 1rem 3rem; */
+
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
     cursor: pointer;
   }
   @media (min-width: 992px) {
     margin: 1rem auto;
-    /* position: absolute; */
-    top: 63%;
+    /* position: absolute;
+    top: 80%; */
   }
 `;
 
 const FooterWrapper = styled.div`
   text-align: center;
-  padding-bottom: 19%;
+  /* padding-bottom: 19%; */
   @media (min-width: 992px) {
     margin-top: 0;
     padding-bottom: 26%;
@@ -218,7 +218,7 @@ const LogInWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* Desktop */
   @media (min-width: 992px) {
     padding-top: 19px;
