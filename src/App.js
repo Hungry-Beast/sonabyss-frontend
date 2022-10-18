@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import Topbar from "./components/Navs/Topbar";
 import { useEffect, useState } from "react";
 import NoInternetConnection from "../src/components/Error_Page/ErrorNet"
+import ViewDetails from "./components/Event/ViewDetails";
 
 const Component = styled.div`
   width: 100%;
@@ -33,11 +34,11 @@ function App() {
       {/* <Topbar/> */}
       <NoInternetConnection>
         <Routes>
-          <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess}/>} />
-          <Route path="/events" element={<EventPage userAccess={userAccess}  setUserAccess={setUserAccess} />} />
-          <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess}/>} />
+          <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess} />} />
+          <Route path="/events" element={<EventPage userAccess={userAccess} setUserAccess={setUserAccess} />} />
+          <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess} />} />
           <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
-          <Route path="/error" element={<NoInternetConnection />} />
+          <Route path="/events/:id" element={<ViewDetails />} />
         </Routes>
       </NoInternetConnection>
     </Component>
