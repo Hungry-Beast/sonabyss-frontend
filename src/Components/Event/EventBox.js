@@ -8,6 +8,7 @@ import "./Style.css";
 import { Backdrop, CircularProgress, Modal } from "@mui/material";
 import PaymentPopUp from "./PaymentPopUp";
 
+
 const BackCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -117,7 +118,7 @@ const Button = styled.button`
 `;
 
 const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
 
