@@ -127,7 +127,8 @@ const LogInButton = styled.button`
   font-family: "Midnight";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
+  margin: 0;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
