@@ -6,24 +6,40 @@ import Home from "./Components/Home/Home";
 import LogInPage from "./Components/LogIn/LogInPage";
 import RegisterPage from "./Components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NoInternetConnection from "../src/Components/Error_Page/ErrorNet"
+import ViewDetails from "./Components/Event/ViewDetails";
 
 const Component = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color:#130912 ;
-  display:flex;
+  background-color: #130912;
+  display: flex;
   justify-content: center;
-
 `;
 function App() {
+  const [userAccess, setUserAccess] = useState(null);
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const user = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+    setUserAccess(user);
+
+  }, []);
+  console.log(userAccess)
   return (
     <Component className="App">
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/events" element={<EventPage />} />
-        <Route path="/signin" element={<LogInPage />} />
-        <Route path="/signup" element={<RegisterPage />} />
-      </Routes>
+      {/* <Topbar/> */}
+      <NoInternetConnection>
+        <Routes>
+          <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess} />} />
+          <Route path="/events" element={<EventPage userAccess={userAccess} setUserAccess={setUserAccess} />} />
+          <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess} />} />
+          <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
+          <Route path="/events/:id" element={<ViewDetails />} />
+        </Routes>
+      </NoInternetConnection>
     </Component>
   );
 }

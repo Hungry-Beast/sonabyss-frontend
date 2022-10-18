@@ -21,6 +21,17 @@
   }
 
 
+  /* Hosting page class */
+  .login-container label + .css-nv0bbl {
+    color: #D5C6DC;
+  }
+
+  /* Hosting page class */
+  .login-container .css-nv0bbl::after {
+    color: #D5C6DC;
+  }
+
+
   .login-container input {
     font-size: 15px;
     margin-left: 15px;

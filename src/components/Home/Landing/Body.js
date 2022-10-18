@@ -7,7 +7,7 @@ const Component = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 1000px;
+  /* max-height: 1000px; */
   color: white;
   /* overflow-x: hidden; */
   @media (max-width: ${phoneBreak}) {
@@ -16,6 +16,7 @@ const Component = styled.div`
     min-height: 60vh;
     justify-content: center;
   }
+  
 `;
 const LeftPart = styled.div`
   flex: 1;
@@ -23,6 +24,7 @@ const LeftPart = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
   @media (max-width: ${phoneBreak}) {
     flex: 0;
   }
@@ -67,7 +69,7 @@ const ReadyText = styled.h2`
   top: 22%;
   left: 14%;
   transform: rotate(7.68deg);
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-size: 1.9rem;
   font-style: normal;
   font-weight: 400;
@@ -99,12 +101,11 @@ const Cat = styled.img`
 `;
 const LeftLowerPart = styled.div`
   /* display: none; */
-  position: fixed;
+  position: absolute;
   bottom: 0%;
-  /* @media(max-width:${phoneBreak}){
-    position: absolute;
-    bottom: 0;
-  } */
+  @media(max-width:${phoneBreak}){
+  display: none;
+  }
 `;
 const LeftLowerPartPh = styled.div`
   display: none;
@@ -124,7 +125,7 @@ const Skeleton = styled.img`
   mix-blend-mode: exclusion;
   transform: matrix(1, 0, 0, 1, 0, 0);
   height: 10rem;
-  @media(max-width:${phoneBreak}){
+  @media (max-width: ${phoneBreak}) {
     height: 7rem;
     display: none;
   }
@@ -136,7 +137,7 @@ const Rectangle = styled.div`
   height: 9rem;
 `;
 const SkeletonText = styled.h2`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -145,7 +146,7 @@ const SkeletonText = styled.h2`
   left: 42%;
 `;
 const SkeletonTextOutside = styled.h2`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -159,6 +160,12 @@ const MiddlePart = styled.div`
   z-index: 1;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: ${phoneBreak}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   /* min-height: 80vh; */
 `;
 const Background = styled.img`
@@ -184,13 +191,13 @@ const WhiteLogoContainer = styled.div`
   left: 18%;
   @media (max-width: ${phoneBreak}) {
     /* position: relative; */
-    bottom: 34%;
-    left: 10%;
+    bottom: 14%;
+    left: 15%;
     /* margin: 0 auto; */
   }
   @media (max-width: ${phoneBreakSm}) {
     /* position: relative; */
-    bottom: 48%;
+    bottom: 25%;
     left: 15%;
     /* margin: 0 auto; */
   }
@@ -206,7 +213,7 @@ const Date = styled.h2`
   margin: 0;
   mix-blend-mode: normal;
   text-shadow: 0px 10px 6pxrgba (0, 0, 0, 0.32);
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2.2rem;
@@ -235,7 +242,7 @@ const RightPart = styled.div`
   }
 `;
 const WelcomeText = styled.h2`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   max-width: 16rem;
@@ -249,7 +256,7 @@ const WelcomeText = styled.h2`
   }
 `;
 const RegisterText = styled.h2`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2rem;
@@ -259,7 +266,7 @@ const RegisterText = styled.h2`
   }
 `;
 const RegisterButton = styled.button`
-  font-family: 'Midnight Minutes', sans-serif;;
+  font-family: "Midnight Minutes", sans-serif;
   font-style: normal;
   font-weight: 400;
   background: #ff461f;

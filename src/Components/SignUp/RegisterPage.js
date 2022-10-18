@@ -8,7 +8,7 @@ import {
   InputLabel,
   FormHelperText,
   Snackbar,
-  Button,
+  // Button,
   Alert,
   Backdrop,
   CircularProgress,
@@ -30,6 +30,7 @@ const SignUpForm = styled.form`
   /* border: 2px solid green; */
   /* max-width: 390px; */
   align-items: center;
+  background-color: #130912;
 `;
 
 const LogoTitle = styled.div`
@@ -95,7 +96,8 @@ const InputTagReg = styled(TextField)`
   width: 296px !important;
   height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
-  display: ${(props) => (props.isnerist==="1" ? "inline-flex" : "none")} !important;
+  display: ${(props) =>
+    props.isnerist === "1" ? "inline-flex" : "none"} !important;
   &:hover {
     label {
       color: #ff461f !important;
@@ -229,6 +231,9 @@ const SxStyles = {
   "& .MuiTextField-root:hover": {
     color: "red",
   },
+  "& .css-1d1r5q-MuiFormHelperText-root.Mui-error": {
+    zIndex: "1 !important",
+  }
 };
 
 // sx props ends here ...
@@ -244,12 +249,13 @@ const SignUpWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* Desktop */
   @media (min-width: 992px) {
-    padding-top: 19px;
+    /* padding-top: 19px; */
+    padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 `;
 
@@ -267,7 +273,7 @@ const Container = styled.div`
     z-index: 3;
     height: 82vh;
     width: 69vw;
-    background-color: blue;
+    background-color: #000;
     margin: auto;
   }
 `;
@@ -306,11 +312,13 @@ const LeftContainer = styled.div`
   @media (min-width: 992px) {
     display: flex;
     flex: 2;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding-top: 3%;
     background-color: #000000;
     flex-direction: column;
+    max-height: 600px;
+    /* margin: auto 0; */
   }
 `;
 
@@ -352,16 +360,18 @@ const FourthLine = styled.h3`
 `;
 const BallonGifContainer = styled.div`
   /* position: absolute; */
-  top: 55%;
-  left: 23%;
+  /* top: 55%;
+  left: 23%; */
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   /* width: ; */
 `;
 const BallonImage = styled.img`
-  width: 30%;
-  margin: 2rem auto;
+
+  width: 39%;
+  /* margin: 2rem auto; */
 `;
 
 const BatManContainer = styled.div`
@@ -370,7 +380,7 @@ const BatManContainer = styled.div`
 const BatImage = styled.img`
   width: 30%;
 `;
-const RegisterPage = () => {
+const RegisterPage = ({setUserAccesss}) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
   const [confpswdError, setConfPswdError] = useState(false);
@@ -442,7 +452,6 @@ const RegisterPage = () => {
     } else {
       setConfPswdError(true);
     }
-    
   };
 
   const handleSubmit = (e) => {
@@ -521,6 +530,7 @@ const RegisterPage = () => {
       .then((result) => {
         setLoading(false);
         if (result.success) {
+          setUserAccesss(result)
           localStorage.setItem("user", JSON.stringify(result));
 
           navigate("/", { state: result });
@@ -567,7 +577,7 @@ const RegisterPage = () => {
   const handleEventChange = (e) => {
     setValues({ ...values, ["password"]: e.target.value });
     pswdError && handlePasswordChange(e);
-    confPasswordCheck&& handlePasswordChange(e);
+    confPasswordCheck && handlePasswordChange(e);
   };
 
   const handleConfEventChange = (e) => {
@@ -615,7 +625,7 @@ const RegisterPage = () => {
               />
 
               <Wrapper>
-                <QueryText>Are you a Neristien?</QueryText>
+                <QueryText>Are you a Neristian?</QueryText>
                 <CustomizedSwitches checked={checked} setChecked={setChecked} />
               </Wrapper>
 
@@ -656,6 +666,7 @@ const RegisterPage = () => {
                 variant="standard"
                 error={pswdError}
                 className="password-container"
+                sx={{marginTop: '5px'}}
               >
                 <InputLabel>Password</InputLabel>
                 <SignUpPassword

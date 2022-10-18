@@ -18,14 +18,19 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./LoginCustomization.css";
 import CustomizedSwitches from "./LogInCustomSwitch";
+import { phoneBreak } from "../../breakPoints";
 
 const LogInForm = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1;
+  background-color: #130912;
   /* border: 2px solid green; */
   /* max-width: 390px; */
   align-items: center;
+  @media(max-width:${phoneBreak}){
+    max-height: 500px;
+  }
 `;
 
 const LogoTitle = styled.div`
@@ -122,7 +127,8 @@ const LogInButton = styled.button`
   font-family: "Midnight";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
+  margin: 0;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -130,6 +136,7 @@ const LogInButton = styled.button`
   outline: none;
   background: #ff461f;
   color: #000000;
+  margin:10rem 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 5px 5px 6px #ff1b12;
   &:hover {
     transition: 80ms ease-in-out;
@@ -138,8 +145,8 @@ const LogInButton = styled.button`
     cursor: pointer;
   }
   @media (min-width: 992px) {
-    margin: 0 auto;
-    position: absolute;
+    margin: 1rem auto;
+    /* position: absolute; */
     top: 63%;
   }
 `;
@@ -216,9 +223,10 @@ const LogInWrapper = styled.div`
   @media (min-width: 992px) {
     padding-top: 19px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 `;
+// const 
 
 const Container = styled.div`
   background-color: #1e1e1e;
@@ -272,7 +280,7 @@ const LeftContainer = styled.div`
   @media (min-width: 992px) {
     display: flex;
     flex: 2;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding-top: 3%;
     background-color: #000000;
@@ -317,18 +325,19 @@ const ThirdLine = styled.h2`
 //   margin: 0;
 // `;
 const BallonGifContainer = styled.div`
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const BallonImage = styled.img`
-  width: 30%;
-  margin:2rem 0;
+  width: 46%;
+  /* margin:2rem 0; */
   /* mix-blend-mode: difference; */
   /* mix-blend-mode: multiply; */
 `;
 
-const LogInPage = () => {
+const LogInPage = ({setUserAccess}) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
@@ -432,6 +441,7 @@ const LogInPage = () => {
         setLoading(false);
         console.log(result);
         if (result) {
+          setUserAccess(result)
           localStorage.setItem("user", JSON.stringify(result));
           navigate("/");
         }

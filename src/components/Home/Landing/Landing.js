@@ -13,7 +13,7 @@ const BlackBox = styled.div`
   justify-content: center;
   flex-direction: column;
   color: #fff;
-  width: 80%;
+  width: 95%;
   margin: 2rem auto;
   padding: 3rem 2rem;
   background: rgba(0, 0, 0, 0.32);

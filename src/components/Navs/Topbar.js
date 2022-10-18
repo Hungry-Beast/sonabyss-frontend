@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak } from "../../breakPoints";
-import { imgUrl, prodURL } from "../../config";
+import { imgUrl, pdfUrl, prodURL } from "../../config";
 // import { user } from "../../localStore";
 
 const Component = styled.div`
@@ -127,6 +127,27 @@ const Button = styled(Link)`
     transform: translateY(-10%);
   }
 `;
+const SceduleButton = styled.a`
+  text-decoration: none;
+  background-color: transparent;
+  padding: 0;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  transition: 200ms ease-in-out;
+  font-family: "nightOfTerror";
+  font-style: normal;
+  font-weight: 400;
+  margin: 1rem auto;
+  cursor: pointer;
+  @media (min-width: ${phoneBreak}) {
+    margin: 0 1rem;
+  }
+  &:hover {
+    transform: translateY(-10%);
+  }
+`;
 const ButtonLog = styled.button`
   text-decoration: none;
   background-color: transparent;
@@ -149,11 +170,11 @@ const ButtonLog = styled.button`
   }
 `;
 
-const Topbar = () => {
+const Topbar = ({userAccess,setUserAccess}) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [userAccess, setUserAccess] = useState();
-  const [userInfo, setUserInfo] = useState();
+  // const [userAccess, setUserAccess] = useState();
+  // const [userInfo, setUserInfo] = useState();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -161,54 +182,58 @@ const Topbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const getUserInfo = () => {
-    var myHeaders = new Headers();
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
-    if (user) {
-      myHeaders.append("Authorization", "Bearer " + user.authToken);
+  // const getUserInfo = () => {
+  //   var myHeaders = new Headers();
+  //   const user = localStorage.getItem("user")
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : null;
+  //   if (user) {
+  //     myHeaders.append("Authorization", "Bearer " + user.authToken);
 
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
+  //     var requestOptions = {
+  //       method: "GET",
+  //       headers: myHeaders,
+  //       redirect: "follow",
+  //     };
 
-      fetch(prodURL + "/auth/getuser", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          localStorage.setItem("userInfo", JSON.stringify(result));
-          setUserInfo(result);
-        })
-        .catch((error) => console.log("error", error));
-    }
-  };
-  useEffect(() => {
-    // console.log(user);
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
-    // if()
-    if (user) {
-      getUserInfo();
-    }
+  //     fetch(prodURL + "/auth/getuser", requestOptions)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         localStorage.setItem("userInfo", JSON.stringify(result));
+  //         setUserInfo(result);
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   }
+  // };
+  // useEffect(() => {
+  //   // console.log(user);
+  //   const user = localStorage.getItem("user")
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : null;
+  //   // if()
+  //   if (user) {
+  //     getUserInfo();
+  //   }
 
-    setUserAccess(user);
-  }, []);
+  //   setUserAccess(user);
+  // }, []);
   console.log(userAccess);
-
+// userAccess
   return (
     <Component className="topbar">
       <LeftPart>
-        <Logo src={imgUrl + "/logo.svg"} />
+        <Link to="/">
+          <Logo src={imgUrl + "/logo.svg"} />
+        </Link>
       </LeftPart>
       <RightPart>
         <PcMenu>
-          {userInfo ? (
+          {userAccess ? (
             <>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton  href={pdfUrl} download target="_blank">
+                SCHEDULE
+              </SceduleButton>
               {/* <Button to="/signin">SIGN IN</Button> */}
               <Button>
                 <Tooltip title="Account settings">
@@ -221,7 +246,7 @@ const Topbar = () => {
                     aria-expanded={open ? "true" : undefined}
                   >
                     <Avatar sx={{ width: 32, height: 32 }}>
-                      {userInfo.name ? userInfo.name[0] : "A"}
+                      {userAccess.name ? userAccess.name[0] : "A"}
                     </Avatar>
                   </IconButton>
                 </Tooltip>
@@ -277,7 +302,9 @@ const Topbar = () => {
           ) : (
             <>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton  href={pdfUrl}  target="_blank">
+                SCHEDULE
+              </SceduleButton>
               <Button to="/signin">SIGN IN</Button>
               <Button to="/signup">SIGN UP</Button>
             </>
@@ -300,7 +327,9 @@ const Topbar = () => {
             </MenuLogoDiv>
             <MobileMenuContainer>
               <Button to="/events">EVENTS</Button>
-              <Button to="/schedule">SCHEDULE</Button>
+              <SceduleButton  href={pdfUrl} download target="_blank">
+                SCHEDULE
+              </SceduleButton>
               {userAccess ? (
                 <ButtonLog
                   onClick={() => {
