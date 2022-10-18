@@ -249,10 +249,11 @@ const SignUpWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* Desktop */
   @media (min-width: 992px) {
-    padding-top: 19px;
+    /* padding-top: 19px; */
+    padding: 0;
     display: flex;
     justify-content: space-evenly;
   }
@@ -665,6 +666,7 @@ const RegisterPage = ({setUserAccesss}) => {
                 variant="standard"
                 error={pswdError}
                 className="password-container"
+                sx={{marginTop: '5px'}}
               >
                 <InputLabel>Password</InputLabel>
                 <SignUpPassword
