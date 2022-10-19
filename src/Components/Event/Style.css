@@ -86,7 +86,7 @@
 .AutoCom .css-2iz2x6 {
   width: 20%;
 }
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 992px) {
   .eventPage .topbar {
     display: none !important;
   }

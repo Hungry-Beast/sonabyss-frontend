@@ -42,7 +42,7 @@ img {
 
   &:hover{
     img {
-    filter:blur(4px) brightness(50%);
+    filter:blur(4px) brightness(35%);
   }
   .overlay{
     opacity: 1;
@@ -66,7 +66,7 @@ img {
 
 `
 
-export default function Slider() {
+export default function Slider({setClubLoaded}) {
     const [events, setEvents] = useState([])
 
     var requestOptions = {
@@ -111,7 +111,7 @@ export default function Slider() {
                             <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
 
-                                <img src={e.image} className='image' />
+                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>

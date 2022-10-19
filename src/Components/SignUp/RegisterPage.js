@@ -32,6 +32,7 @@ const SignUpForm = styled.form`
   /* max-width: 390px; */
   align-items: center;
   background-color: #130912;
+  height: 100%;
 `;
 
 const LogoTitle = styled.div`
@@ -99,8 +100,8 @@ const InputTagReg = styled(TextField)`
     min-height: 50px !important;
   }
   background-color: rgba(22, 10, 19, 0.7) !important;
-  display: ${(props) =>
-    props.isnerist === "1" ? "inline-flex" : "none"} !important;
+  visibility: ${(props) =>
+    props.isnerist === "1" ? "visible" : "hidden"} !important;
   &:hover {
     label {
       color: #ff461f !important;
@@ -125,6 +126,8 @@ const InputTagReg = styled(TextField)`
 
 const InputTagPh = styled(InputTagReg)`
   display: ${(props) => (true ? "inline-flex" : "none")} !important;
+  visibility: ${(props) =>
+    props.isnerist === "1" || true ? "visible" : "hidden"} !important;
   margin-bottom: 1rem !important;
   width: 95%;
 `;
@@ -246,6 +249,7 @@ const SxStyles = {
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
+  height: 100%;
 `;
 
 const SignUpWrapper = styled.div`
@@ -263,6 +267,7 @@ const SignUpWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     min-width: 350px;
+    min-height: 600px;
     /* min-height: 600px; */
     padding: 0.8rem 0;
   }
@@ -277,6 +282,7 @@ const Container = styled.div`
   @media (max-width: 992px) {
     width: 100%;
     height: 100vh;
+    transition: 200ms ease-in-out;
   }
   display: flex;
   /* Desktop */
@@ -293,7 +299,7 @@ const Container = styled.div`
     max-height: 700px;
     background-color: #000;
     margin: auto;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 `;
 
@@ -330,7 +336,7 @@ const ParentContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  
+  overflow-y: auto;
 `;
 
 const LeftContainer = styled.div`
@@ -346,7 +352,7 @@ const LeftContainer = styled.div`
     flex-direction: column;
     max-height: 600px;
     height: 100%;
-   
+
     /* margin: auto 0; */
   }
 `;
@@ -408,7 +414,7 @@ const BatManContainer = styled.div`
 const BatImage = styled.img`
   width: 30%;
 `;
-const RegisterPage = ({ setUserAccesss }) => {
+const RegisterPage = ({ setUserAccess }) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
   const [confpswdError, setConfPswdError] = useState(false);
@@ -417,7 +423,7 @@ const RegisterPage = ({ setUserAccesss }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const handleClick = () => {
     setOpen(true);
@@ -488,37 +494,36 @@ const RegisterPage = ({ setUserAccesss }) => {
     // setLoading(true);
     var myHeaders = new Headers();
     let isError = false;
+    var regno = /^[0-9]{6,6}$/g;
+
+    if (checked && !e.target.regno.value.match(regno)) {
+      setRegError(true);
+      return;
+      isError = true;
+    }
+    var phoneno = /^\d{10}$/;
+    if (!e.target.phoneno.value.match(phoneno)) {
+      setPhoneError(true);
+      isError = true;
+
+      return;
+    }
     var passwordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.password.value.match(passwordCheck)) {
       setPswdError(true);
-      // return;
       isError = true;
+      return;
     }
 
     var confPasswordCheck =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!e.target.confPassword.value.match(confPasswordCheck)) {
       setConfPswdError(true);
-      // return;
+      return;
       isError = true;
     }
 
-    var regno = /^[0-9]{6,6}$/g;
-
-    if (checked && !e.target.regno.value.match(regno)) {
-      setRegError(true);
-      // return;
-      isError = true;
-    }
-
-    var phoneno = /^\d{10}$/;
-    if (!e.target.phoneno.value.match(phoneno)) {
-      setPhoneError(true);
-      isError = true;
-
-      // return;
-    }
     if (e.target.confPassword.value !== e.target.password.value) {
       // alert("Ho")
       setConfPasswordCheck(true);
@@ -558,14 +563,14 @@ const RegisterPage = ({ setUserAccesss }) => {
       .then((result) => {
         setLoading(false);
         if (result.success) {
-          setUserAccesss(result);
+          setUserAccess(result);
           localStorage.setItem("user", JSON.stringify(result));
 
           navigate("/", { state: result });
         } else {
           if (result.error == 1) {
             setPhoneError(2);
-          } else if (result.error == 1) {
+          } else if (result.error == 2) {
             setRegError(2);
           }
         }
@@ -665,8 +670,10 @@ const RegisterPage = ({ setUserAccesss }) => {
                 error={regError}
                 isnerist={checked ? "1" : null}
                 helperText={
-                  regError
+                  regError === 1
                     ? "Please enter a valid 6 digit reg no. with no /"
+                    : regError === 2
+                    ? "Registration no already exist"
                     : ""
                 }
                 onChange={(e) => {
@@ -683,7 +690,11 @@ const RegisterPage = ({ setUserAccesss }) => {
                 error={phoneError}
                 isnerist={checked ? "1" : null}
                 helperText={
-                  phoneError ? "Please enter a valid 10 digit number" : ""
+                  phoneError === 1
+                    ? "Please enter a valid 10 digit number"
+                    : phoneError === 2
+                    ? "Phone number already exist"
+                    : ""
                 }
                 onChange={(e) => {
                   phoneError && handlePhoneChange(e);

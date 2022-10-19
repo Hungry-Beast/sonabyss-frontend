@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { prodURL } from "../../config";
+import { imgUrl, prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
 import { Backdrop, CircularProgress, Modal } from "@mui/material";
@@ -18,7 +18,7 @@ const BackCard = styled.div`
   padding: 12px;
   max-width: 350px;
   filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
-  background: #000000;
+  background: ${(props) => (props.isMain && false ? "#ffffff" : "#000000")};
   color: #fff;
   @media (max-width: 992px) {
     margin: 0;
@@ -31,6 +31,8 @@ const EventCard = styled.div`
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 12px;
+  min-width: 5rem;
+  min-height: 10rem;
 `;
 const Poster = styled.img`
   width: 100%;
@@ -62,6 +64,8 @@ const Cardfooter = styled.div`
 const Stylespan1 = styled.span`
   font-family: "Midnight Minutes", sans-serif;
   font-size: 2em;
+  text-align: center;
+  /* color:${(props) => (props.isMain && false ? "#000" : "#fff")}; */
   /* padding: 0.2em 1em;
   margin: 10px 0; */
   @media (max-width: ${phoneBreak}) {
@@ -71,6 +75,8 @@ const Stylespan1 = styled.span`
 const Stylespan2 = styled.span`
   font-family: "Midnight Minutes", sans-serif;
   font-size: 1.5em;
+  text-align: center;
+  /* color:${(props) => (props.isMain ? "#000" : "#fff")}; */
   @media (max-width: ${phoneBreak}) {
     font-size: 1.2em;
   }
@@ -79,6 +85,7 @@ const Stylespan3 = styled.span`
   text-decoration: underline;
   font-family: "Midnight Minutes", sans-serif;
   font-size: 1em;
+  text-align: center;
   @media (max-width: ${phoneBreak}) {
     font-size: 0.8em;
   }
@@ -116,10 +123,11 @@ const Button = styled.button`
   }
 `;
 
-const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
+const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
   const [modal, setModal] = useState(false);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
+  const [imgLoaded, setImgLoaded] = useState(false)
 
   const [registerLoading, setRegisterLoading] = useState(false);
   console.log(data);
@@ -183,15 +191,16 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       navigate("/signin");
     }
   };
+  console.log(imgLoaded)
   return (
-    <BackCard>
+    <BackCard isMain={isMain}>
       <EventCard>
-        <Poster loading="lazy" src={data.image} />
+        <Poster  onLoad={()=>setImgLoaded(true)} src={data.image} />
       </EventCard>
       <Details>
-        <Stylespan1>{data.name}</Stylespan1>
-        <Stylespan2>{data.date}</Stylespan2>
-        <Stylespan2>{data.venue}</Stylespan2>
+        <Stylespan1 isMain={isMain}>{data.name}</Stylespan1>
+        <Stylespan2 isMain={isMain}>{data.date}</Stylespan2>
+        <Stylespan2 isMain={isMain}>{data.venue}</Stylespan2>
         <Cardfooter>
           <SpanDiv />
           <BtnDiv>
@@ -229,10 +238,16 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       </Modal>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={registerLoading}
+        open={!imgLoaded||registerLoading}
         // onClick={handleClose}
       >
-        <CircularProgress color="inherit" />
+        {/* <CircularProgress color="inherit" /> */}
+        <img
+          style={{
+            width:"15rem"
+          }}
+          src={imgUrl + "/imageLoading.gif"}
+        />
       </Backdrop>
     </BackCard>
   );

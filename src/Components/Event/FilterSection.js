@@ -27,8 +27,9 @@ const StyleFilter = styled.div`
 const PreEventDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  width: 60%;
+  justify-content: center;
+  /* width: 60%; */
+  flex: 1;
   @media (max-width: ${phoneBreak}) {
     width: 100%;
     margin-top: 1rem;
@@ -59,7 +60,8 @@ const AutoCompleteDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 40%;
+  /* width: 40%; */
+  flex:1;
   @media (max-width: ${phoneBreak}) {
     width: 100%;
     justify-content: space-between;
@@ -183,6 +185,9 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
 
   return (
     <StyleFilter className="event-card">
+      <div style={{
+        flex:"1"
+      }}></div>
       <PreEventDiv>
         <PreEvent>
           <Pre>PreEvents</Pre>
