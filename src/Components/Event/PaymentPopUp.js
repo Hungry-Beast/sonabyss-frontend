@@ -14,9 +14,11 @@ const Background = styled.div`
     /* display: flex;
     flex-direction: column; */
     width: 75vw;
+    height: 90vh;
+    overflow-y: scroll;
   }
 `;
-const PopUpContainer = styled.div`
+const PopUpContainer = styled.form`
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background: #000000;
@@ -26,20 +28,19 @@ const PopUpContainer = styled.div`
   flex-direction: column;
   padding: 0.5em 0.5em;
   color: #ffffff;
+
   @media (max-width: ${phoneBreak}) {
-      border-radius: 2.5em;
+    border-radius: 2.5em;
   }
-  
-  
 `;
 const ForCross = styled.div`
   display: flex;
   flex-direction: row;
   @media (max-width: ${phoneBreak}) {
-      display: flex;
-      flex-direction: column;
-      border-radius: 3em;
-      width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3em;
+    width: 100%;
   }
 `;
 const EventDetails = styled.div`
@@ -48,22 +49,21 @@ const EventDetails = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: "Midnight Minutes";
+  font-family: "pasdecourbe Minutes";
   margin: 0 10px;
   @media (max-width: ${phoneBreak}) {
-      /* display: block; */
-      width: 100%;
-      margin: 0;
+    /* display: block; */
+    width: 100%;
+    margin: 0;
   }
-  
 `;
 const Head = styled.span`
   width: 100%;
   margin: 0.3em 0;
   font-size: 2.5em;
   @media (max-width: ${phoneBreak}) {
-      font-size: 1.5em;
-      text-align: center;
+    font-size: 1.5em;
+    text-align: center;
   }
 `;
 const DetailContainer = styled.div`
@@ -72,7 +72,7 @@ const DetailContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   @media (max-width: ${phoneBreak}) {
-      width: 100%;
+    width: 100%;
   }
 `;
 const PaymentDetails = styled.div`
@@ -81,18 +81,18 @@ const PaymentDetails = styled.div`
   align-items: center;
   justify-content: center;
   width: 32%;
-  font-family: "Midnight Minutes";
+  font-family: "pasdecourbe Minutes";
   margin: 0 10px;
   @media (max-width: ${phoneBreak}) {
-      width: 60%;
-      margin: 10px auto;
+    width: 60%;
+    margin: 10px auto;
   }
 `;
 const MidDetails = styled.div`
   display: flex;
   flex-direction: row;
   @media (max-width: ${phoneBreak}) {
-      display: block;
+    display: block;
   }
 `;
 const Left = styled.div`
@@ -101,8 +101,8 @@ const Left = styled.div`
   align-items: center;
   width: 50%;
   @media (max-width: ${phoneBreak}) {
-      margin: 0 auto;
-      width: 70%;
+    margin: 0 auto;
+    width: 70%;
   }
 `;
 const Foot1 = styled.div`
@@ -118,9 +118,9 @@ const Foot2 = styled.div`
   justify-content: flex-start;
   margin: 0.5em 0;
   @media (max-width: ${phoneBreak}) {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 const Imagecontainer = styled.div`
@@ -139,8 +139,8 @@ const Posterimg = styled.img`
   margin: 0 auto;
   border-radius: 37px;
   @media (max-width: ${phoneBreak}) {
-      border-radius: 20px;
-      width: 100%;
+    border-radius: 20px;
+    width: 100%;
   }
 `;
 
@@ -163,21 +163,21 @@ const Span1 = styled.span`
   font-size: 1.5em;
   width: 100%;
   @media (max-width: ${phoneBreak}) {
-      font-size: 1em;
-      padding: 0.2em 0;
+    font-size: 1em;
+    padding: 0.2em 0;
   }
 `;
 const Span2 = styled.span`
   @media (max-width: ${phoneBreak}) {
-      font-size: 0.5em;
+    font-size: 0.5em;
   }
 `;
 const Span3 = styled.span`
   width: 100%;
   font-size: 2em;
   @media (max-width: ${phoneBreak}) {
-      font-size: 1em;
-      text-align: center;
+    font-size: 1em;
+    text-align: center;
   }
 `;
 // const Span4 = styel
@@ -190,10 +190,10 @@ const Submitbutton = styled.button`
   box-shadow: 0px 6px 0px #44003d;
   border-radius: 25.5px;
   @media (max-width: ${phoneBreak}) {
-      width: 80px;
-      height: 20px;
-      font-size: 0.7em;
-      box-shadow: 0px 3px 0px #44003d;
+    width: 80px;
+    height: 20px;
+    font-size: 0.7em;
+    box-shadow: 0px 3px 0px #44003d;
   }
 `;
 const Top = styled.div`
@@ -203,39 +203,48 @@ const Top = styled.div`
   justify-content: flex-end;
   padding: 0 1em;
 `;
-const Cross =styled.img`
+const Cross = styled.img`
   width: 3em;
   @media (max-width: ${phoneBreak}) {
-      width: 2em;
+    width: 2em;
   }
 `;
 
-const PaymentPopUp = () => {
+const PaymentPopUp = ({ data, handleClick, handleClose }) => {
+  console.log(data, handleClick);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.file.files[0])
+    handleClick(e.target.file.files[0])
+
+  };
   return (
     <Background>
-      <PopUpContainer>
+      <PopUpContainer onSubmit={handleSubmit}>
         <Top>
-          <Cross src={imgUrl + "/charm_circle-cross.svg"}/>
+          <Cross
+            onClick={handleClose}
+            src={imgUrl + "/charm_circle-cross.svg"}
+          />
         </Top>
         <ForCross>
-
           <EventDetails>
-            <Head>Event name: Mortal Kombat 11</Head>
+            <Head>Event name: {data?.name}</Head>
             <MidDetails>
               <Left>
                 <Imagecontainer>
-                  <Posterimg src="/images/combat.png" alt="" />
+                  <Posterimg src={data.image} alt="" />
                 </Imagecontainer>
                 <Foot1>
-                  <Submitbutton>Submit</Submitbutton>
+                  <Submitbutton type="submit">Submit</Submitbutton>
                 </Foot1>
               </Left>
 
               <DetailContainer>
-                <Span3>Amount: Rs xxxx /-</Span3>
+                <Span3>Amount: Rs {data.price} /-</Span3>
                 <Span2>Upload the screenshot after the payment.</Span2>
                 <Foot2>
-                  <input type="file" required />
+                  <input name="file" type="file" required />
                 </Foot2>
                 <Span2>
                   *in case of processing, money debited contact : +919xxxxxxxx

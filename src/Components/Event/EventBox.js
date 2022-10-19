@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { prodURL } from "../../config";
+import { imgUrl, prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
 import { Backdrop, CircularProgress, Modal } from "@mui/material";
 import PaymentPopUp from "./PaymentPopUp";
-
 
 const BackCard = styled.div`
   display: flex;
@@ -19,7 +18,7 @@ const BackCard = styled.div`
   padding: 12px;
   max-width: 350px;
   filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
-  background: #000000;
+  background: ${(props) => (props.isMain && true ? "linear-gradient(180.22deg, #000000 0.2%, #5B5B5B 99.82%)" : "#000")};
   color: #fff;
   @media (max-width: 992px) {
     margin: 0;
@@ -32,6 +31,8 @@ const EventCard = styled.div`
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 12px;
+  min-width: 5rem;
+  min-height: 10rem;
 `;
 const Poster = styled.img`
   width: 100%;
@@ -61,8 +62,10 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 2em;
+  text-align: center;
+  /* color:${(props) => (props.isMain && false ? "#000" : "#fff")}; */
   /* padding: 0.2em 1em;
   margin: 10px 0; */
   @media (max-width: ${phoneBreak}) {
@@ -70,16 +73,22 @@ const Stylespan1 = styled.span`
   }
 `;
 const Stylespan2 = styled.span`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 1.5em;
+  text-align: center;
+  color:${(props) => (props.isMain||false ? "#000" : "#fff")};
   @media (max-width: ${phoneBreak}) {
     font-size: 1.2em;
   }
 `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 1em;
+  text-align: center;
+  color: inherit !important;
+  text-decoration: none;
+
   @media (max-width: ${phoneBreak}) {
     font-size: 0.8em;
   }
@@ -90,6 +99,7 @@ const BtnDiv = styled.div`
     width: 70%; */
 `;
 const SpanDiv = styled(Link)`
+  /* color: inherit !important; */
   display: flex;
   justify-content: center;
   /* width: 30%; */
@@ -117,23 +127,24 @@ const Button = styled.button`
   }
 `;
 
-const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
-  const [modal, setModal] = useState(true);
+const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
+  const [modal, setModal] = useState(false);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
+  const [imgLoaded, setImgLoaded] = useState(false)
 
   const [registerLoading, setRegisterLoading] = useState(false);
   console.log(data);
   const navigate = useNavigate();
-  const handleClick = () => {
-    if(data.isPaid){
+  const handleClick = (file) => {
+    console.log(file);
 
-    }
-    const user=localStorage.getItem("user")&&JSON.parse(localStorage.getItem("user"))
+    const user =
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
     if (userAccess) {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + userAccess.authToken);
-      myHeaders.append("Content-Type", "application/json");
+      // myHeaders.append("Content-Type", "application/json");
       const today = new Date();
       const yyyy = today.getFullYear();
       let mm = today.getMonth() + 1; // Months start at 0!
@@ -141,21 +152,31 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
 
       if (dd < 10) dd = "0" + dd;
       if (mm < 10) mm = "0" + mm;
-      console.log(data);
       const formattedToday = dd + "/" + mm + "/" + yyyy;
-      var raw = JSON.stringify({
-        date: formattedToday,
-        clubId: selectedClub.value,
-        clubName: selectedClub.value,
-        eventId: data["_id"],
-        eventName: data.name,
-      });
-      console.log(raw);
+      console.log(data);
+      var formdata = new FormData();
+      formdata.append("date", formattedToday);
+      formdata.append("clubId", data.club);
+      formdata.append("clubName", data.clubName);
+      formdata.append("eventId", data.id);
+      formdata.append("eventName", data.eventName);
+      if (file) {
+        formdata.append("file", file);
+      }
+      setModal(false);
+      // var raw = JSON.stringify({
+      //   date: formattedToday,
+      //   clubId: selectedClub.value,
+      //   clubName: selectedClub.value,
+      //   eventId: data.id,
+      //   eventName: data.name,
+      // });
+      // console.log(raw);
 
       var requestOptions = {
         method: "POST",
         headers: myHeaders,
-        body: raw,
+        body: formdata,
         redirect: "follow",
       };
       setRegisterLoading(true);
@@ -174,46 +195,69 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       navigate("/signin");
     }
   };
+
+  const ViewEventDetails = () => {
+    console.log()
+    // navigate("/events/" + data._id, { state: data })
+
+  }
+
   return (
-    <BackCard>
+    <BackCard isMain={isMain}>
       <EventCard>
-        <Poster loading="lazy" src={data.image} />
+        <Poster  onLoad={()=>setImgLoaded(true)} src={data.image} />
       </EventCard>
       <Details>
-        <Stylespan1>{data.name}</Stylespan1>
-        <Stylespan2>{data.date}</Stylespan2>
-        <Stylespan2>{data.venue}</Stylespan2>
+        <Stylespan1 isMain={isMain}>{data.name}</Stylespan1>
+        <Stylespan2 isMain={isMain}>{data.date}</Stylespan2>
+        <Stylespan2 isMain={isMain}>{data.venue}</Stylespan2>
         <Cardfooter>
           <SpanDiv />
           <BtnDiv>
             <Button
               disabled={data.isRegistered || data.disabled}
-              onClick={() => handleClick(data)}
+              onClick={() => {
+                !userAccess
+                  ? navigate("/signin")
+                  : data.isPaid
+                    ? setModal(true)
+                    : handleClick();
+              }}
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
-          <SpanDiv>
-            <Stylespan3>View details</Stylespan3>
+          <SpanDiv className="link">
+            <Link to={"/events/" + data.id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>
       <Modal
         open={modal}
-        // onClose={handleClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         {/* <Box sx={style}> */}
-        <PaymentPopUp />
+        <PaymentPopUp
+          data={data}
+          handleClose={handleClose}
+          handleClick={handleClick}
+        />
         {/* </Box> */}
       </Modal>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={registerLoading}
+        open={!imgLoaded||registerLoading}
         // onClick={handleClose}
       >
-        <CircularProgress color="inherit" />
+        {/* <CircularProgress color="inherit" /> */}
+        <img
+          style={{
+            width:"15rem"
+          }}
+          src={imgUrl + "/imageLoading.gif"}
+        />
       </Backdrop>
     </BackCard>
   );

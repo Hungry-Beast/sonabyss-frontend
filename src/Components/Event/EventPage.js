@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 // import axios from "axios";
 // import { user } from "../../localStore";
-import { prodURL } from "../../config";
+import { imgUrl, prodURL } from "../../config";
 import { useLocation } from "react-router-dom";
 import Topbar from "../Navs/Topbar";
 import FilterSection from "./FilterSection";
@@ -12,9 +12,9 @@ import styled from "@emotion/styled";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
 import { Modal } from "@mui/material";
-import PaymentPopUp from "./PaymentPopUp"
-import Skeleton from '@mui/material/Skeleton';
-import Box from '@mui/material/Box';
+import PaymentPopUp from "./PaymentPopUp";
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 const EventTopbar = styled(Topbar)`
   @media (max-width: ${phoneBreak}) {
@@ -60,16 +60,44 @@ const EventAndPre = styled.div`
   }
 `;
 const PleaseSelect = styled.div``;
-
+const MainEventDiv = styled.div`
+  /* width: 100vw !important; */
+  display: block;
+`;
+const PreEvent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 2.5em;
+  background-color: #000000;
+  border: solid #ff0000;
+  border-radius: 70px;
+  color: white;
+  margin: 3rem 0;
+`;
+const Pre = styled.span`
+  font-size: 2em;
+  font-family: "pasdecourbe", sans-serif;
+  max-width: 100%;
+  @media (max-width: ${phoneBreak}) {
+    font-size: 1.3em;
+  }
+`;
+const Image=styled.img`
+      width: 10rem;
+      height:10rem;
+`
 function EventPage({ userAccess, setUserAccess }) {
   // const url = "https://sonabyss.herokuapp.com";
   const location = useLocation();
 
   // const [userAccess, setUserAccess] = useState(null);
+  console.log(location);
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
-  const [eventLoading, setEventLoading] = useState(false);
+  const [eventLoading, setEventLoading] = useState(true);
+  const [checked, setChecked] = useState(0);
   //console.log(userAccess);
 
   const getEvents = (val) => {
@@ -93,8 +121,9 @@ function EventPage({ userAccess, setUserAccess }) {
       redirect: "follow",
     };
     let clubId;
-    if (location.state) {
-      clubId = location.state.e.id;
+    if (location.state && !checked) {
+      clubId = location.state._id;
+      setChecked(1);
     } else {
       clubId = val;
     }
@@ -161,16 +190,16 @@ function EventPage({ userAccess, setUserAccess }) {
   //     .catch((error) => //console.log("error", error));
   // };
   useEffect(() => {
+    getClubs();
     if (location.state) {
-      setSelectedClub(location.state.club["id"]);
+      setSelectedClub(location.state._id);
       getEvents();
     }
-    getClubs();
   }, []);
   // ..............................................................
 
   // const [modal, setModal] = useState(true);
-  
+
   // .................................................................
   return (
     <Bckground className="eventPage">
@@ -182,54 +211,77 @@ function EventPage({ userAccess, setUserAccess }) {
           setSelectedClub={setSelectedClub}
           getEvents={getEvents}
         />
-        <EventAndPre>
+        <>
           {selectedClub ? (
-            Events ? (
-              Events.map((data) => (
-                <EventBox
-                  data={data}
-                  getEvents={getEvents}
-                  selectedClub={selectedClub}
-                  userAccess={userAccess}
-                />
-              ))
+            Events && Events.length !== 0 ? (
+              <>
+                <EventAndPre>
+                  {Events[0]?.length &&
+                    Events[0].map((data) => (
+                      <EventBox
+                        data={data}
+                        getEvents={getEvents}
+                        selectedClub={selectedClub}
+                        userAccess={userAccess}
+                        isMain={false}
+                      />
+                    ))}
+                </EventAndPre>
+                <PreEvent>
+                  <Pre>Main Event</Pre>
+                </PreEvent>
+                <EventAndPre>
+                  {Events[0]?.length &&
+                    Events[0].map((data) => (
+                      <EventBox
+                        data={data}
+                        getEvents={getEvents}
+                        selectedClub={selectedClub}
+                        userAccess={userAccess}
+                        isMain={true}
+                      />
+                    ))}
+                </EventAndPre>
+              </>
             ) : (
               <CircularProgress />
             )
           ) : (
-              [1, 2, 3,4].map((arr) => (
-                  <Box sx={{ pt: 0.5 }}>
-                    <Skeleton variant="rectangular" height={200} sx={{ bgcolor: 'grey.900' }}/>
-                    <Skeleton sx={{ bgcolor: 'grey.900' }}/>
-                    <Skeleton width="60%"  sx={{ bgcolor: 'grey.900' }}/>
-                  </Box>
-                
-              ))
+            [1, 2, 3, 4].map((arr) => (
+              <Box sx={{ pt: 0.5 }}>
+                <Skeleton
+                  variant="rectangular"
+                  height={200}
+                  sx={{ bgcolor: "grey.900" }}
+                />
+                <Skeleton sx={{ bgcolor: "grey.900" }} />
+                <Skeleton width="60%" sx={{ bgcolor: "grey.900" }} />
+              </Box>
+            ))
           )}
-
-        </EventAndPre>
+        </>
       </OuterEventPage>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={eventLoading}
         // onClick={handleClose}
       >
-        <CircularProgress color="inherit" />
+        {/* <CircularProgress color="inherit" /> */}
+        <Image src={imgUrl+"/ghostLoader.gif"}/>
       </Backdrop>
       {/* //........................................................................... */}
       {/* <Modal */}
-          {/* open={modal}
+      {/* open={modal}
           // onClose={handleClose}
           aria-labelledby="modal-modal-title" */}
-          {/* aria-describedby="modal-modal-description" */}
-        {/* > */}
-          {/* <Box sx={style}> */}
-          {/* <PaymentPopUp /> */}
-          {/* </Box> */}
+      {/* aria-describedby="modal-modal-description" */}
+      {/* > */}
+      {/* <Box sx={style}> */}
+      {/* <PaymentPopUp /> */}
+      {/* </Box> */}
       {/* </Modal> */}
       {/* ....................................................................................... */}
     </Bckground>
-    
   );
 }
 

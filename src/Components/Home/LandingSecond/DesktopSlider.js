@@ -26,7 +26,6 @@ img {
   }
   
   .overlay {
-  
     position: absolute;
     top: 0;
     bottom: 0;
@@ -47,11 +46,11 @@ img {
   }
   .overlay{
     opacity: 1;
-  }
+   }
   }
   
   .text {
-    font-family: 'midnight';
+    font-family: 'pasdecourbe';
     letter-spacing: 0.09em;
     color: rgba(255,0,16,1);
     font-size: 1.3rem;
@@ -67,7 +66,7 @@ img {
 
 `
 
-export default function Slider() {
+export default function Slider({setClubLoaded}) {
     const [events, setEvents] = useState([])
 
     var requestOptions = {
@@ -91,6 +90,10 @@ export default function Slider() {
         <div className="desktop-slider" >
             <Swiper
                 effect={"coverflow"}
+                // rewind={true}
+                // loop={true}
+                loop={true}
+                loopedSlides={8}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={3}
@@ -112,7 +115,7 @@ export default function Slider() {
                             <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
 
-                                <img src={e.image} className='image' />
+                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak, phoneBreakSm } from "../../../breakPoints";
 import { imgUrl } from "../../../config";
@@ -16,7 +17,6 @@ const Component = styled.div`
     min-height: 60vh;
     justify-content: center;
   }
-  
 `;
 const LeftPart = styled.div`
   flex: 1;
@@ -66,11 +66,11 @@ const ReadyImg = styled.img`
 `;
 const ReadyText = styled.h2`
   position: absolute;
-  top: 22%;
-  left: 14%;
+  top: 18%;
+  left: 12%;
   transform: rotate(7.68deg);
-  font-family: "Midnight Minutes", sans-serif;
-  font-size: 1.9rem;
+  font-family: "pasdecourbe", sans-serif;
+  font-size: 2.4rem;
   font-style: normal;
   font-weight: 400;
   margin: 0;
@@ -103,8 +103,8 @@ const LeftLowerPart = styled.div`
   /* display: none; */
   position: absolute;
   bottom: 0%;
-  @media(max-width:${phoneBreak}){
-  display: none;
+  @media (max-width: ${phoneBreak}) {
+    display: none;
   }
 `;
 const LeftLowerPartPh = styled.div`
@@ -137,7 +137,7 @@ const Rectangle = styled.div`
   height: 9rem;
 `;
 const SkeletonText = styled.h2`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -146,7 +146,7 @@ const SkeletonText = styled.h2`
   left: 42%;
 `;
 const SkeletonTextOutside = styled.h2`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
@@ -213,7 +213,7 @@ const Date = styled.h2`
   margin: 0;
   mix-blend-mode: normal;
   text-shadow: 0px 10px 6pxrgba (0, 0, 0, 0.32);
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2.2rem;
@@ -242,10 +242,10 @@ const RightPart = styled.div`
   }
 `;
 const WelcomeText = styled.h2`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
-  max-width: 16rem;
+  max-width: 22rem;
   font-size: 2rem;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.7rem;
@@ -256,7 +256,7 @@ const WelcomeText = styled.h2`
   }
 `;
 const RegisterText = styled.h2`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2rem;
@@ -266,7 +266,7 @@ const RegisterText = styled.h2`
   }
 `;
 const RegisterButton = styled.button`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-style: normal;
   font-weight: 400;
   background: #ff461f;
@@ -275,7 +275,7 @@ const RegisterButton = styled.button`
   border: none;
   outline: none;
   font-size: 2rem;
-  padding: 0.2rem 1rem;
+  padding: .2rem 1rem;
   margin-top: 5rem;
   @media (max-width: ${phoneBreak}) {
     /* font-size: 1.7rem; */
@@ -283,6 +283,7 @@ const RegisterButton = styled.button`
   }
 `;
 const Body = () => {
+  const navigate = useNavigate()
   return (
     <Component>
       <LeftPart>
@@ -324,7 +325,7 @@ const Body = () => {
           Welcoming you to the most awaited fest of Arunachal Pradesh.
         </WelcomeText>
         <RegisterText>“Did you register?”</RegisterText>
-        <RegisterButton>Register</RegisterButton>
+        <RegisterButton onClick={() => navigate('/events')}>Register</RegisterButton>
         <LeftLowerPartPh>
           <SkeletonContainer>
             <Rectangle />
