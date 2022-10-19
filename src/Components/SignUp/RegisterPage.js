@@ -53,7 +53,7 @@ const SignUpLogo = styled.img`
 `;
 
 const Heading = styled.h1`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   font-size: 32px;
   /* color: black; */
   color: #ffffff;
@@ -162,7 +162,7 @@ const SignUpPassword = styled(Input)`
 `;
 
 const SignUpButton = styled.button`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
   margin: 1rem auto;
@@ -365,14 +365,14 @@ const WelcomeText = styled.div`
 `;
 
 const FirstLine = styled.h2`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   font-weight: 400;
   color: white;
   margin: 0;
   font-size: 39px;
 `;
 const SecondLine = styled.h1`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   font-weight: 400;
   font-size: 74px;
   line-height: 1;
@@ -380,14 +380,14 @@ const SecondLine = styled.h1`
   margin: 0;
 `;
 const ThirdLine = styled.h2`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   font-weight: 400;
   font-size: 39px;
   color: white;
   margin: 0;
 `;
 const FourthLine = styled.h3`
-  font-family: "Midnight";
+  font-family: "pasdecourbe";
   font-weight: 400;
   font-size: 26px;
   color: white;
@@ -543,13 +543,14 @@ const RegisterPage = ({ setUserAccess }) => {
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
         regNo: e.target.regno.value,
-        userType: checked ? "s" : "o",
+        userType: "s",
       };
     } else {
       formdata = {
         name: e.target.name.value,
         password: e.target.password.value,
         phoneNo: e.target.phoneno.value,
+        userType: "o",
       };
     }
     var requestOptions = {

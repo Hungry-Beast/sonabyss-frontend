@@ -50,7 +50,7 @@ img {
   }
   
   .text {
-    font-family: 'midnight';
+    font-family: 'pasdecourbe';
     letter-spacing: 0.09em;
     color: rgb(255,18,33);
     font-size: 1.3rem;

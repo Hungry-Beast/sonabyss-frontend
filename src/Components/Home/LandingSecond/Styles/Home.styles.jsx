@@ -7,7 +7,7 @@ export const CentralContainer = styled.div`
 
 export const Heading = styled.div`
     font-size: 58px;
-    font-family: "midnight";
+    font-family: "unutterable";
     opacity: 1;
     position: relative;
     z-index: 3;
@@ -15,7 +15,7 @@ export const Heading = styled.div`
 `
 
 export const ViewAllButton = styled.button`
-    font-family: "midnight";
+    font-family: "unutterable";
     padding: 10px 45px;
     border-radius: 30px;
     background: #FF461F;
@@ -80,7 +80,7 @@ export const AboutText = styled.div`
     background: rgba(22, 10, 19, 0.7);
     font-size: 26px;
     margin: 0 auto;
-    font-family: "midnight";
+    font-family: "unutterable";
     letter-spacing: 1.2px;
     padding: 30px 10% 30px 10%;
     line-height: 28px;

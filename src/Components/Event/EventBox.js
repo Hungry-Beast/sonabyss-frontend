@@ -62,7 +62,7 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-size: 2em;
   text-align: center;
   /* color:${(props) => (props.isMain && false ? "#000" : "#fff")}; */
@@ -73,7 +73,7 @@ const Stylespan1 = styled.span`
   }
 `;
 const Stylespan2 = styled.span`
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-size: 1.5em;
   text-align: center;
   /* color:${(props) => (props.isMain ? "#000" : "#fff")}; */
@@ -83,7 +83,7 @@ const Stylespan2 = styled.span`
 `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   font-size: 1em;
   text-align: center;
   @media (max-width: ${phoneBreak}) {

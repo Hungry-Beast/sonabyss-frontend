@@ -66,7 +66,7 @@ export default function Slider() {
       }
       
       .text {
-        font-family: 'midnight';
+        font-family: 'pasdecourbe';
         letter-spacing: 0.05em;
         color: rgb(255,18,33);
         font-size: 1rem;

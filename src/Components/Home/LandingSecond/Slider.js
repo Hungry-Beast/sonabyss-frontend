@@ -38,9 +38,9 @@ export default function Slider() {
         {/* <CircularProgress color="inherit" /> */}
         <img
           style={{
-            width: "15rem",
+            width: "6rem",
           }}
-          src={imgUrl + "/ghostLoader.gif"}
+          src={imgUrl + "/cuteGhostLoader.gif"}
         />
       </Backdrop>
     </>

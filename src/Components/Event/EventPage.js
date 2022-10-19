@@ -77,7 +77,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
@@ -96,7 +96,7 @@ function EventPage({ userAccess, setUserAccess }) {
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
-  const [eventLoading, setEventLoading] = useState(false);
+  const [eventLoading, setEventLoading] = useState(true);
   const [checked, setChecked] = useState(0);
   //console.log(userAccess);
 
