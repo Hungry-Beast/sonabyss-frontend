@@ -228,7 +228,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
             </Button>
           </BtnDiv>
           <SpanDiv className="link">
-            <Link to={"/events/" + data.id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
+            <Link to={"/events/" + userAccess? data.id : data["_id"]} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>
