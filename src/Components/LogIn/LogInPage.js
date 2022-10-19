@@ -272,7 +272,10 @@ const SecondaryContainer = styled.div`
   }
 `;
 
-const ParentContainer = styled.div``;
+const ParentContainer = styled.div`
+  width:100vw;
+  height:100vh;
+`;
 
 const LeftContainer = styled.div`
   display: none;
@@ -479,7 +482,7 @@ const LogInPage = ({setUserAccess}) => {
 
   return (
     <ParentContainer>
-      <PrimaryContainer></PrimaryContainer>
+      {/* <PrimaryContainer></PrimaryContainer> */}
       <SecondaryContainer></SecondaryContainer>
       <Container>
         <LeftContainer>

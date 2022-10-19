@@ -22,6 +22,7 @@ import "./SignUpCustomization.css";
 import CustomizedSwitches from "./CustomSwitch";
 import { Link, useNavigate } from "react-router-dom";
 import { Close } from "@mui/icons-material";
+import { phoneBreak } from "../../breakPoints";
 
 const SignUpForm = styled.form`
   display: flex;
@@ -93,8 +94,10 @@ const InputTagUser = styled(TextField)`
 
 const InputTagReg = styled(TextField)`
   margin-bottom: 1rem !important;
-  width: 296px !important;
-  height: 50px !important;
+  @media (min-width: 320px) {
+    width: 296px !important;
+    min-height: 50px !important;
+  }
   background-color: rgba(22, 10, 19, 0.7) !important;
   display: ${(props) =>
     props.isnerist === "1" ? "inline-flex" : "none"} !important;
@@ -123,6 +126,7 @@ const InputTagReg = styled(TextField)`
 const InputTagPh = styled(InputTagReg)`
   display: ${(props) => (true ? "inline-flex" : "none")} !important;
   margin-bottom: 1rem !important;
+  width: 95%;
 `;
 
 // const SignUpPassword = styled(Input)`
@@ -136,7 +140,7 @@ const InputTagPh = styled(InputTagReg)`
 const SignUpPassword = styled(Input)`
   margin-bottom: 1rem !important;
   width: 296px !important;
-  height: 50px !important;
+  min-height: 50px !important;
   background-color: rgba(22, 10, 19, 0.7) !important;
   /* &:hover {
     .password-container label {
@@ -234,7 +238,7 @@ const SxStyles = {
   },
   "& .css-1d1r5q-MuiFormHelperText-root.Mui-error": {
     zIndex: "1 !important",
-  }
+  },
 };
 
 // sx props ends here ...
@@ -250,6 +254,7 @@ const SignUpWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
   /* padding: 1rem; */
   /* Desktop */
   @media (min-width: 992px) {
@@ -257,25 +262,38 @@ const SignUpWrapper = styled.div`
     padding: 0;
     display: flex;
     justify-content: space-evenly;
+    min-width: 350px;
+    /* min-height: 600px; */
+    padding: 0.8rem 0;
+  }
+  @media (max-width: ${phoneBreak}) {
+    overflow-y: scroll;
+    margin: 1rem 0;
   }
 `;
 
 const Container = styled.div`
-  background-color: #1e1e1e;
-  width: 100%;
+  /* background-color: #1e1e1e; */
+  @media (max-width: 992px) {
+    width: 100%;
+    height: 100vh;
+  }
   display: flex;
-  height: 100vh;
   /* Desktop */
-  @media (min-width: 992px) {
+  @media (min-width: 993px) {
     /* display: none; */
-    position: absolute;
-    top: 10%;
+    /* position: absolute; */
+    align-items: center;
+    justify-content: center;
+    top: 6%;
     right: 17%;
     z-index: 3;
-    height: 82vh;
-    width: 69vw;
+    /* height: 89vh;
+    width: 69vw; */
+    max-height: 700px;
     background-color: #000;
     margin: auto;
+    overflow-y: scroll;
   }
 `;
 
@@ -305,7 +323,15 @@ const SecondaryContainer = styled.div`
   }
 `;
 
-const ParentContainer = styled.div``;
+const ParentContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+`;
 
 const LeftContainer = styled.div`
   display: none;
@@ -315,10 +341,12 @@ const LeftContainer = styled.div`
     flex: 2;
     justify-content: space-evenly;
     align-items: center;
-    padding-top: 3%;
+    /* padding-top: 3%; */
     background-color: #000000;
     flex-direction: column;
     max-height: 600px;
+    height: 100%;
+   
     /* margin: auto 0; */
   }
 `;
@@ -370,7 +398,6 @@ const BallonGifContainer = styled.div`
   /* width: ; */
 `;
 const BallonImage = styled.img`
-
   width: 39%;
   /* margin: 2rem auto; */
 `;
@@ -381,7 +408,7 @@ const BatManContainer = styled.div`
 const BatImage = styled.img`
   width: 30%;
 `;
-const RegisterPage = ({setUserAccesss}) => {
+const RegisterPage = ({ setUserAccesss }) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
   const [confpswdError, setConfPswdError] = useState(false);
@@ -531,7 +558,7 @@ const RegisterPage = ({setUserAccesss}) => {
       .then((result) => {
         setLoading(false);
         if (result.success) {
-          setUserAccesss(result)
+          setUserAccesss(result);
           localStorage.setItem("user", JSON.stringify(result));
 
           navigate("/", { state: result });
@@ -588,7 +615,7 @@ const RegisterPage = ({setUserAccesss}) => {
 
   return (
     <ParentContainer>
-      <PrimaryContainer></PrimaryContainer>
+      {/* <PrimaryContainer></PrimaryContainer> */}
       <SecondaryContainer></SecondaryContainer>
       <Container>
         <LeftContainer>
@@ -667,7 +694,7 @@ const RegisterPage = ({setUserAccesss}) => {
                 variant="standard"
                 error={pswdError}
                 className="password-container"
-                sx={{marginTop: '5px'}}
+                sx={{ marginTop: "5px" }}
               >
                 <InputLabel>Password</InputLabel>
                 <SignUpPassword

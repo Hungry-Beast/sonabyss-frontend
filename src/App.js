@@ -1,14 +1,14 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import EventPage from "./Components/Event/EventPage";
+import EventPage from "./components/Event/EventPage";
 import styled from "styled-components";
-import Home from "./Components/Home/Home";
-import LogInPage from "./Components/LogIn/LogInPage";
-import RegisterPage from "./Components/SignUp/RegisterPage";
+import Home from "./components/Home/Home";
+import LogInPage from "./components/LogIn/LogInPage";
+import RegisterPage from "./components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NoInternetConnection from "../src/Components/Error_Page/ErrorNet"
-import ViewDetails from "./Components/Event/ViewDetails";
+import NoInternetConnection from "./components/Error_Page/ErrorNet"
+import ViewDetails from "./components/Event/ViewDetails";
 
 const Component = styled.div`
   width: 100%;
