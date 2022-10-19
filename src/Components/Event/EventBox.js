@@ -183,6 +183,13 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       navigate("/signin");
     }
   };
+
+  const ViewEventDetails = () => {
+    console.log(data)
+    // navigate("/events/" + data._id, { state: data })
+
+  }
+
   return (
     <BackCard>
       <EventCard>
@@ -201,15 +208,15 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
                 !userAccess
                   ? navigate("/signin")
                   : data.isPaid
-                  ? setModal(true)
-                  : handleClick();
+                    ? setModal(true)
+                    : handleClick();
               }}
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
           <SpanDiv>
-            <Stylespan3>View details</Stylespan3>
+            <Link to={"/events/" + data._id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>
@@ -230,7 +237,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub }) => {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={registerLoading}
-        // onClick={handleClose}
+      // onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
