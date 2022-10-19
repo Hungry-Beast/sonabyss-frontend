@@ -25,7 +25,6 @@ img {
   }
   
   .overlay {
-  
     position: absolute;
     top: 0;
     bottom: 0;
@@ -41,12 +40,12 @@ img {
   
 
   &:hover{
-    img {
+  img {
     filter:blur(4px) brightness(50%);
-  }
+   }
   .overlay{
     opacity: 1;
-  }
+   }
   }
   
   .text {
@@ -90,6 +89,10 @@ export default function Slider() {
         <div className="desktop-slider" >
             <Swiper
                 effect={"coverflow"}
+                // rewind={true}
+                // loop={true}
+                loop={true}
+                loopedSlides={8}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={3}
