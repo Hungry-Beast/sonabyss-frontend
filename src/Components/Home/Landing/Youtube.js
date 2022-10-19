@@ -26,7 +26,9 @@ const Youtube = () => {
                         <h1 className="title">Sonabyss_2k22 Teaser</h1>
                         <span>Come Join Us</span>
                     </div>
-                    <InstaIcon src={imgUrl + "/youtube-logo.svg"} className='youtube_ico' />
+                    <a href='https://www.youtube.com/watch?v=14CeiS_ewYo' target='_blank' style={{ alignSelf: 'center' }}>
+                        <InstaIcon src={imgUrl + "/youtube-logo.svg"} className='youtube_ico' />
+                    </a>
                 </div>
             </div>
         </div>

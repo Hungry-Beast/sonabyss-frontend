@@ -34,7 +34,18 @@ function Bottom() {
   // Navigate('/route',{state:{club}})
   return (
     <>
-      <Youtube />
+      <Container>
+        <AboutDiv>
+          <AboutDivContent>
+            <ImageContainer>
+              {/* <Image src={back} /> */}
+              <Image src={imgUrl + "/Homepage.png"} />
+            </ImageContainer>
+            <Youtube />
+          </AboutDivContent>
+        </AboutDiv>
+      </Container>
+
       <CentralContainer>
         {/*-------------------------------------------------------------- Clubs ----------------------------------------------------- */}
         <Container>
