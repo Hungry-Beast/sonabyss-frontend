@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak, phoneBreakSm } from "../../../breakPoints";
 import { imgUrl } from "../../../config";
@@ -282,6 +283,7 @@ const RegisterButton = styled.button`
   }
 `;
 const Body = () => {
+  const navigate = useNavigate()
   return (
     <Component>
       <LeftPart>
@@ -323,7 +325,7 @@ const Body = () => {
           Welcoming you to the most awaited fest of Arunachal Pradesh.
         </WelcomeText>
         <RegisterText>“Did you register?”</RegisterText>
-        <RegisterButton>Register</RegisterButton>
+        <RegisterButton onClick={() => navigate('/events')}>Register</RegisterButton>
         <LeftLowerPartPh>
           <SkeletonContainer>
             <Rectangle />

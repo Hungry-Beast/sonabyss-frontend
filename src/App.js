@@ -7,7 +7,7 @@ import LogInPage from "./components/LogIn/LogInPage";
 import RegisterPage from "./components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NoInternetConnection from "../src/components/Error_Page/ErrorNet"
+import NoInternetConnection from "./components/Error_Page/ErrorNet"
 import ViewDetails from "./components/Event/ViewDetails";
 import AllClubView from "./components/Event/AllClubView";
 
@@ -64,6 +64,8 @@ function App() {
             element={<RegisterPage setUserAccess={setUserAccess} />}
           />
           <Route path="/events/:id" element={<ViewDetails />} />
+          <Route path="/allclubs" element={<AllClubView />} />
+
         </Routes>
       </NoInternetConnection>
     </Component>

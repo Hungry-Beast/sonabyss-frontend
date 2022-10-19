@@ -19,8 +19,9 @@ const Div = styled(SwiperSlide)`
 /* position: relative !important; */
 /* width:50%; */
 img {
-    object-fit: cover;
+    object-fit:cover;
    transition: all 0.5s ease-in-out;
+   /* border-radius: 29px;; */
 
   }
   
@@ -33,16 +34,16 @@ img {
     height: 100%;
     /* width: 100%; */
     opacity: 0;
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease;
 
     /* background-color: #008cba; */
   }
   
 
   &:hover{
-  img {
-    filter:blur(4px) brightness(50%);
-   }
+    img {
+    filter:blur(4px) brightness(35%);
+  }
   .overlay{
     opacity: 1;
    }
@@ -51,7 +52,7 @@ img {
   .text {
     font-family: 'pasdecourbe';
     letter-spacing: 0.09em;
-    color: rgb(255,18,33);
+    color: rgba(255,0,16,1);
     font-size: 1.3rem;
     position: absolute;
     top: 50%;
