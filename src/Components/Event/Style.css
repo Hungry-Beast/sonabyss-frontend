@@ -115,3 +115,7 @@
   }
 
 }
+
+.link a{
+  color: inherit !important;
+}

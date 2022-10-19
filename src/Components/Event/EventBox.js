@@ -18,7 +18,7 @@ const BackCard = styled.div`
   padding: 12px;
   max-width: 350px;
   filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
-  background: ${(props) => (props.isMain && false ? "#ffffff" : "#000000")};
+  background: ${(props) => (props.isMain && true ? "linear-gradient(180.22deg, #000000 0.2%, #5B5B5B 99.82%)" : "#000")};
   color: #fff;
   @media (max-width: 992px) {
     margin: 0;
@@ -62,7 +62,7 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: "pasdecourbe", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 2em;
   text-align: center;
   /* color:${(props) => (props.isMain && false ? "#000" : "#fff")}; */
@@ -73,19 +73,22 @@ const Stylespan1 = styled.span`
   }
 `;
 const Stylespan2 = styled.span`
-  font-family: "pasdecourbe", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 1.5em;
   text-align: center;
-  /* color:${(props) => (props.isMain ? "#000" : "#fff")}; */
+  color:${(props) => (props.isMain||false ? "#000" : "#fff")};
   @media (max-width: ${phoneBreak}) {
     font-size: 1.2em;
   }
 `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: "pasdecourbe", sans-serif;
+  font-family: "midnight", sans-serif;
   font-size: 1em;
   text-align: center;
+  color: inherit !important;
+  text-decoration: none;
+
   @media (max-width: ${phoneBreak}) {
     font-size: 0.8em;
   }
@@ -96,6 +99,7 @@ const BtnDiv = styled.div`
     width: 70%; */
 `;
 const SpanDiv = styled(Link)`
+  /* color: inherit !important; */
   display: flex;
   justify-content: center;
   /* width: 30%; */
@@ -193,7 +197,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
   };
 
   const ViewEventDetails = () => {
-    console.log(data)
+    console.log()
     // navigate("/events/" + data._id, { state: data })
 
   }
@@ -223,8 +227,8 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
-          <SpanDiv>
-            <Link to={"/events/" + data._id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
+          <SpanDiv className="link">
+            <Link to={"/events/" + data.id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>

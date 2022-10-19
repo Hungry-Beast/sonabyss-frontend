@@ -231,8 +231,8 @@ function EventPage({ userAccess, setUserAccess }) {
                   <Pre>Main Event</Pre>
                 </PreEvent>
                 <EventAndPre>
-                  {Events[1]?.length &&
-                    Events[1].map((data) => (
+                  {Events[0]?.length &&
+                    Events[0].map((data) => (
                       <EventBox
                         data={data}
                         getEvents={getEvents}
