@@ -1,10 +1,14 @@
-import { CentralContainer, ViewAllButton, Image, ImageContainer, Container, AboutDiv, AboutDivContent, AboutText, SponserImg, SponserImgCont, SponserImgMainContainer, Heading, Footer, LogoDiv, InstaIcon, SonabyssIcon, FooterText, HR, ExtraMarqueeImg, ExtraMarqueeImgCont, SponserHolder, IconContainers, TextContainers, TextContainer, Dummy } from './Styles/Home.styles'
+import { useEffect, useState } from 'react'
+import { CentralContainer, ViewAllButton, Image, ImageContainer, Container, AboutDiv, AboutDivContent, AboutText, SponserImg, SponserImgCont, SponserImgMainContainer, Heading, Footer, LogoDiv, InstaIcon, SonabyssIcon, FooterText, HR, ExtraMarqueeImg, ExtraMarqueeImgCont, SponserHolder, IconContainers, TextContainers, TextContainer, Dummy, IconCont, AboutUs, ContactUs } from './Styles/Home.styles'
 import Slider from './Slider'
 import { imgUrl } from '../../../config'
-import { Navigate } from 'react-router-dom'
+import { prodURL } from "../../../config"
+import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 function Bottom() {
-    // Navigate('/route',{state:{club}})
+    // const [showClubs, setShowClubs] = useState(true);
+    const navigate = useNavigate();
     return (
         <>
             <CentralContainer>
@@ -21,9 +25,9 @@ function Bottom() {
                                 <Image src={imgUrl + "/Homepage.png"} />
                             </ImageContainer>
 
-
                             <Slider />
-                            <ViewAllButton>View All</ViewAllButton>
+
+                            <ViewAllButton onClick={() => navigate("/allclubs")} >View All</ViewAllButton>
                         </AboutDivContent>
                     </AboutDiv>
 
@@ -82,17 +86,49 @@ function Bottom() {
                     </AboutDiv>
                 </Container>
 
+                {/*-------------------------------------------------------------- Organizer ----------------------------------------------------- */}
+
+                <Container>
+                    <AboutDiv>
+                        <Heading>Organizers</Heading>
+                        <AboutDivContent>
+
+                            <ImageContainer>
+                                <Image src={imgUrl + "/Homepage.png"} />
+                            </ImageContainer>
+
+                            <SponserImgMainContainer>
+                                <SponserHolder>
+                                    <SponserImgCont>
+                                        <SponserImg src={imgUrl + "/cat.png"} />
+                                    </SponserImgCont>
+                                    <SponserImgCont>
+                                        <SponserImg src={imgUrl + "/cat.png"} />
+                                    </SponserImgCont>
+                                    <SponserImgCont>
+                                        <SponserImg src={imgUrl + "/cat.png"} />
+                                    </SponserImgCont>
+                                </SponserHolder>
+                            </SponserImgMainContainer>
+
+                        </AboutDivContent>
+
+                    </AboutDiv>
+                </Container>
+
+                {/*-------------------------------------------------------------- Footer ----------------------------------------------------- */}
+
                 <HR />
 
                 <Footer>
                     <IconContainers>
-                        <InstaIcon src={imgUrl + "/insta-logo.svg"} />
-                        <InstaIcon src={imgUrl + "/youtube-logo.svg"} />
+                        <IconCont><InstaIcon src={imgUrl + "/insta-logo.svg"} /></IconCont>
+                        <IconCont><InstaIcon src={imgUrl + "/youtube-logo.svg"} /></IconCont>
                     </IconContainers>
 
                     <TextContainer>
                         <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
-                        <FooterText>ABOUT US &nbsp;  &nbsp;|&nbsp; &nbsp;  CONTACT US </FooterText>
+                        <FooterText> <AboutUs>ABOUT US</AboutUs>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs>CONTACT US</ContactUs>  </FooterText>
                     </TextContainer>
 
                     <Dummy></Dummy>
@@ -106,3 +142,20 @@ function Bottom() {
 }
 
 export default Bottom;
+
+{/* <>
+                            {/* <>
+                                {
+                                    showClubs ? (
+                                        <>
+                                            {events.map(e => (
+                                                <AllClubsCont>
+                                                    <Club>
+
+                                                    </Club>
+                                                </AllClubsCont>
+                                            ))}
+                                        </>
+                                    ) : (<Slider />)
+                                }
+                            </> */}

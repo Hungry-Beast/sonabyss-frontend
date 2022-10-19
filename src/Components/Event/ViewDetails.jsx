@@ -1,8 +1,8 @@
 import Topbar from '../Navs/Topbar'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { imgUrl } from "../../config";
-
+import { useLocation } from "react-router-dom";
 
 const CentralContainer = styled.div`
     width: 100%;
@@ -97,16 +97,16 @@ const ContentDiv = styled.div`
 `
 const NameCard = styled.div`
     min-height: 340px;
-    height: 25%;
+    height: 21%;
     min-width: 280px;
     padding: 9px;
-    width: 25%;
+    width: 21%;
     background-color: black;
     margin-left: 20px;
     border-radius: 16px;
     @media screen and (max-width: 1370px) {
-        min-height: 310px;
-        min-width: 250px;
+        min-height: 330px;
+        min-width: 270px;
     }
     @media screen and (max-width: 850px) {
         min-width: 0;
@@ -124,39 +124,50 @@ const NameCardImg = styled.img`
 `
 
 const DetailsHolder = styled.div`
-    width: 90%;
+    width: 85%;
     margin-left: 6%;
-    @media screen and (max-width: 1370px) {
-        margin-left: 2%;
-    }
+    height: 100%;
     @media screen and (max-width: 850px) {
         margin: 0 auto;
         margin-top: 15%
     }
 `
-
+const DetailText = styled.div`
+    display: flex;
+    margin: 0 0 20px 10px;
+    gap: 10%;
+    @media screen and (max-width: 850px) {
+        display: block;
+        text-align: center;
+        margin: 0 10% 0 0;
+    }
+`
 const DetailName = styled.h2`
     color: white;
     font-family: 'midnight';
-    font-size: 40px;
+    font-size: 27px;
     font-weight: 700;
-    margin-left: 20%;
-    @media screen and (max-width: 490px) {
-        font-size: 30px;
-        margin-left: 15%;
+    /* margin-left: 10%; */
+    @media screen and (max-width: 850px) {
+        font-size: 25px;
+        margin-left: 10%;
     }
 `
 
 const DetailsCard = styled.div`
-    height: 260px;
-    max-width: 700px;
+    max-height: 260px;
+    width: 90%;
     border-radius: 20px;
     background: rgba(0, 0, 0, 0.72);
-    margin-top: 30px;
     padding: 10px 30px 10px 30px;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+      }
+
     @media screen and (max-width: 850px) {
-        width: 90%;
+        width: 100%;
         min-height: 400px;
         margin: 0 auto;
         max-width: auto;
@@ -165,9 +176,11 @@ const DetailsCard = styled.div`
 `
 
 const SkeletonAndButton = styled.div`
-    width: 240px;
-    height: 350px;
+    max-width: 200px;
+    width: 20%;
+    height: 100%;
     text-align: center;
+    margin: 7% 5px 0 0;
     @media screen and (max-width: 1288px) {
         width: 180px;
         height: 280px;
@@ -216,6 +229,27 @@ const H3 = styled.h3`
 `
 
 const ViewDetails = () => {
+    const location = useLocation();
+    console.log(location.pathname.split('/'));
+    const tempUrl = location.pathname.split('/')[2];
+    const [details, setDetails] = useState()
+
+    useEffect(() => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0OTE2YjE1YWU3OWI4ZDMzYjU2YTM3In0sImlhdCI6MTY2NTczNDQ2OX0.Fj74lVJU-CHmrL_f1clWHdjxtbgXBBS_VXA-_p1tohs");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`https://179.61.188.237/events/event/${tempUrl}`, requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    })
+
     return (
         <CentralContainer>
             <SemiContainer>
@@ -230,10 +264,15 @@ const ViewDetails = () => {
                             <NameCardImg src={imgUrl + "/MK.png"} />
                         </NameCard>
                         <DetailsHolder>
-                            <DetailName>Mortal Kombat 11</DetailName>
+                            <DetailText>
+                                <DetailName>Mortal Kombat 11</DetailName>
+                                <DetailName>Payment Status : </DetailName>
+                            </DetailText>
+
                             <DetailsCard>
-                                <H2>DETAILS : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</H2>
-                                <H3>PRE/MAIN EVENT : </H3>
+                                <H2>PRE/MAIN EVENT : </H2>
+                                <H3>DETAILS : Lorem Ipsum is Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been Lorem Ipsum has been t</H3>
+
                                 <H3>DATE : </H3>
                                 <H3>TIME : </H3>
                                 <RegisterBtnDisabled>REGISTER</RegisterBtnDisabled>
@@ -241,6 +280,7 @@ const ViewDetails = () => {
                         </DetailsHolder>
                         <SkeletonAndButton>
                             <SkeletonImg src={imgUrl + "/Group 3.svg"} />
+                            {/* <h1>Payment Status : </h1> <br /> */}
                             <RegisterBtn>REGISTER</RegisterBtn>
                         </SkeletonAndButton>
                     </ContentDiv>

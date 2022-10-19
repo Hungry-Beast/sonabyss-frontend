@@ -191,7 +191,13 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
       navigate("/signin");
     }
   };
-  console.log(imgLoaded)
+
+  const ViewEventDetails = () => {
+    console.log(data)
+    // navigate("/events/" + data._id, { state: data })
+
+  }
+
   return (
     <BackCard isMain={isMain}>
       <EventCard>
@@ -210,15 +216,15 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
                 !userAccess
                   ? navigate("/signin")
                   : data.isPaid
-                  ? setModal(true)
-                  : handleClick();
+                    ? setModal(true)
+                    : handleClick();
               }}
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
           <SpanDiv>
-            <Stylespan3>View details</Stylespan3>
+            <Link to={"/events/" + data._id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>

@@ -210,7 +210,7 @@ export const SponserHolder = styled.div`
         width: 780px;
         border-radius: 0;
         gap: 30px;
-        animation: scrolling 4s linear infinite;
+        animation: scrolling 5s linear infinite;
     }
 
     @keyframes scrolling {
@@ -251,10 +251,29 @@ export const TextContainer = styled.div`
 export const Dummy = styled.div`
     @media screen and (max-width: 650px) {display: none;}
 `
+export const IconCont = styled.a`
+    display: block;
+    margin-left: 20px;
+    width: 65px;
+    height: 60px;
+    cursor: pointer;
+    @media screen and (max-width: 650px) {
+        height: 45px;
+        width: 50px;
+        margin-left: 5px;
+    }
+    @media screen and (max-width: 450px) {
+        height: 35px;
+        width: 40px;
+        margin-left: 10px;
+    }
+`
 
 export const InstaIcon = styled.img`
     mix-blend-mode: color-dodge;
-    margin-left: 20px;
+    width: 100%;
+    height: 100%;
+    /* margin-left: 20px;
     width: 65px;
     height: 60px;
     @media screen and (max-width: 650px) {
@@ -262,6 +281,11 @@ export const InstaIcon = styled.img`
         width: 50px;
         margin-left: 5px;
     }
+    @media screen and (max-width: 450px) {
+        height: 35px;
+        width: 40px;
+        margin-left: 10px;
+    } */
 `
 
 export const SonabyssIcon = styled.img`
@@ -270,6 +294,10 @@ export const SonabyssIcon = styled.img`
     @media screen and (max-width: 650px) {
         height: 32px;
         width: 110px;
+    }
+    @media screen and (max-width: 450px) {
+        height: 30px;
+        width: 100px;
     }
 `
 
@@ -281,4 +309,11 @@ export const FooterText = styled.p`
     @media screen and (max-width: 650px) {
         font-size: 12px;
     }
+`
+
+export const AboutUs = styled.a`
+    
+`
+export const ContactUs = styled.a`
+    
 `
