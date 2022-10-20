@@ -50,8 +50,13 @@ export const AboutDiv = styled.div`
     opacity: 1;
     @media screen and (max-width: 650px) {
         width: 100%;
-        padding: 80px 0px 0px 0px;
+        border-radius:0;
+        /* padding: 80px 0px 0px 0px; 
+         display: none; */
+         padding: 80px 0px 0px 0px;
     }
+
+    /* box-shadow: -1px 1px 0px 26px rgba(52,48,173,1); */
 
     &::after {
     content: '';
@@ -60,9 +65,15 @@ export const AboutDiv = styled.div`
     position: absolute;
     top: 0;
     left: -4%;
-    filter: blur(30px);
+    filter: blur(20px);
     border-radius: 50px;
     background: #3e1c33c2;
+    @media screen and (max-width: 650px) {
+        border-radius: 0;
+        box-shadow: -1px 1px 0px 24px #0f070c;
+        width: 120%;
+        height: 108%;
+    }
 }
 `
 
@@ -80,7 +91,7 @@ export const AboutText = styled.div`
     background: rgba(22, 10, 19, 0.7);
     font-size: 26px;
     margin: 0 auto;
-    font-family: "unutterable";
+    font-family: 'Abyssinica SIL';
     letter-spacing: 1.2px;
     padding: 30px 10% 30px 10%;
     line-height: 28px;
@@ -107,11 +118,12 @@ export const ImageContainer = styled.div`
     z-index: -1;
     transform: translate(50%,-50%);
     @media screen and (max-width: 650px) {
-        width: 180%;
+        /* width: 180%;
         max-height: 460px;
         left: -40%;
         top: 0;
-        transform: translate(0,0);
+        transform: translate(0,0); */
+        display:none;
     }
 
 `
@@ -143,11 +155,15 @@ export const ExtraMarqueeImg = styled.img`
 
 
 export const SponserImgCont = styled.div`
-    height: 170px;
-    width: 170px;
+    /* height: 240px;
+    width: 250px; */
+    height: 13.3vw;
+    width: 23%;
+    max-height: 240px;
     position: relative;
+    /* border: 2px solid green; */
     border-radius: 50%;
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
     &::after{
         content: '';
         height: 101%;
@@ -160,7 +176,22 @@ export const SponserImgCont = styled.div`
         box-shadow: inset 0px 0px 11px 10px rgb(0 0 0 / 90%);
     }
 
+    @media screen and (max-width: 650px) {
+        width: 180px;
+        height: 180px;
+    }
 `
+
+export const SponserName = styled.p`
+    /* background-color: pink; */
+    /* border: 2px solid pink; */
+    /* margin-top: -2px; */
+    /* height: 20%; */
+    font-family: "unutterable";
+    font-style: normal;
+    font-weight: 400;
+`
+
 export const ExtraMarqueeImgCont = styled.div`
     height: 170px;
     width: 170px;
@@ -208,9 +239,10 @@ export const SponserHolder = styled.div`
     height: 100%;
     @media screen and (max-width: 650px) {
         width: 780px;
+        /* width: 100%; */
         border-radius: 0;
-        gap: 30px;
-        animation: scrolling 5s linear infinite;
+        gap: 35px;
+        animation: scrolling 4s linear infinite;
     }
 
     @keyframes scrolling {
@@ -241,11 +273,11 @@ export const Footer = styled.div`
 `
 export const IconContainers = styled.div`
     display: flex;
-    margin-left: 3%;
+    margin-left: 7%;
 `
 
 export const TextContainer = styled.div`
-    margin-right: 8%;
+    margin-right: 12%;
 `
 
 export const Dummy = styled.div`
@@ -253,9 +285,9 @@ export const Dummy = styled.div`
 `
 export const IconCont = styled.a`
     display: block;
-    margin-left: 20px;
-    width: 65px;
-    height: 60px;
+    margin-left: 30px;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
     @media screen and (max-width: 650px) {
         height: 45px;
@@ -290,6 +322,7 @@ export const InstaIcon = styled.img`
 
 export const SonabyssIcon = styled.img`
     height: 40px;
+    width: 125px;
     margin: 10px 0 -18px 0;
     @media screen and (max-width: 650px) {
         height: 32px;
@@ -311,9 +344,10 @@ export const FooterText = styled.p`
     }
 `
 
-export const AboutUs = styled.a`
-    
-`
+// export const AboutUs = styled.a`
+
+// `
 export const ContactUs = styled.a`
-    
+    color: white;
+    text-decoration: none;
 `
