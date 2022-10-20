@@ -116,7 +116,7 @@ const InputTagReg = styled(TextField)`
     border-bottom: 2px solid #ff461f;
   } */
   @media (min-width: 992px) {
-    margin-bottom: 3px !important;
+    margin-bottom: 1rem !important;
   }
 `;
 
