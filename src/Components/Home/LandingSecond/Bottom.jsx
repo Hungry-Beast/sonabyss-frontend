@@ -100,20 +100,20 @@ function Bottom() {
                             <SponserImgMainContainer>
                                 <SponserHolder>
                                     <SponserImgCont>
-                                        <SponserImg src={imgUrl + "/MadangPulo.jpg"} />
-                                        <SponserName>Sponser</SponserName>
+                                        <SponserImg src={imgUrl + "/Galli-min.jpg"} />
+                                        <SponserName>Galli Beyong <br /> Racaf Secretary</SponserName>
                                     </SponserImgCont>
                                     <SponserImgCont>
                                         <SponserImg src={imgUrl + "/MadangPulo.jpg"} />
-                                        <SponserName>Sponser</SponserName>
+                                        <SponserName>Mudang Pullo<br />Assistant Racaf Sec.</SponserName>
                                     </SponserImgCont>
                                     <SponserImgCont>
-                                        <SponserImg src={imgUrl + "/MadangPulo.jpg"} />
-                                        <SponserName>Sponser</SponserName>
+                                        <SponserImg src={imgUrl + "/MojiRiba.jpg"} />
+                                        <SponserName>Moji Riba <br /> Event Manager</SponserName>
                                     </SponserImgCont>
                                     <SponserImgCont>
-                                        <SponserImg src={imgUrl + "/MadangPulo.jpg"} />
-                                        <SponserName>Sponser</SponserName>
+                                        <SponserImg src={imgUrl + "/MaruTalu.jpg"} />
+                                        <SponserName>Maru Talu <br /> Organising Secretary</SponserName>
                                     </SponserImgCont>
 
                                 </SponserHolder>

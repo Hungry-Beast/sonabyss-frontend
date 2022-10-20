@@ -1,6 +1,9 @@
 .mobile-slider .swiper {
-    width: 300px;
-    height: 370px;
+    /* width: 240px;
+    height: 320px; */
+    height: 60%;
+    width: 60%;
+    /* max-width: 250px; */
 }
 
 .mobile-slider .swiper-slide {
@@ -54,5 +57,5 @@
 }
 
 .mobile-slider .swiper-slide:nth-child(11n) {
-    background-color: rgb(124, 41, 108);
+    background-color: rgb(142, 59, 145);
 }
