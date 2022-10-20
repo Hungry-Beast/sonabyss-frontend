@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // import "swiper/css/effect-coverflow";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
 import "swiper/css/effect-cards";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "./MobileSlider.css";
 import { EffectCards } from "swiper";
 import { prodURL } from "../../../config";
@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Slider({setClubLoaded}) {
+export default function Slider({ setClubLoaded }) {
     const navigate = useNavigate();
     const [events, setEvents] = useState([])
     var requestOptions = {
@@ -24,28 +24,32 @@ export default function Slider({setClubLoaded}) {
             .then(response => response.json())
             .then(result => {
                 console.log(result);
+
                 setEvents(result.reverse())
+
+
             })
             .catch(error => console.log('error', error));
 
 
     }, [])
 
-    console.log(events);
-
     const Div = styled(SwiperSlide)`
     /* position: relative !important; */
     /* width:50%; */
-    img {
-        object-fit: cover;
-        width: 100%;
-    height: 100%;
-       transition: all 0.5s ease-in-out;
+
+    /* position: relative; */
+    @media(max-width:650px){
+
+        img {
+            object-fit: cover;
+            width: 100%;
+        height: 100%;
+        transition: all 0.5s ease-in-out;
+        
+    }
     
-      }
-      
       .overlay {
-      
         position: absolute;
         top: 0;
         bottom: 0;
@@ -58,18 +62,18 @@ export default function Slider({setClubLoaded}) {
     
       }
       
-    
+      
       &:hover{
         img {
         filter:blur(4px) brightness(50%);
-      }
+    }
       .overlay{
-        opacity: 1;
-      }
-      }
+          opacity: 1;
+        }
+    }
       
       .text {
-        font-family: 'pasdecourbe';
+        font-family: 'midnight';
         letter-spacing: 0.05em;
         color: rgb(255,18,33);
         font-size: 1rem;
@@ -80,9 +84,11 @@ export default function Slider({setClubLoaded}) {
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         text-align: center;
-      }
-      
+    }
+    }
     `
+
+
 
     return (
         <div className="mobile-slider" >
@@ -90,13 +96,14 @@ export default function Slider({setClubLoaded}) {
                 effect={"cards"}
                 grabCursor={true}
                 modules={[EffectCards]}
+
                 className="mySwiper"
             >
                 {
                     events.map(e => {
                         return (
                             <Div onClick={() => navigate('/events', { state: e })} >
-                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
+                                <img src={e.image} className='image' onLoad={() => setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>
