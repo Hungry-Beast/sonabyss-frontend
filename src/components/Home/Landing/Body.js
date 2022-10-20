@@ -70,7 +70,7 @@ const ReadyText = styled.h2`
   left: 12%;
   transform: rotate(7.68deg);
   font-family: "livingbynumbers", sans-serif;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-style: normal;
   font-weight: 400;
   margin: 0;

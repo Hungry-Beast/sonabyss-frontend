@@ -175,7 +175,7 @@ function Bottom({setClubLoaded}) {
 
                     <TextContainer>
                         <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
-                        <FooterText> <Link target="_blank" style={{ textDecoration: "none", color: "white" }} to="/aboutUs" ><span>About Us</span></Link>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
+                        <FooterText> <Link  style={{ textDecoration: "none", color: "white" }} to="/aboutUs" ><span>About Us</span></Link>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
                     </TextContainer>
 
                     <Dummy></Dummy>
