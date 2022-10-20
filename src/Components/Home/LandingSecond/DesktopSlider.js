@@ -50,9 +50,11 @@ img {
   }
   
   .text {
-    font-family: 'pasdecourbe';
+    font-family: 'livingbynumbers';
     letter-spacing: 0.09em;
-    color: rgba(255,0,16,1);
+    /* color: rgba(255,0,16,1); */
+    font-weight: bold;
+    color: #eba000;
     font-size: 1.3rem;
     position: absolute;
     top: 50%;

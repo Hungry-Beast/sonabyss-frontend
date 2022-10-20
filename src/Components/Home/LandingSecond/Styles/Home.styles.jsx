@@ -7,7 +7,7 @@ export const CentralContainer = styled.div`
 
 export const Heading = styled.div`
     font-size: 58px;
-    font-family: "unutterable";
+    font-family: "livingbynumbers";
     opacity: 1;
     position: relative;
     z-index: 3;
@@ -15,7 +15,7 @@ export const Heading = styled.div`
 `
 
 export const ViewAllButton = styled.button`
-    font-family: "unutterable";
+    font-family: "livingbynumbers";
     padding: 10px 45px;
     border-radius: 30px;
     background: #FF461F;
@@ -187,7 +187,7 @@ export const SponserName = styled.p`
     /* border: 2px solid pink; */
     /* margin-top: -2px; */
     /* height: 20%; */
-    font-family: "unutterable";
+    font-family: "bloodsuckers";
     font-style: normal;
     font-weight: 400;
 `
@@ -336,7 +336,7 @@ export const SonabyssIcon = styled.img`
 
 export const FooterText = styled.p`
     margin-left: -10px;
-    font-family: "nightOfTerror";
+    font-family: "bloodsuckers";
     color: white;
     font-size: 13px;
     @media screen and (max-width: 650px) {

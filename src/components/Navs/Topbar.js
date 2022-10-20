@@ -115,7 +115,7 @@ const Button = styled(Link)`
   color: #fff;
   font-size: 1.8rem;
   transition: 200ms ease-in-out;
-  font-family: "nightOfTerror";
+  font-family: "bloodsuckers";
   font-style: normal;
   font-weight: 400;
   margin: 1rem auto;
@@ -136,7 +136,7 @@ const SceduleButton = styled.a`
   color: #fff;
   font-size: 1.8rem;
   transition: 200ms ease-in-out;
-  font-family: "nightOfTerror";
+  font-family: "bloodsuckers";
   font-style: normal;
   font-weight: 400;
   margin: 1rem auto;
@@ -157,7 +157,7 @@ const ButtonLog = styled.button`
   color: #fff;
   font-size: 1.8rem;
   transition: 200ms ease-in-out;
-  font-family: "nightOfTerror";
+  font-family: "bloodsuckers";
   font-style: normal;
   font-weight: 400;
   margin: 1rem auto;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import { imgUrl, prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
@@ -66,7 +66,7 @@ const Cardfooter = styled.div`
   }
 `;
 const Stylespan1 = styled.span`
-  font-family: "midnight", sans-serif;
+  font-family: "livingbynumbers", sans-serif;
   font-size: 2em;
   text-align: center;
   /* color:${(props) => (props.isMain && false ? "#000" : "#fff")}; */
@@ -77,7 +77,7 @@ const Stylespan1 = styled.span`
   }
 `;
 const Stylespan2 = styled.span`
-  font-family: "midnight", sans-serif;
+  font-family: "livingbynumbers", sans-serif;
   font-size: 1.5em;
   text-align: center;
   color: ${(props) => (props.isMain || false ? "#000" : "#fff")};
@@ -87,7 +87,7 @@ const Stylespan2 = styled.span`
 `;
 const Stylespan3 = styled.span`
   text-decoration: underline;
-  font-family: "midnight", sans-serif;
+  font-family: "livingbynumbers", sans-serif;
   font-size: 1em;
   text-align: center;
   color: inherit !important;
@@ -109,6 +109,7 @@ const SpanDiv = styled(Link)`
   /* width: 30%; */
   color: white;
   flex: 1;
+  text-decoration: none;
 `;
 const Button = styled.button`
   background: #ff0000;
@@ -117,13 +118,33 @@ const Button = styled.button`
   mix-blend-mode: normal;
   box-shadow: 0px 6px 0px #44003d;
   border-radius: 20.5px;
-  padding: 0.5em 1.5em;
-  font-family: "nightOfTerror";
+  padding: 0.3rem 1rem;
+  font-family: 'Creepster', cursive;;
   font-style: normal;
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 29px;
+  font-size: 1.5rem;
+  /* letter-spacing: 2px; */
+  line-height: 35px;
   color: #000000;
+  ${(props) => {
+    if (props.isregistered) {
+      return css`
+        border-radius: 22px;
+        background-color: #810000;
+        color: #ffffff;
+        box-shadow: 0px 5px 0px #ffffff;
+      `;
+    }
+    if (props.isdisabled) {
+      return css`
+        background-color: #1E1E1E;
+        color: #ffffff;
+        box-shadow: 0px 6px 0px #ffffff;
+        filter: blur(0.5px);
+      `;
+    }
+  }}
+
   @media (max-width: ${phoneBreak}) {
     padding: 0.2em 1em;
     margin: 10px 0;
@@ -227,12 +248,15 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
                   ? setModal(true)
                   : handleClick();
               }}
+              isregistered={data.isRegistered}
+              isdisabled={data.disabled}
+
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
           <SpanDiv className="link">
-            <Link to={"/events/" + navigateLink}>
+            <Link style={{textDecoration: 'none'}} to={"/events/" + navigateLink}>
               {" "}
               <Stylespan3>View details</Stylespan3>{" "}
             </Link>
@@ -250,7 +274,6 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
           data={data}
           handleClose={handleClose}
           handleClick={handleClick}
-          
         />
         {/* </Box> */}
       </Modal>
