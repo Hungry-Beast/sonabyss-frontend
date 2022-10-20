@@ -237,6 +237,7 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
             display: " flex",
             alignItems: "flex-end",
           }}
+          className="selectDiv"
           fullWidth
         >
           <Select
