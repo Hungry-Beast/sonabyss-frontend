@@ -33,13 +33,11 @@
 }
 
 .desktop-slider .swiper-slide.swiper-slide-visible.swiper-slide-prev {
-  transform: translate3d(118px, 0px, -100px) rotateX(-1deg) rotateY(1deg)
-    scale(1) !important;
+  transform: translate3d(118px, 0px, -100px) rotateX(-1deg) rotateY(1deg) scale(1) !important;
 }
 
 .desktop-slider .swiper-slide.swiper-slide-visible.swiper-slide-next {
-  transform: translate3d(-144px, 0px, -98px) rotateX(1deg) rotateY(-2deg)
-    scale(1) !important;
+  transform: translate3d(-144px, 0px, -98px) rotateX(1deg) rotateY(-2deg) scale(1) !important;
 }
 
 .hLnzvN::after {
@@ -84,6 +82,7 @@
   max-width: 1100px;
   margin: 0 auto;
 }
+
 /* transform: translate3d(-144px, 0px, -98px) rotateX(1deg) rotateY(-2deg) scale(1) !important; */
 /* 
 .container {
