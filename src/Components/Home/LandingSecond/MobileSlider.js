@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/effect-coverflow";
+// import "swiper/css/effect-coverflow";
+import "swiper/css/effect-cards";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./MobileSlider.css";
@@ -29,6 +30,8 @@ export default function Slider() {
 
 
     }, [])
+
+    console.log(events);
 
     const Div = styled(SwiperSlide)`
     /* position: relative !important; */
@@ -79,10 +82,7 @@ export default function Slider() {
         text-align: center;
       }
       
-    
     `
-
-
 
     return (
         <div className="mobile-slider" >
