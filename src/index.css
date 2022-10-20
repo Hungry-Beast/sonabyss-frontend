@@ -28,6 +28,10 @@
   font-family: "livingbynumbers";
   src: url(./fonts/living-by-numbers/living\ by\ numbers.ttf);
 }
+@font-face {
+  font-family: "bloodsuckers";
+  src: url(./fonts/bloodsuckers-font/Bloodsuckers-m2ex.ttf);
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

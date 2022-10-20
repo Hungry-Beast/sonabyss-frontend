@@ -174,7 +174,7 @@ export const SponserName = styled.p`
     /* border: 2px solid pink; */
     /* margin-top: -2px; */
     /* height: 20%; */
-    font-family: "nightOfTerror";
+    font-family: "bloodsuckers";
     font-style: normal;
     font-weight: 400;
 `
@@ -322,7 +322,7 @@ export const SonabyssIcon = styled.img`
 
 export const FooterText = styled.p`
     margin-left: -10px;
-    font-family: "nightOfTerror";
+    font-family: "bloodsuckers";
     color: white;
     font-size: 13px;
     @media screen and (max-width: 650px) {
