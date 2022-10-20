@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { imgUrl } from "../../config";
 import Topbar from "../Navs/Topbar";
 import Landing from "./Landing/Landing";
 import Bottom from "./LandingSecond/Bottom";
@@ -16,6 +17,23 @@ const Component = styled.div`
   position: relative;
   margin: 0 auto;
 `;
+const LoadingDiv = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 100000;
+  position: fixed;
+  display: ${(props) => (props.isLoaded ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
+`;
+const LoadImg = styled.img`
+  width: 20rem;
+  @media (max-width: 992px) {
+    width: 15rem;
+  }
+`;
+
 const Home = ({ userAccess, setUserAccess, clubLoaded, setClubLoaded }) => {
   return (
     <Component>
@@ -24,6 +42,9 @@ const Home = ({ userAccess, setUserAccess, clubLoaded, setClubLoaded }) => {
         <Landing />
       </div>
       <Bottom clubLoaded={clubLoaded} setClubLoaded={setClubLoaded} />
+      <LoadingDiv isLoaded={!clubLoaded}>
+        <LoadImg src={imgUrl + "/load1.gif"} />
+      </LoadingDiv>
     </Component>
   );
 };

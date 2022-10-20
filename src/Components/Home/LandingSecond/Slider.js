@@ -20,9 +20,9 @@ const useCheckMobileScreen = () => {
   return width <= 650;
 };
 
-export default function Slider() {
+export default function Slider({ clubLoaded, setClubLoaded }) {
   const isMobile = useCheckMobileScreen();
-  const [clubLoaded, setClubLoaded] = useState(false);
+  // const [clubLoaded, setClubLoaded] = useState(false);
   return (
     <>
       {isMobile ? (
@@ -30,19 +30,7 @@ export default function Slider() {
       ) : (
         <DesktopSlider setClubLoaded={setClubLoaded} />
       )}
-      <Backdrop
-        sx={{ color: "#fff", zIndex: "310" }}
-        open={!clubLoaded}
-        // onClick={handleClose}
-      >
-        {/* <CircularProgress color="inherit" /> */}
-        <img
-          style={{
-            width: "6rem",
-          }}
-          src={imgUrl + "/ghostLoader.gif"}
-        />
-      </Backdrop>
+      
     </>
   );
 }

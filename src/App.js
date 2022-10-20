@@ -7,10 +7,11 @@ import LogInPage from "./components/LogIn/LogInPage";
 import RegisterPage from "./components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NoInternetConnection from "./components/Error_Page/ErrorNet"
+import NoInternetConnection from "./components/Error_Page/ErrorNet";
 import ViewDetails from "./components/Event/ViewDetails";
 import AllClubView from "./components/Event/AllClubView";
 import AboutUs from "./components/Aboutus/AboutUs";
+import { imgUrl } from "./config";
 
 const Component = styled.div`
   width: 100%;
@@ -19,10 +20,28 @@ const Component = styled.div`
   display: flex;
   justify-content: center;
 `;
+const LoadingDiv = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 100000;
+  position: fixed;
+  display: ${props=>props.isLoaded?"flex":"none"};
+  justify-content: center;
+  align-items: center;
+`;
+const LoadImg = styled.img`
+  width: 20rem;
+  @media (max-width: 992px) {
+    width: 15rem;
+  }
+`;
+
 function App() {
   const [userAccess, setUserAccess] = useState(null);
   const [userData, setUserData] = useState(null);
   const [clubLoaded, setClubLoaded] = useState(false);
+
   useEffect(() => {
     const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -67,9 +86,11 @@ function App() {
           <Route path="/events/:id" element={<ViewDetails />} />
           <Route path="/allclubs" element={<AllClubView />} />
           <Route path="/aboutUs" element={<AboutUs />} />
-
         </Routes>
       </NoInternetConnection>
+      <LoadingDiv isLoaded={!clubLoaded}>
+        <LoadImg src={imgUrl + "/load1.gif"} />
+      </LoadingDiv>
     </Component>
   );
 }

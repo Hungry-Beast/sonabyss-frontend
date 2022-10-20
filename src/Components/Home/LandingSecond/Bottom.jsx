@@ -34,7 +34,7 @@ import { imgUrl } from "../../../config";
 import { Link, Navigate } from "react-router-dom";
 import Youtube from "../Landing/Youtube";
 
-function Bottom() {
+function Bottom({ clubLoaded, setClubLoaded }) {
   // Navigate('/route',{state:{club}})
   return (
     <>
@@ -61,7 +61,7 @@ function Bottom() {
                 <Image src={imgUrl + "/Homepage.png"} />
               </ImageContainer>
 
-              <Slider />
+              <Slider  clubLoaded={clubLoaded} setClubLoaded={setClubLoaded}/>
               {/* <ViewAllButton>View All</ViewAllButton> */}
             </AboutDivContent>
           </AboutDiv>
