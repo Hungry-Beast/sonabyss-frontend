@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak } from "../../../breakPoints";
 import Body from "./Body";
@@ -19,7 +20,7 @@ const BlackBox = styled.div`
   background: rgba(0, 0, 0, 0.32);
   border-radius: 36px;
   max-width: 600px;
-  @media(min-width:${phoneBreak}){
+  @media (min-width: ${phoneBreak}) {
     display: none;
   }
 `;
@@ -55,12 +56,26 @@ const RegisterButton = styled.button`
 `;
 
 const Landing = () => {
+  const navigate = useNavigate();
+  const [userAccess, setUserAccess] = useState();
+  useEffect(() => {
+    const user =
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
+    setUserAccess(user);
+  }, []);
+
   return (
     <Component>
       <Body />
       <BlackBox>
         <RegisterText>“Did you register?”</RegisterText>
-        <RegisterButton>Register</RegisterButton>
+        <RegisterButton
+          onClick={() =>
+            userAccess ? navigate("/events") : navigate("/signin")
+          }
+        >
+          Register
+        </RegisterButton>
       </BlackBox>
     </Component>
   );

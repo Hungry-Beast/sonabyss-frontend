@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { phoneBreak, phoneBreakSm } from "../../../breakPoints";
@@ -275,7 +275,7 @@ const RegisterButton = styled.button`
   border: none;
   outline: none;
   font-size: 2rem;
-  padding: .2rem 1rem;
+  padding: 0.2rem 1rem;
   margin-top: 5rem;
   @media (max-width: ${phoneBreak}) {
     /* font-size: 1.7rem; */
@@ -283,7 +283,14 @@ const RegisterButton = styled.button`
   }
 `;
 const Body = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [userAccess, setUserAccess] = useState();
+  useEffect(() => {
+    const user =
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
+    setUserAccess(user);
+  }, []);
+
   return (
     <Component>
       <LeftPart>
@@ -325,7 +332,13 @@ const Body = () => {
           Welcoming you to the most awaited fest of Arunachal Pradesh.
         </WelcomeText>
         <RegisterText>“Did you register?”</RegisterText>
-        <RegisterButton onClick={() => navigate('/events')}>Register</RegisterButton>
+        <RegisterButton
+          onClick={() =>
+            userAccess ? navigate("/events") : navigate("/signin")
+          }
+        >
+          Register
+        </RegisterButton>
         <LeftLowerPartPh>
           <SkeletonContainer>
             <Rectangle />

@@ -60,7 +60,7 @@ const PhoneMenuComponent = styled.div`
   display: ${(props) => (props.openMenu ? "block" : "hidden")};
   transform: translateX(${(props) => (props.openMenu ? "0" : "100%")});
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background: #130912;

@@ -211,7 +211,7 @@ const Cross = styled.img`
 `;
 
 const PaymentPopUp = ({ data, handleClick, handleClose }) => {
-  console.log(data, handleClick);
+  console.log(data);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.file.files[0])
@@ -247,7 +247,7 @@ const PaymentPopUp = ({ data, handleClick, handleClose }) => {
                   <input name="file" type="file" required />
                 </Foot2>
                 <Span2>
-                  *in case of processing, money debited contact : +919xxxxxxxx
+                  *in case of processing, money debited contact : +91{data.phoneNo} {"  "}
                   We’ll get right back to you.
                 </Span2>
               </DetailContainer>
@@ -256,9 +256,9 @@ const PaymentPopUp = ({ data, handleClick, handleClose }) => {
           <PaymentDetails>
             <Span1>Scan</Span1>
             <Scannercontain>
-              <Scannerimage src="../images/img.png" alt="Scan" />
+              <Scannerimage src={data.qrCode} alt="Scan" />
             </Scannercontain>
-            <Span1>UPI ID: xyz@oksbi</Span1>
+            <Span1>UPI ID: {data.upi}</Span1>
           </PaymentDetails>
         </ForCross>
       </PopUpContainer>

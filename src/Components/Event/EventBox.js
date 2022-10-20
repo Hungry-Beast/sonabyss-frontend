@@ -25,6 +25,7 @@ const BackCard = styled.div`
   color: #fff;
   @media (max-width: 992px) {
     margin: 0;
+    padding: 12px 6px;
   }
 `;
 const EventCard = styled.div`
@@ -111,13 +112,10 @@ const SpanDiv = styled(Link)`
 `;
 const Button = styled.button`
   background: #ff0000;
-  /* background: #ff0000; */
-  mix-blend-mode: normal;
-  box-shadow: 0px 6px 0px #44003d;
-  /* box-shadow: ; */
   outline: none;
   border: none;
   mix-blend-mode: normal;
+  box-shadow: 0px 6px 0px #44003d;
   border-radius: 20.5px;
   padding: 0.5em 1.5em;
   font-family: "nightOfTerror";
@@ -125,16 +123,7 @@ const Button = styled.button`
   font-weight: 400;
   font-size: 1rem;
   line-height: 29px;
-  color: #000;
-  background-color: ${(props) => props.isregistered && "#810000"};
-  box-shadow: ${(props) => props.isregistered && "0px 6px 0px #ffffff"};
-  color: ${(props) => props.isregistered && "#fff"};
-  background-color: ${(props) => props.isdisabled && "#1E1E1E"};
-  box-shadow: ${(props) => props.isregistered && " 0px 6px 0px #FFFFFF"};
-  color: ${(props) => props.isregistered && "#fff"};
-
-
-
+  color: #000000;
   @media (max-width: ${phoneBreak}) {
     padding: 0.2em 1em;
     margin: 10px 0;
@@ -149,7 +138,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   const [registerLoading, setRegisterLoading] = useState(false);
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   const handleClick = (file) => {
     console.log(file);
@@ -168,7 +157,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
       if (dd < 10) dd = "0" + dd;
       if (mm < 10) mm = "0" + mm;
       const formattedToday = dd + "/" + mm + "/" + yyyy;
-      console.log(data);
+      // console.log(data);
       var formdata = new FormData();
       formdata.append("date", formattedToday);
       formdata.append("clubId", data.club);
@@ -211,11 +200,12 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
     }
   };
 
-  const ViewEventDetails = () => {
-    console.log();
-    // navigate("/events/" + data._id, { state: data })
-  };
-
+  const navigateLink = userAccess ? data.id : data._id;
+  // const ViewEventDetails = () => {
+  //   console.log(navigateLink);
+  //   navigate("/signin");
+  // };
+  // console.log(data["_id"])
   return (
     <BackCard isMain={isMain}>
       <EventCard>
@@ -230,8 +220,6 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
           <BtnDiv>
             <Button
               disabled={data.isRegistered || data.disabled}
-              isdisabled={data.disabled}
-              isregistered={data.isRegistered}
               onClick={() => {
                 !userAccess
                   ? navigate("/signin")
@@ -244,11 +232,9 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
             </Button>
           </BtnDiv>
           <SpanDiv className="link">
-            <Link to={"/events/" + data.id}>
+            <Link to={"/events/" + navigateLink}>
               {" "}
-              <Stylespan3 onClick={ViewEventDetails}>
-                View details
-              </Stylespan3>{" "}
+              <Stylespan3>View details</Stylespan3>{" "}
             </Link>
           </SpanDiv>
         </Cardfooter>
@@ -264,6 +250,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
           data={data}
           handleClose={handleClose}
           handleClick={handleClick}
+          
         />
         {/* </Box> */}
       </Modal>
