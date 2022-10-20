@@ -115,7 +115,8 @@ const Button = styled(Link)`
   color: #fff;
   font-size: 1.8rem;
   transition: 200ms ease-in-out;
-  font-family: "bloodsuckers";
+  /* font-family: "bloodsuckers"; */
+  font-family: "Creepster",cursive;
   font-style: normal;
   font-weight: 400;
   margin: 1rem auto;
@@ -136,7 +137,8 @@ const SceduleButton = styled.a`
   color: #fff;
   font-size: 1.8rem;
   transition: 200ms ease-in-out;
-  font-family: "bloodsuckers";
+  /* font-family: "bloodsuckers"; */
+  font-family: "Creepster",cursive;
   font-style: normal;
   font-weight: 400;
   margin: 1rem auto;
