@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from 'styled-components'
 import TextField from "@mui/material/TextField";
-import { Autocomplete } from "@mui/material";
+import { Autocomplete, MenuItem, Select } from "@mui/material";
 import styled from "@emotion/styled";
 import { imgUrl } from "../../config";
 // import "./Style.css";
@@ -61,7 +61,7 @@ const AutoCompleteDiv = styled.div`
   align-items: center;
   justify-content: flex-end;
   /* width: 40%; */
-  flex:1;
+  flex: 1;
   @media (max-width: ${phoneBreak}) {
     width: 100%;
     justify-content: space-between;
@@ -74,7 +74,7 @@ const BackArrow = styled.img`
   }
 `;
 const AutoStyle = {
-  '& .MuiPaper-root': {
+  "& .MuiPaper-root": {
     background: "rgba(0, 0, 0, 0.98) ",
     color: "white",
   },
@@ -119,9 +119,11 @@ const Events = [
   { label: "Dance club" },
 ];
 const PopupIcon = (
-  <span sx={{
-    margin:"0 5px "
-  }}>
+  <span
+    sx={{
+      margin: "0 5px ",
+    }}
+  >
     <svg
       width="22"
       // height="21"
@@ -137,57 +139,58 @@ const PopupIcon = (
     </svg>
   </span>
 );
-const Select = styled.select`
-  width: 10rem;
-    height: 35px;
-  background: white;
-  color: gray;
-  padding-left: 5px;
-  font-size: 14px;
-  border: none;
-  margin-left: 10px;
+// const Select = styled.select`
+//   width: 10rem;
+//   height: 35px;
+//   background: white;
+//   color: gray;
+//   padding-left: 5px;
+//   font-size: 14px;
+//   border: none;
+//   margin-left: 10px;
 
-  option {
-    color: black;
-    background: black;
-    display: flex;
-    white-space: pre;
-    min-height: 20px;
-    padding: 0px 2px 1px;
-    width: 60%;
-    margin: 0.5rem auto !important;
+//   option {
+//     color: black;
+//     background: black;
+//     display: flex;
+//     white-space: pre;
+//     min-height: 20px;
+//     padding: 0px 2px 1px;
+//     width: 60%;
+//     margin: 0.5rem auto !important;
 
-    background: black;
-    border: 14px solid #ff0000;
-    box-shadow: inset 0px 1px 1px 1px #ffffff;
-    border-radius: 0.5em;
-    font-size: 1.7rem;
-    color:white;
-
-  }
-`;
-const SelectBox = styled(Autocomplete)`
-  .css-9e5uuu-MuiPaper-root-MuiAutocomplete-paper {
-    background: rgba(0, 0, 0, 0.98) !important;
-  border: 5px solid #ffffff !important;
-  border-radius: 35px !important;
-  color: #ffffff !important;
-  font-family: "pasdecourbe" !important;
-  font-style: normal;
-  font-weight: 400;
-  width: 100%;
-  font-size: 1.5rem;
-  }
-`;
+//     background: black;
+//     border: 14px solid #ff0000;
+//     box-shadow: inset 0px 1px 1px 1px #ffffff;
+//     border-radius: 0.5em;
+//     font-size: 1.7rem;
+//     color: white;
+//   }
+// `;
+// const SelectBox = styled(Autocomplete)`
+//   .css-9e5uuu-MuiPaper-root-MuiAutocomplete-paper {
+//     background: rgba(0, 0, 0, 0.98) !important;
+//     border: 5px solid #ffffff !important;
+//     border-radius: 35px !important;
+//     color: #ffffff !important;
+//     font-family: "pasdecourbe" !important;
+//     font-style: normal;
+//     font-weight: 400;
+//     width: 100%;
+//     font-size: 1.5rem;
+//   }
+// `;
 const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
   const navigate = useNavigate();
   console.log(clubs);
 
   return (
     <StyleFilter className="event-card">
-      <div style={{
-        flex:"1"
-      }}></div>
+      <div
+        style={{
+          flex: "1",
+        }}
+      ></div>
       <PreEventDiv>
         <PreEvent>
           <Pre>PreEvents</Pre>
@@ -200,7 +203,7 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
           }}
           src={imgUrl + "/backArrow.svg"}
         />
-        <SelectBox
+        {/* <SelectBox
           className="AutoCom"
           disablePortal
           options={clubs}
@@ -213,15 +216,35 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
             getEvents(newValue.value);
             // console.log(newValue)
           }}
+          blurOnSelect="touch"
           renderInput={(params) => (
             <TextField
               placeholder="Clubs"
               variant="standard"
               {...params}
               InputProps={{ ...params.InputProps, disableUnderline: true }}
+              focused={false}
             />
           )}
-        />
+        /> */}
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectedClub}
+          label="Age"
+          sx={{
+            width:"60% !important"
+          }}
+          onChange={(handleChange, val) => {
+            console.log(val);
+          }}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+        </Select>
         {/* <Select 
         >
           <option value="" hidden>
