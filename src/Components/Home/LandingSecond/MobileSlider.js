@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Slider() {
+export default function Slider({setClubLoaded}) {
     const navigate = useNavigate();
     const [events, setEvents] = useState([])
     var requestOptions = {
@@ -96,7 +96,7 @@ export default function Slider() {
                     events.map(e => {
                         return (
                             <Div onClick={() => navigate('/events', { state: e })} >
-                                <img src={e.image} className='image' />
+                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>
