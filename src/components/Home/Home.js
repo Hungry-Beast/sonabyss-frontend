@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { imgUrl } from "../../config";
 import Topbar from "../Navs/Topbar";
@@ -34,18 +34,21 @@ const LoadImg = styled.img`
   }
 `;
 
-const Home = ({ userAccess, setUserAccess, clubLoaded, setClubLoaded }) => {
+const Home = ({ userAccess, setUserAccess }) => {
+  const [clubLoaded, setClubLoaded] = useState(false);
   return (
-    <Component>
-      <div>
-        <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
-        <Landing />
-      </div>
-      <Bottom clubLoaded={clubLoaded} setClubLoaded={setClubLoaded} />
+    <>
+      <Component>
+        <div>
+          <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
+          <Landing />
+        </div>
+        <Bottom clubLoaded={clubLoaded} setClubLoaded={setClubLoaded} />
+      </Component>
       <LoadingDiv isLoaded={!clubLoaded}>
         <LoadImg src={imgUrl + "/load1.gif"} />
       </LoadingDiv>
-    </Component>
+    </>
   );
 };
 

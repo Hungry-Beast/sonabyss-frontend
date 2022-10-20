@@ -20,27 +20,10 @@ const Component = styled.div`
   display: flex;
   justify-content: center;
 `;
-const LoadingDiv = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  z-index: 100000;
-  position: fixed;
-  display: ${props=>props.isLoaded?"flex":"none"};
-  justify-content: center;
-  align-items: center;
-`;
-const LoadImg = styled.img`
-  width: 20rem;
-  @media (max-width: 992px) {
-    width: 15rem;
-  }
-`;
 
 function App() {
   const [userAccess, setUserAccess] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [clubLoaded, setClubLoaded] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("user")
@@ -61,8 +44,7 @@ function App() {
               <Home
                 setUserAccess={setUserAccess}
                 userAccess={userAccess}
-                clubLoaded={clubLoaded}
-                setClubLoaded={setClubLoaded}
+               
               />
             }
           />
@@ -88,9 +70,7 @@ function App() {
           <Route path="/aboutUs" element={<AboutUs />} />
         </Routes>
       </NoInternetConnection>
-      <LoadingDiv isLoaded={!clubLoaded}>
-        <LoadImg src={imgUrl + "/load1.gif"} />
-      </LoadingDiv>
+     
     </Component>
   );
 }

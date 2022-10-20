@@ -166,7 +166,7 @@
 }
 
 .MuiSelect-select {
-  border: solid #ff0000 !important;
+  /* border: solid #ff0000 !important; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -175,19 +175,43 @@
   color: #ffffff !important;
   font-size: 1.4rem !important;
   font-family: "pasdecourbe" !important ;
-  max-width: 17em !important;
-  border-radius: 70px !important;
-  border: solid #ff0000 !important;
+  /* max-width: 17em !important; */
   min-height: 10px !important;
   position: relative;
+}
+.MuiSelect-select:focus {
+  /* border-color: no, */
+  /* border: solid #ff0000 !important; */
+  outline: none !important;
+}
+.css-ove8eb-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+  border-radius: 70px !important;
+  border: 4px solid #ff0000 !important;
   
 }
-.MuiSelect-select:focus{
-  /* border-color: no, */
-  border: solid #ff0000 !important;
-  outline: none !important;
 
-}
-.css-ove8eb-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+.css-ove8eb-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
   border: none !important;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding-left: 32px !important;
+  padding-right: 0 !important;
+}
+.css-i4bv87-MuiSvgIcon-root{
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .MuiSelect-select{
+        font-size: 1.3rem !important;
+      }
+      .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root{
+    font-size: 1rem !important;
+
+  }
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select{
+    padding: 0.6rem 0.4rem !important;
+  }
 }

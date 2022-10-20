@@ -7,6 +7,7 @@ import { imgUrl } from "../../config";
 // import "./Style.css";
 import { phoneBreak } from "../../breakPoints";
 import { useNavigate } from "react-router-dom";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import "./Style.css";
 
 const StyleFilter = styled.div`
@@ -121,8 +122,8 @@ const Events = [
 ];
 const PopupIcon = (
   <span
-    sx={{
-      margin: "0 5px ",
+    style={{
+      margin: "0 10px ",
     }}
   >
     <svg
@@ -184,6 +185,9 @@ const PopupIcon = (
 const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
   const navigate = useNavigate();
   console.log(clubs);
+  const Arrow = () => {
+    return <ArrowDownwardIcon color="white" />;
+  };
 
   return (
     <StyleFilter className="event-card">
@@ -238,22 +242,27 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedClub&&selectedClub.value}
+            value={selectedClub && selectedClub.value}
             label="Age"
             sx={{
               width: "70% !important",
             }}
+            IconComponent={() => (
+              <ArrowDownwardIcon
+                style={{ color: "white", margin: "0 10px !important" }}
+              />
+            )}
             onChange={(event, newValue) => {
-              console.log(newValue.props)
+              console.log(newValue.props);
               setSelectedClub(newValue.props);
               getEvents(newValue?.props?.value);
             }}
-          >{
-            clubs&&clubs.length!==0&&clubs.map((club)=>
-            <MenuItem value={club.value}>{club.label}</MenuItem>
-            )
-          }
-           
+          >
+            {clubs &&
+              clubs.length !== 0 &&
+              clubs.map((club) => (
+                <MenuItem value={club.value}>{club.label}</MenuItem>
+              ))}
           </Select>
         </FormControl>
         {/* <Select 
