@@ -180,4 +180,14 @@
   border: solid #ff0000 !important;
   min-height: 10px !important;
   position: relative;
+  
+}
+.MuiSelect-select:focus{
+  /* border-color: no, */
+  border: solid #ff0000 !important;
+  outline: none !important;
+
+}
+.css-ove8eb-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border: none !important;
 }
