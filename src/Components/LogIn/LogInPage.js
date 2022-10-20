@@ -483,6 +483,7 @@ const LogInPage = ({setUserAccess}) => {
 
   return (
     <ParentContainer>
+      <img href=""></img>
       {/* <PrimaryContainer></PrimaryContainer> */}
       <SecondaryContainer></SecondaryContainer>
       <Container>
