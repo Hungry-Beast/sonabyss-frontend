@@ -25,6 +25,8 @@ const EventTopbar = styled(Topbar)`
 const Bckground = styled.div`
   min-height: 100vh;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 `;
 const OuterEventPage = styled.div`
   display: flex;

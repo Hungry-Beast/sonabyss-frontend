@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from 'styled-components'
 import TextField from "@mui/material/TextField";
-import { Autocomplete, MenuItem, Select } from "@mui/material";
+import { Autocomplete, FormControl, MenuItem, Select } from "@mui/material";
 import styled from "@emotion/styled";
 import { imgUrl } from "../../config";
 // import "./Style.css";
@@ -18,6 +18,7 @@ const StyleFilter = styled.div`
   margin-bottom: 2em;
   background-color: rgba(19, 9, 18, 0.9);
   width: 100%;
+  justify-content: space-between;
   @media (max-width: ${phoneBreak}) {
     flex-direction: column-reverse;
   }
@@ -227,28 +228,38 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
             />
           )}
         /> */}
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedClub}
-          label="Age"
+        <FormControl
           sx={{
-            width:"60% !important"
+            display: " flex",
+            alignItems: "flex-end",
           }}
-          onChange={(handleChange, val) => {
-            console.log(val);
-          }}
+          fullWidth
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-        </Select>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedClub&&selectedClub.value}
+            label="Age"
+            sx={{
+              width: "70% !important",
+            }}
+            onChange={(event, newValue) => {
+              console.log(newValue.props)
+              setSelectedClub(newValue.props);
+              getEvents(newValue?.props?.value);
+            }}
+          >{
+            clubs&&clubs.length!==0&&clubs.map((club)=>
+            <MenuItem value={club.value}>{club.label}</MenuItem>
+            )
+          }
+           
+          </Select>
+        </FormControl>
         {/* <Select 
         >
           <option value="" hidden>
-            Type
+          Type
           </option>
           <option value="1">Audi</option>
           <option value="2">BMW</option>
