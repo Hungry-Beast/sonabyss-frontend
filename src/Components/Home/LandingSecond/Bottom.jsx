@@ -51,22 +51,6 @@ function Bottom() {
       </Container>
 
       <CentralContainer>
-        {/*-------------------------------------------------------------- Clubs ----------------------------------------------------- */}
-        <Container>
-          <AboutDiv>
-            <Heading>Clubs</Heading>
-            <AboutDivContent>
-              <ImageContainer>
-                {/* <Image src={back} /> */}
-                <Image src={imgUrl + "/Homepage.png"} />
-              </ImageContainer>
-
-              <Slider />
-              {/* <ViewAllButton>View All</ViewAllButton> */}
-            </AboutDivContent>
-          </AboutDiv>
-        </Container>
-
         {/*-------------------------------------------------------------- About ----------------------------------------------------- */}
 
         <Container>
@@ -99,6 +83,22 @@ function Bottom() {
                 with your charisma; let the magic posess and pierce, come join
                 us and truly—embrace your fears.
               </AboutText>
+            </AboutDivContent>
+          </AboutDiv>
+        </Container>
+
+        {/*-------------------------------------------------------------- Clubs ----------------------------------------------------- */}
+        <Container>
+          <AboutDiv>
+            <Heading>Clubs</Heading>
+            <AboutDivContent>
+              <ImageContainer>
+                {/* <Image src={back} /> */}
+                <Image src={imgUrl + "/Homepage.png"} />
+              </ImageContainer>
+
+              <Slider />
+              {/* <ViewAllButton>View All</ViewAllButton> */}
             </AboutDivContent>
           </AboutDiv>
         </Container>
@@ -308,20 +308,20 @@ export default Bottom;
 
 //                 <HR />
 
-                // <Footer>
-                //     <IconContainers>
-                //         <IconCont href="https://instagram.com/sonabyss2k22?igshid=YmMyMTA2M2Y=" target="_blank" ><InstaIcon src={imgUrl + "/insta-logo.svg"} /></IconCont>
-                //         <IconCont href="https://www.youtube.com/channel/UCyStvq5i-MhAUAzivfBpvhQ" target="_blank" ><InstaIcon src={imgUrl + "/youtube-logo.svg"} /></IconCont>
-                //     </IconContainers>
+// <Footer>
+//     <IconContainers>
+//         <IconCont href="https://instagram.com/sonabyss2k22?igshid=YmMyMTA2M2Y=" target="_blank" ><InstaIcon src={imgUrl + "/insta-logo.svg"} /></IconCont>
+//         <IconCont href="https://www.youtube.com/channel/UCyStvq5i-MhAUAzivfBpvhQ" target="_blank" ><InstaIcon src={imgUrl + "/youtube-logo.svg"} /></IconCont>
+//     </IconContainers>
 
-                //     <TextContainer>
-                //         <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
-                //         <FooterText> <AboutUs>ABOUT US</AboutUs>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
-                //     </TextContainer>
+//     <TextContainer>
+//         <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
+//         <FooterText> <AboutUs>ABOUT US</AboutUs>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
+//     </TextContainer>
 
-                //     <Dummy></Dummy>
+//     <Dummy></Dummy>
 
-                // </Footer>
+// </Footer>
 
 //             </CentralContainer>
 //         </>
