@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import { imgUrl, prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
@@ -124,6 +124,24 @@ const Button = styled.button`
   font-size: 1rem;
   line-height: 29px;
   color: #000000;
+  ${(props) => {
+    if (props.isregistered) {
+      return css`
+        background-color: #810000;
+        color: #ffffff;
+        box-shadow: 0px 6px 0px #ffffff;
+      `;
+    }
+    if (props.isdisabled) {
+      return css`
+        background-color: #1E1E1E;
+        color: #ffffff;
+        box-shadow: 0px 6px 0px #ffffff;
+        filter: blur(0.5px);
+      `;
+    }
+  }}
+
   @media (max-width: ${phoneBreak}) {
     padding: 0.2em 1em;
     margin: 10px 0;
@@ -227,6 +245,9 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
                   ? setModal(true)
                   : handleClick();
               }}
+              isregistered={data.isRegistered}
+              isdisabled={data.disabled}
+
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
@@ -250,7 +271,6 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
           data={data}
           handleClose={handleClose}
           handleClick={handleClick}
-          
         />
         {/* </Box> */}
       </Modal>
