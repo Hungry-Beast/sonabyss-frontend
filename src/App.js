@@ -6,10 +6,10 @@ import Home from "./components/Home/Home";
 import LogInPage from "./components/LogIn/LogInPage";
 import RegisterPage from "./components/SignUp/RegisterPage";
 import { Route, Routes } from "react-router-dom";
-import Topbar from "./components/Navs/Topbar";
 import { useEffect, useState } from "react";
-import NoInternetConnection from "../src/components/Error_Page/ErrorNet"
+import NoInternetConnection from "./components/Error_Page/ErrorNet"
 import ViewDetails from "./components/Event/ViewDetails";
+import AllClubView from "./components/Event/AllClubView";
 
 const Component = styled.div`
   width: 100%;
@@ -21,24 +21,51 @@ const Component = styled.div`
 function App() {
   const [userAccess, setUserAccess] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [clubLoaded, setClubLoaded] = useState(false);
   useEffect(() => {
     const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : null;
     setUserAccess(user);
-
   }, []);
-  console.log(userAccess)
+  console.log(userAccess);
   return (
     <Component className="App">
       {/* <Topbar/> */}
       <NoInternetConnection>
         <Routes>
-          <Route path="/" exact element={<Home setUserAccess={setUserAccess} userAccess={userAccess} />} />
-          <Route path="/events" element={<EventPage userAccess={userAccess} setUserAccess={setUserAccess} />} />
-          <Route path="/signin" element={<LogInPage setUserAccess={setUserAccess} />} />
-          <Route path="/signup" element={<RegisterPage setUserAccess={setUserAccess} />} />
+          <Route
+            path="/"
+            exact
+            element={
+              <Home
+                setUserAccess={setUserAccess}
+                userAccess={userAccess}
+                clubLoaded={clubLoaded}
+                setClubLoaded={setClubLoaded}
+              />
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <EventPage
+                userAccess={userAccess}
+                setUserAccess={setUserAccess}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={<LogInPage setUserAccess={setUserAccess} />}
+          />
+          <Route
+            path="/signup"
+            element={<RegisterPage setUserAccess={setUserAccess} />}
+          />
           <Route path="/events/:id" element={<ViewDetails />} />
+          <Route path="/allclubs" element={<AllClubView />} />
+
         </Routes>
       </NoInternetConnection>
     </Component>

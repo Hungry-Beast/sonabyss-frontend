@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,18 +13,19 @@ import parse from 'html-react-parser';
 import { EffectCoverflow, Pagination, Navigation, EffectCards } from "swiper";
 import { prodURL } from "../../../config";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Div = styled(SwiperSlide)`
 /* position: relative !important; */
 /* width:50%; */
 img {
-    object-fit: fill;
+    object-fit:cover;
    transition: all 0.5s ease-in-out;
+   /* border-radius: 29px;; */
 
   }
   
   .overlay {
-  
     position: absolute;
     top: 0;
     bottom: 0;
@@ -33,7 +34,7 @@ img {
     height: 100%;
     /* width: 100%; */
     opacity: 0;
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease;
 
     /* background-color: #008cba; */
   }
@@ -41,18 +42,18 @@ img {
 
   &:hover{
     img {
-    filter:blur(4px) brightness(50%);
+    filter:blur(4px) brightness(35%);
   }
   .overlay{
     opacity: 1;
-  }
+   }
   }
   
   .text {
-    font-family: 'midnight';
+    font-family: 'pasdecourbe';
     letter-spacing: 0.09em;
-    color: rgb(255,18,33);
-    font-size: 1.9rem;
+    color: rgba(255,0,16,1);
+    font-size: 1.3rem;
     position: absolute;
     top: 50%;
     left: 39%;
@@ -65,16 +66,13 @@ img {
 
 `
 
-export default function Slider() {
+export default function Slider({setClubLoaded}) {
     const [events, setEvents] = useState([])
-    const refr = useRef()
-    const ref1 = useRef()
+
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
     };
-
-    let img, club_Hover;
     useEffect(() => {
         fetch(`${prodURL}/clubs`, requestOptions)
             .then(response => response.json())
@@ -85,17 +83,17 @@ export default function Slider() {
             .catch(error => console.log('error', error));
 
 
-
-
-
-
     }, [])
     // const [ref, setfirst] = useState(second)
-
+    const navigate = useNavigate();
     return (
         <div className="desktop-slider" >
             <Swiper
                 effect={"coverflow"}
+                // rewind={true}
+                // loop={true}
+                loop={true}
+                loopedSlides={8}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={3}
@@ -114,9 +112,10 @@ export default function Slider() {
                 {
                     events.map(e => {
                         return (
-                            <Div  >
+                            <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
-                                <img src={e.image} className='image' ref={refr} />
+
+                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>

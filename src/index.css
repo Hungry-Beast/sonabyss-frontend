@@ -11,6 +11,19 @@
   src: url(./fonts/cf_night_of_terror/CFNightofTerrorFont.rtf),
     url(./fonts/cf_night_of_terror/CFNightofTerror.ttf);
 }
+@font-face {
+  font-family: "adripingmarker";
+  src: url(./fonts/adripingmarker/ADrippingMarker-Ddw1.ttf);
+}
+@font-face {
+  font-family: "pasdecourbe";
+  src: url(./fonts/pasdecourbe/Pasdecourbe-Wy9Y.ttf);
+}
+@font-face {
+  font-family: "unutterable";
+  src: url(./fonts/unutterable/Unutterable-z8E8X.ttf),
+    url(./fonts/unutterable/UnutterableItalic-jE2E9.ttf);
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -24,6 +37,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-*{
+* {
   /* outline: 1px solid red; */
 }

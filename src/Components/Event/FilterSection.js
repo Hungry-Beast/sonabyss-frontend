@@ -27,8 +27,9 @@ const StyleFilter = styled.div`
 const PreEventDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  width: 60%;
+  justify-content: center;
+  /* width: 60%; */
+  flex: 1;
   @media (max-width: ${phoneBreak}) {
     width: 100%;
     margin-top: 1rem;
@@ -48,7 +49,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: "Midnight Minutes", sans-serif;
+  font-family: "pasdecourbe", sans-serif;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
@@ -59,7 +60,8 @@ const AutoCompleteDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 40%;
+  /* width: 40%; */
+  flex:1;
   @media (max-width: ${phoneBreak}) {
     width: 100%;
     justify-content: space-between;
@@ -84,7 +86,7 @@ const AutoStyle = {
     backgroundColor: "#000000",
     color: "#FFFFFF",
     fontsize: "15px",
-    fontfamily: "Midnight Minutes",
+    fontfamily: "pasdecourbe",
     width: "17em",
     borderRadius: "70px",
     border: " solid #FF0000",
@@ -102,7 +104,7 @@ const AutoStyle = {
     // fontSize: "2em",
     padding: "0.5em",
     color: "#FFFFFF",
-    fontfamily: "Midnight Minutes",
+    fontfamily: "pasdecourbe",
   },
 };
 
@@ -170,7 +172,7 @@ const SelectBox = styled(Autocomplete)`
   border: 5px solid #ffffff !important;
   border-radius: 35px !important;
   color: #ffffff !important;
-  font-family: "midnight" !important;
+  font-family: "pasdecourbe" !important;
   font-style: normal;
   font-weight: 400;
   width: 100%;
@@ -183,6 +185,9 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
 
   return (
     <StyleFilter className="event-card">
+      <div style={{
+        flex:"1"
+      }}></div>
       <PreEventDiv>
         <PreEvent>
           <Pre>PreEvents</Pre>

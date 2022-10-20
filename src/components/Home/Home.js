@@ -16,12 +16,14 @@ const Component = styled.div`
   position: relative;
   margin: 0 auto;
 `;
-const Home = ({ userAccess, setUserAccess }) => {
+const Home = ({ userAccess, setUserAccess, clubLoaded, setClubLoaded }) => {
   return (
     <Component>
-      <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
-      <Landing />
-      <Bottom />
+      <div>
+        <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
+        <Landing />
+      </div>
+      <Bottom clubLoaded={clubLoaded} setClubLoaded={setClubLoaded} />
     </Component>
   );
 };
