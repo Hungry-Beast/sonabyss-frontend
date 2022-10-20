@@ -40,7 +40,7 @@ export default function Slider() {
           style={{
             width: "6rem",
           }}
-          src={imgUrl + "/cuteGhostLoader.gif"}
+          src={imgUrl + "/ghostLoader.gif"}
         />
       </Backdrop>
     </>

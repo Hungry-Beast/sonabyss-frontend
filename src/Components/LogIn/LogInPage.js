@@ -268,7 +268,7 @@ const SecondaryContainer = styled.div`
     height: 94vh;
     width: 86vw;
     border-radius: 132px;
-    filter: blur(4px);
+    /* filter: blur(4px); */
   }
 `;
 
@@ -345,6 +345,7 @@ const LogInPage = ({setUserAccess}) => {
   const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const navigate = useNavigate();
   const handleRegChange = (e) => {
@@ -477,7 +478,7 @@ const LogInPage = ({setUserAccess}) => {
     pswdError && handlePasswordChange(e);
   };
 
-  const [checked, setChecked] = useState(false);
+  
   // console.log(checked);
 
   return (

@@ -378,7 +378,7 @@ const ViewDetails = () => {
           }}
           src={imgUrl + "/backarrow.svg"}
         />
-        <Topbar />
+        <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
         <LowerHalf>
           <ImageContainer>
             <Image src={imgUrl + "/Homepage.png"} />

@@ -325,7 +325,7 @@ const SecondaryContainer = styled.div`
     height: 94vh;
     width: 86vw;
     border-radius: 132px;
-    filter: blur(4px);
+    /* filter: blur(4px); */
   }
 `;
 
@@ -455,7 +455,7 @@ const RegisterPage = ({ setUserAccess }) => {
     if (e.target.value.match(regno)) {
       setRegError(false);
     } else {
-      setRegError(true);
+      setRegError(1);
     }
   };
 
@@ -464,7 +464,7 @@ const RegisterPage = ({ setUserAccess }) => {
     if (e.target.value.match(phoneno)) {
       setPhoneError(false);
     } else {
-      setPhoneError(true);
+      setPhoneError(1);
     }
   };
 
@@ -494,16 +494,18 @@ const RegisterPage = ({ setUserAccess }) => {
     // setLoading(true);
     var myHeaders = new Headers();
     let isError = false;
-    var regno = /^[0-9]{6,6}$/g;
+    var regno = /^[0-9]{6,6}$/;
 
+    console.log("hi")
     if (checked && !e.target.regno.value.match(regno)) {
-      setRegError(true);
+      console.log("hi")
+      setRegError(1);
       return;
       isError = true;
     }
     var phoneno = /^\d{10}$/;
     if (!e.target.phoneno.value.match(phoneno)) {
-      setPhoneError(true);
+      setPhoneError(1);
       isError = true;
 
       return;
@@ -691,7 +693,7 @@ const RegisterPage = ({ setUserAccess }) => {
                 error={phoneError}
                 isnerist={checked ? "1" : null}
                 helperText={
-                  phoneError === 1
+                  phoneError === 1|| phoneError === true
                     ? "Please enter a valid 10 digit number"
                     : phoneError === 2
                     ? "Phone number already exist"

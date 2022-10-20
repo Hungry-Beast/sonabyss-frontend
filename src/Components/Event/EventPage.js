@@ -25,6 +25,8 @@ const EventTopbar = styled(Topbar)`
 const Bckground = styled.div`
   min-height: 100vh;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 `;
 const OuterEventPage = styled.div`
   display: flex;
@@ -83,10 +85,10 @@ const Pre = styled.span`
     font-size: 1.3em;
   }
 `;
-const Image=styled.img`
-      width: 10rem;
-      height:10rem;
-`
+const Image = styled.img`
+  width: 10rem;
+  height: 10rem;
+`;
 function EventPage({ userAccess, setUserAccess }) {
   // const url = "https://sonabyss.herokuapp.com";
   const location = useLocation();
@@ -96,6 +98,7 @@ function EventPage({ userAccess, setUserAccess }) {
   const [Events, setEvents] = useState();
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
+
   const [eventLoading, setEventLoading] = useState(true);
   const [checked, setChecked] = useState(0);
   //console.log(userAccess);
@@ -161,11 +164,15 @@ function EventPage({ userAccess, setUserAccess }) {
           tempClub.push({
             label: club.name,
             value: club["_id"],
+            qrCode: club.qrCode,
+            upi: club.upi,
+            phoneNo: club.phoneNo,
           });
         });
         if (result.length !== 0 && !selectedClub) {
           getEvents(tempClub[0].value);
           setSelectedClub(tempClub[0]);
+          localStorage.setItem("club", JSON.stringify(tempClub[0]));
         }
         setClubs(tempClub);
       })
@@ -193,6 +200,7 @@ function EventPage({ userAccess, setUserAccess }) {
     getClubs();
     if (location.state) {
       setSelectedClub(location.state._id);
+
       getEvents();
     }
   }, []);
@@ -267,7 +275,7 @@ function EventPage({ userAccess, setUserAccess }) {
         // onClick={handleClose}
       >
         {/* <CircularProgress color="inherit" /> */}
-        <Image src={imgUrl+"/ghostLoader.gif"}/>
+        <Image src={imgUrl + "/ghostLoader.gif"} />
       </Backdrop>
       {/* //........................................................................... */}
       {/* <Modal */}

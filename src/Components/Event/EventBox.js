@@ -18,10 +18,14 @@ const BackCard = styled.div`
   padding: 12px;
   max-width: 350px;
   filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
-  background: ${(props) => (props.isMain && true ? "linear-gradient(180.22deg, #000000 0.2%, #5B5B5B 99.82%)" : "#000")};
+  background: ${(props) =>
+    props.isMain && true
+      ? "linear-gradient(180.22deg, #000000 0.2%, #5B5B5B 99.82%)"
+      : "#000"};
   color: #fff;
   @media (max-width: 992px) {
     margin: 0;
+    padding: 12px 6px;
   }
 `;
 const EventCard = styled.div`
@@ -76,7 +80,7 @@ const Stylespan2 = styled.span`
   font-family: "midnight", sans-serif;
   font-size: 1.5em;
   text-align: center;
-  color:${(props) => (props.isMain||false ? "#000" : "#fff")};
+  color: ${(props) => (props.isMain || false ? "#000" : "#fff")};
   @media (max-width: ${phoneBreak}) {
     font-size: 1.2em;
   }
@@ -131,10 +135,10 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
   const [modal, setModal] = useState(false);
   const handleOpen = () => setModal(true);
   const handleClose = () => setModal(false);
-  const [imgLoaded, setImgLoaded] = useState(false)
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const [registerLoading, setRegisterLoading] = useState(false);
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   const handleClick = (file) => {
     console.log(file);
@@ -153,7 +157,7 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
       if (dd < 10) dd = "0" + dd;
       if (mm < 10) mm = "0" + mm;
       const formattedToday = dd + "/" + mm + "/" + yyyy;
-      console.log(data);
+      // console.log(data);
       var formdata = new FormData();
       formdata.append("date", formattedToday);
       formdata.append("clubId", data.club);
@@ -196,16 +200,16 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
     }
   };
 
-  const ViewEventDetails = () => {
-    console.log()
-    // navigate("/events/" + data._id, { state: data })
-
-  }
-
+  const navigateLink = userAccess ? data.id : data._id;
+  // const ViewEventDetails = () => {
+  //   console.log(navigateLink);
+  //   navigate("/signin");
+  // };
+  // console.log(data["_id"])
   return (
     <BackCard isMain={isMain}>
       <EventCard>
-        <Poster  onLoad={()=>setImgLoaded(true)} src={data.image} />
+        <Poster onLoad={() => setImgLoaded(true)} src={data.image} />
       </EventCard>
       <Details>
         <Stylespan1 isMain={isMain}>{data.name}</Stylespan1>
@@ -220,15 +224,18 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
                 !userAccess
                   ? navigate("/signin")
                   : data.isPaid
-                    ? setModal(true)
-                    : handleClick();
+                  ? setModal(true)
+                  : handleClick();
               }}
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
           <SpanDiv className="link">
-            <Link to={"/events/" + data.id} > <Stylespan3 onClick={ViewEventDetails} >View details</Stylespan3> </Link>
+            <Link to={"/events/" + navigateLink}>
+              {" "}
+              <Stylespan3>View details</Stylespan3>{" "}
+            </Link>
           </SpanDiv>
         </Cardfooter>
       </Details>
@@ -243,18 +250,19 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
           data={data}
           handleClose={handleClose}
           handleClick={handleClick}
+          
         />
         {/* </Box> */}
       </Modal>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={!imgLoaded||registerLoading}
+        open={!imgLoaded || registerLoading}
         // onClick={handleClose}
       >
         {/* <CircularProgress color="inherit" /> */}
         <img
           style={{
-            width:"15rem"
+            width: "15rem",
           }}
           src={imgUrl + "/imageLoading.gif"}
         />

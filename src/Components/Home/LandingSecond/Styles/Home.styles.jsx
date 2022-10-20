@@ -344,9 +344,9 @@ export const FooterText = styled.p`
     }
 `
 
-export const AboutUs = styled.a`
-    
-`
+// export const AboutUs = styled.a`
+
+// `
 export const ContactUs = styled.a`
     color: white;
     text-decoration: none;

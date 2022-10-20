@@ -1,0 +1,62 @@
+.outer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(20, 11, 19);
+}
+
+.inner {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.cards {
+  margin: 2.5rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cards .card {
+  height: 400px;
+  width: 300px;
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 25px;
+  border-radius: 20px;
+}
+
+.text {
+  align-self: center;
+  color: #fff;
+  text-align: center;
+}
+.text > span {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.card > img {
+  align-self: center;
+  width: 145px;
+  height: 151px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid aliceblue;
+}
+
+.ico {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ico a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* .github {
+  margin-left: 2rem;
+} */
