@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "./DesktopSlider.css";
 import parse from 'html-react-parser';
 // import required modules
-import { EffectCoverflow, Pagination, Navigation, EffectCards } from "swiper";
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
 import { prodURL } from "../../../config";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,7 @@ img {
 
 `
 
-export default function Slider({setClubLoaded}) {
+export default function Slider({ setClubLoaded }) {
     const [events, setEvents] = useState([])
 
     var requestOptions = {
@@ -92,8 +92,9 @@ export default function Slider({setClubLoaded}) {
                 effect={"coverflow"}
                 // rewind={true}
                 // loop={true}
+                initialSlide={1}
                 loop={true}
-                loopedSlides={8}
+                loopedSlides={11}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={3}
@@ -115,7 +116,7 @@ export default function Slider({setClubLoaded}) {
                             <Div onClick={() => navigate('/events', { state: e })} >
                                 {/* <Div> */}
 
-                                <img src={e.image} className='image' onLoad={()=>setClubLoaded(true)} />
+                                <img src={e.image} className='image' onLoad={() => setClubLoaded(true)} />
                                 <div className="overlay" >
                                     <div class="text">
                                         <p> <strong>{e.name} </strong> </p>
