@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import NoInternetConnection from "./components/Error_Page/ErrorNet"
 import ViewDetails from "./components/Event/ViewDetails";
 import AllClubView from "./components/Event/AllClubView";
+import AboutUs from "./components/Aboutus/AboutUs";
 
 const Component = styled.div`
   width: 100%;
@@ -65,6 +66,7 @@ function App() {
           />
           <Route path="/events/:id" element={<ViewDetails />} />
           <Route path="/allclubs" element={<AllClubView />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
 
         </Routes>
       </NoInternetConnection>

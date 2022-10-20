@@ -27,7 +27,7 @@ import {
 } from "./Styles/Home.styles";
 import Slider from "./Slider";
 import { imgUrl } from "../../../config";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Youtube from "../Landing/Youtube";
 
 function Bottom() {
@@ -136,7 +136,15 @@ function Bottom() {
           <TextContainer>
             <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
             <FooterText>
-              ABOUT US &nbsp; &nbsp;|&nbsp; &nbsp; CONTACT US{" "}
+              <Link
+                to="/aboutUs"
+                style={{
+                  textDecoration: "none",
+                  color: "#fff",
+                }}>
+                <span> ABOUT US</span>{" "}
+              </Link>{" "}
+              &nbsp; &nbsp;|&nbsp; &nbsp; CONTACT US
             </FooterText>
           </TextContainer>
 
