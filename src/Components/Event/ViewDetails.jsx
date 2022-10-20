@@ -248,6 +248,15 @@ const Div = styled.div`
   }
 `;
 
+const PaymentBtn = styled.button`
+  padding: 10px 25px;
+  background: #ff0000;
+  border: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+`
+
 const ViewDetails = () => {
   const location = useLocation();
   console.log(location.pathname.split("/"));
@@ -381,7 +390,7 @@ const ViewDetails = () => {
             <DetailsHolder>
               <DetailText>
                 <DetailName>{details?.name}</DetailName>
-                {details?.isPaid && <DetailName>Payment Status : </DetailName>}
+                {details?.isPaid && <DetailName>Payment Status : <PaymentBtn>{details?.isVerified === 0 ? "PENDING" : details?.isVerified === 1 ? "VERIFIED" : "REJECTED"}</PaymentBtn> </DetailName>}
               </DetailText>
 
               <DetailsCard>
@@ -396,8 +405,8 @@ const ViewDetails = () => {
                     !userAccess
                       ? navigate("/signin")
                       : details?.isPaid
-                      ? setModal(true)
-                      : handleClick();
+                        ? setModal(true)
+                        : handleClick();
                   }}
                 >
                   {details?.isRegistered ? "Registered" : "Register"}
@@ -412,8 +421,8 @@ const ViewDetails = () => {
                   !userAccess
                     ? navigate("/signin")
                     : details?.isPaid
-                    ? setModal(true)
-                    : handleClick();
+                      ? setModal(true)
+                      : handleClick();
                 }}
               >
                 {details?.isRegistered ? "Registered" : "Register"}
@@ -439,7 +448,7 @@ const ViewDetails = () => {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={registerLoading}
-        // onClick={handleClose}
+      // onClick={handleClose}
       >
         {/* <CircularProgress color="inherit" /> */}
         <img

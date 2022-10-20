@@ -80,7 +80,7 @@ export const AboutText = styled.div`
     background: rgba(22, 10, 19, 0.7);
     font-size: 26px;
     margin: 0 auto;
-    font-family: "unutterable";
+    font-family: 'Abyssinica SIL';
     letter-spacing: 1.2px;
     padding: 30px 10% 30px 10%;
     line-height: 28px;
@@ -143,11 +143,14 @@ export const ExtraMarqueeImg = styled.img`
 
 
 export const SponserImgCont = styled.div`
-    height: 170px;
-    width: 170px;
+    /* height: 240px;
+    width: 250px; */
+    height: 13.3vw;
+    width: 23%;
     position: relative;
+    /* border: 2px solid green; */
     border-radius: 50%;
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
     &::after{
         content: '';
         height: 101%;
@@ -160,7 +163,22 @@ export const SponserImgCont = styled.div`
         box-shadow: inset 0px 0px 11px 10px rgb(0 0 0 / 90%);
     }
 
+    @media screen and (max-width: 650px) {
+        width: 180px;
+        height: 180px;
+    }
 `
+
+export const SponserName = styled.p`
+    /* background-color: pink; */
+    /* border: 2px solid pink; */
+    /* margin-top: -2px; */
+    /* height: 20%; */
+    font-family: "nightOfTerror";
+    font-style: normal;
+    font-weight: 400;
+`
+
 export const ExtraMarqueeImgCont = styled.div`
     height: 170px;
     width: 170px;
@@ -241,11 +259,11 @@ export const Footer = styled.div`
 `
 export const IconContainers = styled.div`
     display: flex;
-    margin-left: 3%;
+    margin-left: 7%;
 `
 
 export const TextContainer = styled.div`
-    margin-right: 8%;
+    margin-right: 12%;
 `
 
 export const Dummy = styled.div`
@@ -253,9 +271,9 @@ export const Dummy = styled.div`
 `
 export const IconCont = styled.a`
     display: block;
-    margin-left: 20px;
-    width: 65px;
-    height: 60px;
+    margin-left: 30px;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
     @media screen and (max-width: 650px) {
         height: 45px;
@@ -290,6 +308,7 @@ export const InstaIcon = styled.img`
 
 export const SonabyssIcon = styled.img`
     height: 40px;
+    width: 125px;
     margin: 10px 0 -18px 0;
     @media screen and (max-width: 650px) {
         height: 32px;
@@ -315,5 +334,6 @@ export const AboutUs = styled.a`
     
 `
 export const ContactUs = styled.a`
-    
+    color: white;
+    text-decoration: none;
 `
