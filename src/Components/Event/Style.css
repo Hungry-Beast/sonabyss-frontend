@@ -161,7 +161,7 @@
   border-radius: 0.5em !important;
   font-size: 1.7rem !important;
   margin: 0 auto;
-  font-family: "pasdecourbe" !important ;
+  font-family: "livingbynumbers" !important ;
   text-align: center;
 }
 
@@ -176,6 +176,7 @@
   font-size: 1.4rem !important;
   font-family: "pasdecourbe" !important ;
   /* max-width: 17em !important; */
+  font-family: "livingbynumbers" !important ;
   min-height: 10px !important;
   position: relative;
 }

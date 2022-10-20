@@ -49,7 +49,7 @@ const EventDetails = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: "pasdecourbe Minutes";
+  font-family: "livingbynumbers";
   margin: 0 10px;
   @media (max-width: ${phoneBreak}) {
     /* display: block; */
@@ -81,7 +81,7 @@ const PaymentDetails = styled.div`
   align-items: center;
   justify-content: center;
   width: 32%;
-  font-family: "pasdecourbe Minutes";
+  font-family: "livingbynumbers";
   margin: 0 10px;
   @media (max-width: ${phoneBreak}) {
     width: 60%;

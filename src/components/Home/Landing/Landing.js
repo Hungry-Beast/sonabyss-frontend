@@ -25,7 +25,7 @@ const BlackBox = styled.div`
   }
 `;
 const RegisterText = styled.h2`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-style: normal;
   font-weight: 400;
   font-size: 2.5rem;
@@ -36,7 +36,7 @@ const RegisterText = styled.h2`
   }
 `;
 const RegisterButton = styled.button`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-style: normal;
   font-weight: 400;
   background: #ff461f;

@@ -51,7 +51,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: "pasdecourbe", sans-serif;
+  font-family: "livingbynumbers", sans-serif;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
@@ -88,7 +88,7 @@ const AutoStyle = {
     backgroundColor: "#000000",
     color: "#FFFFFF",
     fontsize: "15px",
-    fontfamily: "pasdecourbe",
+    fontfamily: "livingbynumbers",
     width: "17em",
     borderRadius: "70px",
     border: " solid #FF0000",
@@ -106,7 +106,7 @@ const AutoStyle = {
     // fontSize: "2em",
     padding: "0.5em",
     color: "#FFFFFF",
-    fontfamily: "pasdecourbe",
+    fontfamily: "livingbynumbers",
   },
 };
 
@@ -175,7 +175,7 @@ const PopupIcon = (
 //     border: 5px solid #ffffff !important;
 //     border-radius: 35px !important;
 //     color: #ffffff !important;
-//     font-family: "pasdecourbe" !important;
+//     font-family: "livingbynumbers" !important;
 //     font-style: normal;
 //     font-weight: 400;
 //     width: 100%;

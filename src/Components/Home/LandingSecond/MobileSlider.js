@@ -73,7 +73,7 @@ export default function Slider({ setClubLoaded }) {
     }
       
       .text {
-        font-family: 'midnight';
+        font-family: 'livingbynumbers';
         letter-spacing: 0.05em;
         color: rgb(255,18,33);
         font-size: 1rem;

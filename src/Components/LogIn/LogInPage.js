@@ -51,7 +51,7 @@ const LogInLogo = styled.img`
 `;
 
 const Heading = styled.h1`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-size: 32px;
   /* color: black; */
   color: #ffffff;
@@ -125,7 +125,7 @@ const LogInPassword = styled(Input)`
 
 
 const LogInButton = styled.button`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   border-radius: 165.5px;
   padding: 0.8rem 3rem;
   margin: 1rem auto;
@@ -299,14 +299,14 @@ const WelcomeText = styled.div`
 `;
 
 const FirstLine = styled.h2`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-weight: 400;
   color: white;
   margin: 0;
   font-size: 39px;
 `;
 const SecondLine = styled.h1`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-weight: 400;
   font-size: 74px;
   line-height: 1;
@@ -314,14 +314,14 @@ const SecondLine = styled.h1`
   margin: 0;
 `;
 const ThirdLine = styled.h2`
-  font-family: "pasdecourbe";
+  font-family: "livingbynumbers";
   font-weight: 400;
   font-size: 39px;
   color: white;
   margin: 0;
 `;
 // const FourthLine = styled.h3`
-//   font-family: "pasdecourbe";
+//   font-family: "livingbynumbers";
 //   font-weight: 400;
 //   font-size: 26px;
 //   color: white;
