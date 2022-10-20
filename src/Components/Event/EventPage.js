@@ -79,7 +79,7 @@ const PreEvent = styled.div`
 `;
 const Pre = styled.span`
   font-size: 2em;
-  font-family: "pasdecourbe", sans-serif;
+  font-family: "livingbynumbers", sans-serif;
   max-width: 100%;
   @media (max-width: ${phoneBreak}) {
     font-size: 1.3em;
