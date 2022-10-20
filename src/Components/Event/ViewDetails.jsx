@@ -147,7 +147,7 @@ const DetailText = styled.div`
 `;
 const DetailName = styled.h2`
   color: white;
-  font-family: "midnight";
+  font-family: "livingbynumbers";
   font-size: 27px;
   font-weight: 700;
   /* margin-left: 10%; */

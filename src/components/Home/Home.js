@@ -46,7 +46,7 @@ const Home = ({ userAccess, setUserAccess }) => {
         <Bottom clubLoaded={clubLoaded} setClubLoaded={setClubLoaded} />
       </Component>
       <LoadingDiv isLoaded={!clubLoaded}>
-        <LoadImg src={imgUrl + "/load1.gif"} />
+        <LoadImg src={imgUrl + "/Load1.gif"} />
       </LoadingDiv>
     </>
   );

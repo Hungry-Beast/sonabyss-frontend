@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: "midnight";
   src: url(./fonts/midnight_minutes/MidnightMinutes.otf);
 }
@@ -10,7 +10,7 @@
   font-family: "nightOfTerror";
   src: url(./fonts/cf_night_of_terror/CFNightofTerrorFont.rtf),
     url(./fonts/cf_night_of_terror/CFNightofTerror.ttf);
-}
+} */
 @font-face {
   font-family: "adripingmarker";
   src: url(./fonts/adripingmarker/ADrippingMarker-Ddw1.ttf);
