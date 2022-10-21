@@ -334,7 +334,7 @@ const Body = () => {
         <RegisterText>“Did you register?”</RegisterText>
         <RegisterButton
           onClick={() =>
-            userAccess ? navigate("/events") : navigate("/signin")
+            userAccess ? navigate("/events") : navigate("/signup")
           }
         >
           Register
