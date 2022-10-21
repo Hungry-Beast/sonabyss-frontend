@@ -62,6 +62,14 @@ export default function Slider({ setClubLoaded }) {
           opacity: 1;
         }
       }
+      &:focus {
+        img {
+          filter: blur(4px) brightness(50%);
+        }
+        .overlay {
+          opacity: 1;
+        }
+      }
 
       .text {
         font-family: "livingbynumbers";

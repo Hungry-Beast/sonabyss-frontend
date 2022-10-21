@@ -281,7 +281,7 @@ const Container = styled.div`
   /* background-color: #1e1e1e; */
   @media (max-width: 992px) {
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     transition: 200ms ease-in-out;
   }
   display: flex;
