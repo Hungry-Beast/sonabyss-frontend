@@ -293,6 +293,9 @@ const Topbar = ({userAccess,setUserAccess}) => {
                     localStorage.clear();
                     window.location.reload();
                   }}
+                  sx={{
+                    color:"#000 !important"
+                  }}
                 >
                   <ListItemIcon>
                     <Logout fontSize="small" />
