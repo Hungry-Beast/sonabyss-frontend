@@ -157,6 +157,7 @@ export const ExtraMarqueeImg = styled.img`
 export const SponserImgCont = styled.div`
     /* height: 240px;
     width: 250px; */
+    margin-top: -7%;
     height: 13.3vw;
     width: 23%;
     max-height: 240px;
@@ -190,6 +191,8 @@ export const SponserName = styled.p`
     font-family: "bloodsuckers";
     font-style: normal;
     font-weight: 400;
+    letter-spacing: 3px;
+    font-size: 29px;
 `
 
 export const ExtraMarqueeImgCont = styled.div`
@@ -242,7 +245,7 @@ export const SponserHolder = styled.div`
         /* width: 100%; */
         border-radius: 0;
         gap: 35px;
-        animation: scrolling 4s linear infinite;
+        animation: scrolling 7s linear infinite;
     }
 
     @keyframes scrolling {
@@ -278,6 +281,9 @@ export const IconContainers = styled.div`
 
 export const TextContainer = styled.div`
     margin-right: 12%;
+    @media screen and (max-width: 650px) {
+        margin-right: 2%;
+    }
 `
 
 export const Dummy = styled.div`
@@ -290,13 +296,13 @@ export const IconCont = styled.a`
     height: 55px;
     cursor: pointer;
     @media screen and (max-width: 650px) {
-        height: 45px;
-        width: 50px;
+        height: 43px;
+        width: 53px;
         margin-left: 5px;
     }
     @media screen and (max-width: 450px) {
-        height: 35px;
-        width: 40px;
+        height: 40px;
+        width: 45px;
         margin-left: 10px;
     }
 `
@@ -323,7 +329,7 @@ export const InstaIcon = styled.img`
 export const SonabyssIcon = styled.img`
     height: 40px;
     width: 125px;
-    margin: 10px 0 -18px 0;
+    margin: 10px 0 -20px 0;
     @media screen and (max-width: 650px) {
         height: 32px;
         width: 110px;
@@ -336,9 +342,18 @@ export const SonabyssIcon = styled.img`
 
 export const FooterText = styled.p`
     margin-left: -10px;
-    font-family: "bloodsuckers";
+    /* font-family: "bloodsuckers"; */
     color: white;
     font-size: 13px;
+    font-family: "sans serif";
+    /* @media screen and (max-width: 650px) {
+        margin-left: 10px;
+    } */
+`
+
+export const AboutUs = styled.span`
+    color: white;
+    font-size: 16px;
     @media screen and (max-width: 650px) {
         font-size: 12px;
     }
@@ -350,4 +365,8 @@ export const FooterText = styled.p`
 export const ContactUs = styled.a`
     color: white;
     text-decoration: none;
+    font-size: 16px;
+    @media screen and (max-width: 650px) {
+        font-size: 12px;
+    }
 `
