@@ -44,7 +44,7 @@ function App() {
               <Home
                 setUserAccess={setUserAccess}
                 userAccess={userAccess}
-               
+
               />
             }
           />
@@ -66,11 +66,10 @@ function App() {
             element={<RegisterPage setUserAccess={setUserAccess} />}
           />
           <Route path="/events/:id" element={<ViewDetails />} />
-          <Route path="/allclubs" element={<AllClubView />} />
           <Route path="/aboutUs" element={<AboutUs />} />
         </Routes>
       </NoInternetConnection>
-     
+
     </Component>
   );
 }

@@ -34,7 +34,8 @@ import { imgUrl } from "../../../config";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Youtube from "../Landing/Youtube";
 
-function Bottom({setClubLoaded}) {
+// import "./Bottom.css"
+function Bottom({ setClubLoaded }) {
     // const [showClubs, setShowClubs] = useState(true);
     const navigate = useNavigate();
     return (
@@ -52,31 +53,12 @@ function Bottom({setClubLoaded}) {
                     </AboutDiv>
                 </Container>
 
-                {/*-------------------------------------------------------------- Clubs ----------------------------------------------------- */}
-                <Container>
-                    <AboutDiv>
-                        <Heading>Clubs</Heading>
-                        <AboutDivContent>
-
-
-                            <ImageContainer>
-                                {/* <Image src={back} /> */}
-                                <Image src={imgUrl + "/Homepage.png"} />
-                            </ImageContainer>
-
-                            <Slider setClubLoaded={setClubLoaded}/>
-
-                            <ViewAllButton onClick={() => navigate("/allclubs")} >View All</ViewAllButton>
-                        </AboutDivContent>
-                    </AboutDiv>
-
-                </Container>
 
                 {/*-------------------------------------------------------------- About ----------------------------------------------------- */}
 
                 <Container>
                     <AboutDiv>
-                        <Heading>About</Heading>
+                        <Heading>What is Racaf</Heading>
                         <AboutDivContent>
 
                             <ImageContainer>
@@ -96,10 +78,33 @@ function Bottom({setClubLoaded}) {
                     </AboutDiv>
                 </Container>
 
+
+                {/*-------------------------------------------------------------- Clubs ----------------------------------------------------- */}
+                <Container>
+                    <AboutDiv>
+                        <Heading>Clubs</Heading>
+                        <AboutDivContent>
+
+
+                            <ImageContainer>
+                                {/* <Image src={back} /> */}
+                                <Image src={imgUrl + "/Homepage.png"} />
+                            </ImageContainer>
+
+                            <Slider setClubLoaded={setClubLoaded} />
+
+                            {/* <ViewAllButton onClick={() => navigate("/allclubs")} >View All</ViewAllButton> */}
+                        </AboutDivContent>
+                    </AboutDiv>
+
+                </Container>
+
+
+
                 {/*-------------------------------------------------------------- Sponser----------------------------------------------------- */}
                 <Container>
                     <AboutDiv>
-                        <Heading>Sponsers</Heading>
+                        <Heading>Sponsors</Heading>
                         <AboutDivContent>
 
                             <ImageContainer>
@@ -175,7 +180,7 @@ function Bottom({setClubLoaded}) {
 
                     <TextContainer>
                         <SonabyssIcon src={imgUrl + "/sonabyss-logo.png"} />
-                        <FooterText> <Link  style={{ textDecoration: "none", color: "white" }} to="/aboutUs" ><span>About Us</span></Link>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
+                        <FooterText> <Link style={{ textDecoration: "none" }} className="about-us" to="/aboutUs" ><AboutUs>ABOUT US</AboutUs></Link>  &nbsp;  &nbsp;|&nbsp; &nbsp; <ContactUs href="mailto:Official@sonabyss2k22.com" >CONTACT US</ContactUs>  </FooterText>
                     </TextContainer>
 
                     <Dummy></Dummy>
@@ -186,7 +191,7 @@ function Bottom({setClubLoaded}) {
             </CentralContainer>
         </>
     )
- 
+
 }
 export default Bottom;
 
