@@ -337,6 +337,7 @@ const ParentContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   overflow-y: auto;
+  flex-direction: column;
 `;
 
 const LeftContainer = styled.div`
@@ -414,6 +415,26 @@ const BatManContainer = styled.div`
 const BatImage = styled.img`
   width: 30%;
 `;
+
+const Top = styled.div`
+  display: none;
+  @media (max-width: ${phoneBreak}) {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 1em;
+    margin-top: 20px;
+  }
+`;
+
+const Back = styled.img`
+  /* display: none; */
+  @media (max-width: ${phoneBreak}) {
+    width: 2em;
+    /* height: 20px; */
+  }
+`;
+
 const RegisterPage = ({ setUserAccess }) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(false);
@@ -621,8 +642,18 @@ const RegisterPage = ({ setUserAccess }) => {
     confpswdError && handleConfPasswordError(e);
   };
 
+  const handleCloseSignUp = () => {
+    navigate("/");
+  }
+
   return (
     <ParentContainer>
+      <Top>
+        <Back
+          onClick={handleCloseSignUp}
+          src={imgUrl + "/backarrow.svg"}
+        />
+      </Top>
       {/* <PrimaryContainer></PrimaryContainer> */}
       <SecondaryContainer></SecondaryContainer>
       <Container>
