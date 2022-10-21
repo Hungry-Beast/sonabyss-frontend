@@ -30,9 +30,10 @@ const RegisterText = styled.h2`
   font-weight: 400;
   font-size: 2.5rem;
   margin: 1rem 0;
-  @media (max-width: ${phoneBreak}) {
+  @media (max-width: 390px) {
     /* font-size: 1.7rem; */
     /* display: none; */
+    font-size: 2rem;
   }
 `;
 const RegisterButton = styled.button`

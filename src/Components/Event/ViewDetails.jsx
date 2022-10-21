@@ -6,6 +6,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
 import { Backdrop, Modal } from "@mui/material";
 import PaymentPopUp from "./PaymentPopUp";
+import { phoneBreak } from "../../breakPoints";
+import './Style.css'
+
+const EventTopbar = styled(Topbar)`
+  @media (max-width: ${phoneBreak}) {
+    display: none !important;
+  }
+`;
 
 const CentralContainer = styled.div`
   width: 100%;
@@ -130,9 +138,11 @@ const DetailsHolder = styled.div`
   width: 85%;
   margin-left: 6%;
   height: 100%;
+  position: relative;
   @media screen and (max-width: 850px) {
     margin: 0 auto;
     margin-top: 15%;
+    width: 95%;
   }
 `;
 const DetailText = styled.div`
@@ -174,7 +184,8 @@ const DetailsCard = styled.div`
     min-height: 400px;
     margin: 0 auto;
     max-width: auto;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
   }
 `;
 
@@ -370,7 +381,7 @@ const ViewDetails = () => {
   console.log(details);
 
   return (
-    <CentralContainer>
+    <CentralContainer className="eventPage">
       <SemiContainer>
         <BackIcon
           onClick={() => {
@@ -378,7 +389,7 @@ const ViewDetails = () => {
           }}
           src={imgUrl + "/backarrow.svg"}
         />
-        <Topbar userAccess={userAccess} setUserAccess={setUserAccess} />
+        <EventTopbar userAccess={userAccess} setUserAccess={setUserAccess} />
         <LowerHalf>
           <ImageContainer>
             <Image src={imgUrl + "/Homepage.png"} />
@@ -399,19 +410,20 @@ const ViewDetails = () => {
                 <H3>TIME : {details?.time} </H3>
                 <Div>{details && details.desc && parse(details?.desc)}</Div>
 
-                <RegisterBtnDisabled
-                  disabled={details?.isRegistered || details?.disabled}
-                  onClick={() => {
-                    !userAccess
-                      ? navigate("/signin")
-                      : details?.isPaid
-                        ? setModal(true)
-                        : handleClick();
-                  }}
-                >
-                  {details?.isRegistered ? "Registered" : "Register"}
-                </RegisterBtnDisabled>
+
               </DetailsCard>
+              <RegisterBtnDisabled
+                disabled={details?.isRegistered || details?.disabled}
+                onClick={() => {
+                  !userAccess
+                    ? navigate("/signin")
+                    : details?.isPaid
+                      ? setModal(true)
+                      : handleClick();
+                }}
+              >
+                {details?.isRegistered ? "Registered" : "Register"}
+              </RegisterBtnDisabled>
             </DetailsHolder>
             <SkeletonAndButton>
               <SkeletonImg src={imgUrl + "/Group 3.svg"} />
