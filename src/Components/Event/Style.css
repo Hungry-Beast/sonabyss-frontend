@@ -306,8 +306,16 @@
   border: none !important;
 }
 .css-iw83ej.Mui-focused .MuiOutlinedInput-notchedOutline{
-  border-color:#ff0000;
-  border-width: 2px;
+  border-color:#ff0000 !important;
+  border-width: 2px !important;
+}
+.css-iw83ej{
+  border-color:#ff0000 !important;
+  border-width: 2px !important;
+}
+.css-iw83ej:focus{
+  border-color:#ff0000 !important;
+  border-width: 2px !important;
 }
 
 @media screen and (max-width: 992px) {
