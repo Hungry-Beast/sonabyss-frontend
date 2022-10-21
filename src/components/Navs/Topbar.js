@@ -219,7 +219,7 @@ const Topbar = ({userAccess,setUserAccess}) => {
 
   //   setUserAccess(user);
   // }, []);
-  console.log(userAccess);
+  // console.log(userAccess);
 // userAccess
   return (
     <Component className="topbar">

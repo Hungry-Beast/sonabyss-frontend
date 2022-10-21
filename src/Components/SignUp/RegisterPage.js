@@ -23,6 +23,7 @@ import CustomizedSwitches from "./CustomSwitch";
 import { Link, useNavigate } from "react-router-dom";
 import { Close } from "@mui/icons-material";
 import { phoneBreak } from "../../breakPoints";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const SignUpForm = styled.form`
   display: flex;
@@ -432,8 +433,8 @@ const Back = styled.img`
   @media (max-width: ${phoneBreak}) {
     width: 2em;
     position: fixed;
-    top:20px;
-    left:10px;
+    top: 20px;
+    left: 10px;
     /* height: 20px; */
   }
 `;
@@ -520,9 +521,9 @@ const RegisterPage = ({ setUserAccess }) => {
     let isError = false;
     var regno = /^[0-9]{6,6}$/;
 
-    console.log("hi")
+    console.log("hi");
     if (checked && !e.target.regno.value.match(regno)) {
-      console.log("hi")
+      console.log("hi");
       setRegError(1);
       return;
       isError = true;
@@ -647,14 +648,19 @@ const RegisterPage = ({ setUserAccess }) => {
 
   const handleCloseSignUp = () => {
     navigate("/");
-  }
+  };
 
   return (
     <ParentContainer>
       <Top>
-        <Back
+        <ArrowBackIcon
+          sx={{
+            color: "#ffffff",
+            position: "fixed",
+            top: "20px",
+            left: "10px",
+          }}
           onClick={handleCloseSignUp}
-          src={imgUrl + "/backarrow.svg"}
         />
       </Top>
       {/* <PrimaryContainer></PrimaryContainer> */}
@@ -710,7 +716,7 @@ const RegisterPage = ({ setUserAccess }) => {
                   regError === 1
                     ? "Please enter a valid 6 digit reg no. with no /"
                     : regError === 2
-                    ? "Registration no already exist"
+                    ? "Registration no. already exist"
                     : ""
                 }
                 onChange={(e) => {
@@ -727,7 +733,7 @@ const RegisterPage = ({ setUserAccess }) => {
                 error={phoneError}
                 isnerist={checked ? "1" : null}
                 helperText={
-                  phoneError === 1|| phoneError === true
+                  phoneError === 1 || phoneError === true
                     ? "Please enter a valid 10 digit number"
                     : phoneError === 2
                     ? "Phone number already exist"

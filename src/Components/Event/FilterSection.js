@@ -185,6 +185,7 @@ const PopupIcon = (
 const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
   const navigate = useNavigate();
   console.log(clubs);
+  console.log(selectedClub)
   const Arrow = () => {
     return <ArrowDownwardIcon color="white" />;
   };
@@ -243,8 +244,8 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedClub && selectedClub.value}
-            label="Age"
+            value={selectedClub}
+            label="Clubs"
             sx={{
               width: "70% !important",
             }}
@@ -253,10 +254,10 @@ const FilterSection = ({ clubs, setSelectedClub, getEvents, selectedClub }) => {
                 style={{ color: "white", margin: "0 10px !important" }}
               />
             )}
-            onChange={(event, newValue) => {
+            onChange={(e, newValue) => {
               console.log(newValue.props);
-              setSelectedClub(newValue.props);
-              getEvents(newValue?.props?.value);
+              setSelectedClub(e.target.value);
+              getEvents(e.target.value);
             }}
           >
             {clubs &&

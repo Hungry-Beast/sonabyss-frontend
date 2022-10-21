@@ -125,8 +125,10 @@ function EventPage({ userAccess, setUserAccess }) {
       redirect: "follow",
     };
     let clubId;
+    console.log(location.state)
     if (location.state && !checked) {
       clubId = location.state._id;
+      setSelectedClub(location.state._id)
       setChecked(1);
     } else {
       clubId = val;
@@ -171,14 +173,16 @@ function EventPage({ userAccess, setUserAccess }) {
           });
         });
         if (result.length !== 0 && !selectedClub) {
+          // const temp=tempClub.includes(location.state._id)
+          console.log(location.state);
           getEvents(tempClub[0].value);
-          setSelectedClub(tempClub[0]);
+          setSelectedClub(tempClub[0]?.value);
           localStorage.setItem("club", JSON.stringify(tempClub[0]));
         }
         setClubs(tempClub);
       })
       .catch((error) => {
-        //console.log("error", error)
+        console.log("error", error);
       });
   };
 
@@ -219,55 +223,55 @@ function EventPage({ userAccess, setUserAccess }) {
           selectedClub={selectedClub}
           setSelectedClub={setSelectedClub}
           getEvents={getEvents}
+
         />
         <>
-          {selectedClub ? (
-            Events && Events.length !== 0 ? (
-              <>
-                <EventAndPre>
-                  {Events[0]?.length &&
-                    Events[0].map((data) => (
-                      <EventBox
-                        data={data}
-                        getEvents={getEvents}
-                        selectedClub={selectedClub}
-                        userAccess={userAccess}
-                        isMain={false}
-                      />
-                    ))}
-                </EventAndPre>
-                <PreEvent>
-                  <Pre>Main Event</Pre>
-                </PreEvent>
-                <EventAndPre>
-                  {Events[1]?.length &&
-                    Events[1].map((data) => (
-                      <EventBox
-                        data={data}
-                        getEvents={getEvents}
-                        selectedClub={selectedClub}
-                        userAccess={userAccess}
-                        isMain={true}
-                      />
-                    ))}
-                </EventAndPre>
-              </>
-            ) : (
-              <CircularProgress />
-            )
-          ) : (
-            [1, 2, 3, 4].map((arr) => (
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton
-                  variant="rectangular"
-                  height={200}
-                  sx={{ bgcolor: "grey.900" }}
-                />
-                <Skeleton sx={{ bgcolor: "grey.900" }} />
-                <Skeleton width="60%" sx={{ bgcolor: "grey.900" }} />
-              </Box>
-            ))
-          )}
+          {selectedClub
+            ? Events &&
+              Events.length !== 0 && (
+                <>
+                  <EventAndPre>
+                    {Events[0]?.length &&
+                      Events[0].map((data) => (
+                        <EventBox
+                          data={data}
+                          getEvents={getEvents}
+                          selectedClub={selectedClub}
+                          userAccess={userAccess}
+                          isMain={false}
+                        />
+                      ))}
+                  </EventAndPre>
+                  {Events[1]?.length !== 0 && (
+                    <PreEvent>
+                      <Pre>Main Event</Pre>
+                    </PreEvent>
+                  )}
+                  <EventAndPre>
+                    {Events[1]?.length &&
+                      Events[1].map((data) => (
+                        <EventBox
+                          data={data}
+                          getEvents={getEvents}
+                          selectedClub={selectedClub}
+                          userAccess={userAccess}
+                          isMain={true}
+                        />
+                      ))}
+                  </EventAndPre>
+                </>
+              )
+            : [1, 2, 3, 4].map((arr) => (
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton
+                    variant="rectangular"
+                    height={200}
+                    sx={{ bgcolor: "grey.900" }}
+                  />
+                  <Skeleton sx={{ bgcolor: "grey.900" }} />
+                  <Skeleton width="60%" sx={{ bgcolor: "grey.900" }} />
+                </Box>
+              ))}
         </>
       </OuterEventPage>
       <Backdrop

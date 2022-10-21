@@ -7,7 +7,7 @@ import parse from "html-react-parser";
 import { Backdrop, Modal } from "@mui/material";
 import PaymentPopUp from "./PaymentPopUp";
 import { phoneBreak } from "../../breakPoints";
-import './Style.css'
+import "./Style.css";
 
 const EventTopbar = styled(Topbar)`
   @media (max-width: ${phoneBreak}) {
@@ -266,7 +266,7 @@ const PaymentBtn = styled.button`
   font-size: 18px;
   font-weight: 600;
   color: white;
-`
+`;
 
 const ViewDetails = () => {
   const location = useLocation();
@@ -385,7 +385,7 @@ const ViewDetails = () => {
       <SemiContainer>
         <BackIcon
           onClick={() => {
-            navigate(-1);
+            navigate(-1,{state:{"_id":details.club}});
           }}
           src={imgUrl + "/backarrow.svg"}
         />
@@ -401,16 +401,26 @@ const ViewDetails = () => {
             <DetailsHolder>
               <DetailText>
                 <DetailName>{details?.name}</DetailName>
-                {details?.isRegistered && <DetailName>Payment Status : <PaymentBtn>{details?.isVerified === 0 ? "PENDING" : details?.isVerified === 1 ? "VERIFIED" : "REJECTED"}</PaymentBtn> </DetailName>}
+                {details?.isRegistered && details.isPaid && (
+                  <DetailName>
+                    Payment Status :{" "}
+                    <PaymentBtn>
+                      {details?.isVerified === 0
+                        ? "PENDING"
+                        : details?.isVerified === 1
+                        ? "VERIFIED"
+                        : "REJECTED"}
+                    </PaymentBtn>{" "}
+                  </DetailName>
+                )}
               </DetailText>
 
               <DetailsCard>
                 <H2>{details?.isMainEvent ? "Main Event" : "Pre Event"} </H2>
                 <H3>DATE : {details?.date} </H3>
                 <H3>TIME : {details?.time} </H3>
+                <H3>CONTACT NO : {details?.phoneNo} </H3>
                 <Div>{details && details.desc && parse(details?.desc)}</Div>
-
-
               </DetailsCard>
               <RegisterBtnDisabled
                 disabled={details?.isRegistered || details?.disabled}
@@ -418,8 +428,8 @@ const ViewDetails = () => {
                   !userAccess
                     ? navigate("/signin")
                     : details?.isPaid
-                      ? setModal(true)
-                      : handleClick();
+                    ? setModal(true)
+                    : handleClick();
                 }}
               >
                 {details?.isRegistered ? "Registered" : "Register"}
@@ -433,8 +443,8 @@ const ViewDetails = () => {
                   !userAccess
                     ? navigate("/signin")
                     : details?.isPaid
-                      ? setModal(true)
-                      : handleClick();
+                    ? setModal(true)
+                    : handleClick();
                 }}
               >
                 {details?.isRegistered ? "Registered" : "Register"}
@@ -460,7 +470,7 @@ const ViewDetails = () => {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={registerLoading}
-      // onClick={handleClose}
+        // onClick={handleClose}
       >
         {/* <CircularProgress color="inherit" /> */}
         <img
