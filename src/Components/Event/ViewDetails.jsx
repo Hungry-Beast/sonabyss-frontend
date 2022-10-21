@@ -401,7 +401,7 @@ const ViewDetails = () => {
             <DetailsHolder>
               <DetailText>
                 <DetailName>{details?.name}</DetailName>
-                {details?.isPaid && <DetailName>Payment Status : <PaymentBtn>{details?.isVerified === 0 ? "PENDING" : details?.isVerified === 1 ? "VERIFIED" : "REJECTED"}</PaymentBtn> </DetailName>}
+                {details?.isRegistered && <DetailName>Payment Status : <PaymentBtn>{details?.isVerified === 0 ? "PENDING" : details?.isVerified === 1 ? "VERIFIED" : "REJECTED"}</PaymentBtn> </DetailName>}
               </DetailText>
 
               <DetailsCard>

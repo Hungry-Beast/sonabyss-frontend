@@ -431,6 +431,9 @@ const Back = styled.img`
   /* display: none; */
   @media (max-width: ${phoneBreak}) {
     width: 2em;
+    position: fixed;
+    top:20px;
+    left:10px;
     /* height: 20px; */
   }
 `;

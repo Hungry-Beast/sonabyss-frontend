@@ -516,9 +516,9 @@ const LogInPage = ({ setUserAccess }) => {
       <Container>
         <LeftContainer>
           <WelcomeText>
-            <FirstLine>Welcome to</FirstLine>
+            <FirstLine>Welcome again to</FirstLine>
             <SecondLine>Horror land</SecondLine>
-            <ThirdLine>oop's</ThirdLine>
+            <ThirdLine>Log in at your own RISK</ThirdLine>
             {/* <FourthLine>let's get you sign up real quick</FourthLine> */}
           </WelcomeText>
 
