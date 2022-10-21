@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 import { imgUrl, prodURL } from "../../config";
 import { phoneBreak } from "../../breakPoints";
 import "./Style.css";
@@ -88,13 +88,17 @@ const Stylespan2 = styled.span`
 const Stylespan3 = styled.span`
   text-decoration: underline;
   font-family: "livingbynumbers", sans-serif;
-  font-size: 1em;
+  font-size: 1.3em;
   text-align: center;
   color: inherit !important;
   text-decoration: none;
 
   @media (max-width: ${phoneBreak}) {
-    font-size: 0.8em;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
   }
 `;
 const BtnDiv = styled.div`
@@ -119,7 +123,7 @@ const Button = styled.button`
   box-shadow: 0px 6px 0px #44003d;
   border-radius: 20.5px;
   padding: 0.3rem 1rem;
-  font-family: 'Creepster', cursive;;
+  font-family: "Creepster", cursive;
   font-style: normal;
   font-weight: 400;
   font-size: 1.5rem;
@@ -137,7 +141,7 @@ const Button = styled.button`
     }
     if (props.isdisabled) {
       return css`
-        background-color: #1E1E1E;
+        background-color: #1e1e1e;
         color: #ffffff;
         box-shadow: 0px 6px 0px #ffffff;
         filter: blur(0.5px);
@@ -146,9 +150,15 @@ const Button = styled.button`
   }}
 
   @media (max-width: ${phoneBreak}) {
-    padding: 0.2em 1em;
+    padding: 0.3em 2em;
     margin: 10px 0;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
+    border-radius: 34px;
+  }
+  @media (max-width: 400px) {
+    padding: 0.2em 1.3em;
+    margin: 10px 0;
+    font-size: 1.2rem;
   }
 `;
 
@@ -250,13 +260,15 @@ const EventBox = ({ data, userAccess, getEvents, selectedClub, isMain }) => {
               }}
               isregistered={data.isRegistered}
               isdisabled={data.disabled}
-
             >
               {data.isRegistered ? "Registered" : "Register"}
             </Button>
           </BtnDiv>
           <SpanDiv className="link">
-            <Link style={{textDecoration: 'none'}} to={"/events/" + navigateLink}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to={"/events/" + navigateLink}
+            >
               {" "}
               <Stylespan3>View details</Stylespan3>{" "}
             </Link>
