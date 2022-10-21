@@ -28,7 +28,7 @@ const LogInForm = styled.form`
   /* border: 2px solid green; */
   /* max-width: 390px; */
   align-items: center;
-  @media(max-width:${phoneBreak}){
+  @media (max-width: ${phoneBreak}) {
     max-height: 500px;
   }
 `;
@@ -122,7 +122,6 @@ const LogInPassword = styled(Input)`
     /* margin-top: 10px !important; */
   }
 `;
-
 
 const LogInButton = styled.button`
   font-family: "livingbynumbers";
@@ -226,7 +225,7 @@ const LogInWrapper = styled.div`
     justify-content: space-evenly;
   }
 `;
-// const 
+// const
 
 const Container = styled.div`
   background-color: #1e1e1e;
@@ -273,8 +272,8 @@ const SecondaryContainer = styled.div`
 `;
 
 const ParentContainer = styled.div`
-  width:100vw;
-  height:100vh;
+  width: 100vw;
+  height: 100vh;
 `;
 
 const LeftContainer = styled.div`
@@ -340,7 +339,26 @@ const BallonImage = styled.img`
   /* mix-blend-mode: multiply; */
 `;
 
-const LogInPage = ({setUserAccess}) => {
+const Top = styled.div`
+  display: none;
+  @media (max-width: ${phoneBreak}) {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 1em;
+    margin-top: 20px;
+  }
+`;
+
+const Back = styled.img`
+  /* display: none; */
+  @media (max-width: ${phoneBreak}) {
+    width: 2em;
+    /* height: 20px; */
+  }
+`;
+
+const LogInPage = ({ setUserAccess }) => {
   const [phoneError, setPhoneError] = useState(false);
   const [pswdError, setPswdError] = useState(0);
   const [regError, setRegError] = useState(false);
@@ -445,7 +463,7 @@ const LogInPage = ({setUserAccess}) => {
         setLoading(false);
         console.log(result);
         if (result) {
-          setUserAccess(result)
+          setUserAccess(result);
           localStorage.setItem("user", JSON.stringify(result));
           navigate("/");
         }
@@ -478,12 +496,21 @@ const LogInPage = ({setUserAccess}) => {
     pswdError && handlePasswordChange(e);
   };
 
-  
+  const handleClose = () => {
+    navigate("/");
+  }
+
   // console.log(checked);
 
   return (
     <ParentContainer>
-      <img href=""></img>
+      <Top>
+        <Back
+          onClick={handleClose}
+          src={imgUrl + "/backarrow.svg"}
+        />
+      </Top>
+
       {/* <PrimaryContainer></PrimaryContainer> */}
       <SecondaryContainer></SecondaryContainer>
       <Container>
